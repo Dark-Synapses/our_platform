@@ -6,52 +6,72 @@ const serviceIcons = ['◈', '⬡', '◇', '✧'];
 export function HomePage() {
   return (
     <div className="ds-home-v2">
-      <section className="ds-hero-v2">
-        <div className="ds-hero-grid" aria-hidden="true" />
+      <section className="ds-hero-v3">
+        <div className="ds-hero-v3-inner">
+          <div className="ds-hero-v3-copy">
+            <p className="ds-eyebrow">
+              AI ENGINEERING / CYBERSECURITY / INTELLIGENT DEFENSE
+            </p>
 
-        <div className="ds-hero-content">
-          <p className="ds-eyebrow">
-            AI ENGINEERING / CYBERSECURITY / INTELLIGENT DEFENSE
-          </p>
+            <h1>
+              Intelligent Systems.
+              <span> Secure by Design.</span>
+            </h1>
 
-          <h1>
-            Intelligent<br />
-            Systems.<br />
-            <span>Secure by Design.</span>
-          </h1>
+            <p className="ds-hero-description">
+              We design and build AI-powered solutions,
+              cybersecurity services, and intelligent security
+              systems that help businesses innovate with confidence.
+            </p>
 
-          <p className="ds-hero-description">
-            We design and build AI-powered solutions,
-            cybersecurity services, and intelligent security
-            systems that help businesses innovate with confidence.
-          </p>
+            <div className="ds-hero-actions">
+              <Link className="ds-button-primary" to="/contact">
+                Discuss Your Project ↗
+              </Link>
 
-          <div className="ds-hero-actions">
-            <Link className="ds-button-primary" to="/contact">
-              Discuss Your Project <span aria-hidden="true">↗</span>
-            </Link>
+              <Link className="ds-button-secondary" to="/expertise">
+                Explore Our Expertise ↗
+              </Link>
+            </div>
 
-            <Link className="ds-button-secondary" to="/expertise">
-              Explore Our Expertise <span aria-hidden="true">↗</span>
-            </Link>
+            <div className="ds-hero-v3-capabilities">
+              <span>AI Solutions</span>
+              <span>Cybersecurity</span>
+              <span>Intelligent Defense</span>
+            </div>
           </div>
 
-          <div className="ds-hero-capabilities">
-            <span>AI Solutions</span>
-            <span>Cybersecurity</span>
-            <span>AI-Powered Security</span>
-          </div>
-        </div>
+          <div className="ds-hero-v3-visual" aria-hidden="true">
+            <div className="ds-globe-halo" />
 
-        <div className="ds-hero-visual" aria-hidden="true">
-          <div className="ds-visual-image" />
-          <div className="ds-visual-overlay" />
-          <div className="ds-floating-label ds-label-top">
-            <span className="ds-status-dot" />
-            INTELLIGENT DEFENSE
-          </div>
-          <div className="ds-floating-label ds-label-bottom">
-            AI × SECURITY
+            <img
+              className="ds-globe"
+              src="/images/technical-globe.svg"
+              alt=""
+            />
+
+            <div className="ds-tech-panel ds-panel-threat">
+              <small>THREAT INTELLIGENCE</small>
+
+              <div className="ds-panel-bars">
+                <i /><i /><i /><i />
+                <i /><i /><i /><i />
+              </div>
+
+              <span>Security insights</span>
+            </div>
+
+            <div className="ds-tech-panel ds-panel-security">
+              <small>SYSTEM PROTECTION</small>
+              <strong>◇ Protected</strong>
+              <span>Detect · Analyze · Respond</span>
+            </div>
+
+            <div className="ds-tech-panel ds-panel-ai">
+              <small>AI ANALYSIS</small>
+              <strong>Intelligent Monitoring</strong>
+              <span>AI × Cybersecurity</span>
+            </div>
           </div>
         </div>
       </section>
