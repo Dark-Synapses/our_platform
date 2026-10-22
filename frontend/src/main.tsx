@@ -6,6 +6,7 @@ import './styles/global.css';
 import './styles/redesign.css';
 import './styles/technical.css';
 import './styles/technical-v3.css';
+import './styles/services-v2.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode><BrowserRouter><App /></BrowserRouter></StrictMode>,

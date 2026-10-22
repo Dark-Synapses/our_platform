@@ -1,5 +1,39 @@
+import { ServiceCard } from '../components/ServiceCard';
 import { services } from '../content/site';
 
 export function ServicesPage() {
-  return <section className="section expertise"><p className="eyebrow">Our expertise</p><h1>Built around<br /><span>your challenge.</span></h1><p className="intro">Initial service areas. We will refine these descriptions with the team's confirmed offerings.</p><div className="expertise-list">{services.map((service, index) => <article id={service.id} key={service.id}><span className="number">0{index + 1}</span><div><h2>{service.title}</h2><p>{service.description}</p></div></article>)}</div></section>;
+  return (
+    <div className="ds-expertise-page">
+      <section className="ds-expertise-intro">
+        <p className="ds-services-eyebrow">
+          DARK SYNAPSES / CAPABILITIES
+        </p>
+
+        <h1>
+          Engineered for
+          <span> what's next.</span>
+        </h1>
+
+        <p>
+          We combine AI engineering and cybersecurity
+          expertise to design intelligent, secure,
+          and maintainable solutions.
+        </p>
+      </section>
+
+      <section className="ds-services-v2">
+        <div className="ds-services-container">
+          <div className="ds-services-grid">
+            {services.map((service, index) => (
+              <ServiceCard
+                key={service.id}
+                service={service}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }

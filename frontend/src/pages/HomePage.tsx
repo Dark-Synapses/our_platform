@@ -1,3 +1,4 @@
+import { ServicesSection } from '../components/ServicesSection';
 import { Link } from 'react-router-dom';
 import { deliverySteps, services } from '../content/site';
 
@@ -76,48 +77,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="ds-expertise-v2">
-        <div className="ds-section-top">
-          <div>
-            <p className="ds-eyebrow">OUR EXPERTISE</p>
-            <h2>
-              Comprehensive Solutions<br />
-              for a <span>Safer, Smarter Future.</span>
-            </h2>
-          </div>
-
-          <p className="ds-section-description">
-            We combine artificial intelligence, cybersecurity
-            expertise, and engineering knowledge to deliver
-            solutions that solve real-world challenges.
-          </p>
-        </div>
-
-        <div className="ds-service-grid">
-          {services.map((service, index) => (
-            <Link
-              className="ds-service-card"
-              key={service.id}
-              to={`/expertise#${service.id}`}
-            >
-              <span className="ds-service-icon" aria-hidden="true">
-                {serviceIcons[index % serviceIcons.length]}
-              </span>
-
-              <span className="ds-service-number">
-                0{index + 1}
-              </span>
-
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
-
-              <span className="ds-card-link">
-                Learn More <span aria-hidden="true">↗</span>
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <ServicesSection />
 
       <section className="ds-approach-v2" id="approach">
         <div className="ds-approach-heading">
