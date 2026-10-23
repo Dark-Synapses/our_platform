@@ -15,6 +15,7 @@ services:
     ports:
       - "127.0.0.1:8001:8000"
     environment:
+      PORT: "8000"
       DS_MONGO_HOST: mongo
       DS_MONGO_USERNAME: ${MONGO_USERNAME:?Copy .env.example to .env first}
       DS_MONGO_PASSWORD: ${MONGO_PASSWORD:?Set MONGO_PASSWORD in .env}
