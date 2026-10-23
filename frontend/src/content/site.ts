@@ -1,14 +1,86 @@
-// Edit public website copy here. No content-management dashboard is needed.
 export const services = [
-  { id: 'ai', title: 'AI Engineering', description: 'Knowledge assistants, voice experiences, and AI services connected to your business systems.' },
-  { id: 'cybersecurity', title: 'Cybersecurity', description: 'Security services shaped around an agreed assessment scope and your business priorities.' },
-  { id: 'ai-security', title: 'AI Security', description: 'Understanding the risks and boundaries of AI applications, data access, and connected tools.' },
-  { id: 'automation', title: 'Integration & Automation', description: 'Connect systems and reduce repetitive work through maintainable workflows.' },
-];
+  {
+    id: 'ai',
+    title: 'AI Services',
+    category: 'INTELLIGENT ENGINEERING',
+    description:
+      'AI Software Development،AI Agents،Chatbots & Voice Agents، RAG & Knowledge Assistants، Workflow Automation، Computer Vision، NLP،AI Integration.',
+    capabilities: [
+      'AI Agents & Assistants',
+      'Intelligent Automation',
+      'Custom AI Solutions',
+    ],
+    icon: 'ai',
+  },
+  {
+    id: 'cybersecurity',
+    title: 'Cybersecurity Services',
+    category: 'DIGITAL PROTECTION',
+    description:
+      'Security Assessments,Penetration Testing،Vulnerability Assessment، Web & API Security Testing، Security Consulting،Security Hardening.',
+    capabilities: [
+      'Security Assessments',
+      'Penetration Testing',
+      'Security Architecture',
+    ],
+    icon: 'shield',
+  },
+  {
+    id: 'ai-security',
+    title: 'AI Security',
+    category: 'SECURING INTELLIGENCE',
+    description:
+      'AI Application Security،LLM Security Assessments،Prompt Injection Testing،RAG Security، AI Risk Assessment، Security Testing for AI Integrations.',
+    capabilities: [
+      'AI Application Security',
+      'Data & Access Protection',
+      'AI Penetration Testing',
+    ],
+    icon: 'brain',
+  },
+  {
+    id: 'automation',
+    title: 'AI-Powered Security Systems',
+    category: 'INTELLIGENT DEFENSE',
+    description:
+      'Intelligent Threat Detection، Automated Security Analysis، AI-Assisted Monitoring، Security Workflow Automation، Custom Security Intelligence Tools.',
+    capabilities: [
+      'Intelligent Monitoring',
+      'Anomaly Detection',
+      'Security Automation',
+    ],
+    icon: 'network',
+  },
+  {
+    id: 'content-forensics',
+    title: 'AI Content Authenticity & Digital Forensics',
+    category: 'DIGITAL CONTENT AUTHENTICITY',
+    description:
+      'AI-powered detection and digital forensic analysis of synthetic or manipulated images, videos, audio, and text, including deepfakes and voice cloning, to help organizations assess content authenticity and identify potential digital threats.',
+    capabilities: [
+      'Deepfake Detection',
+      'Synthetic Media Analysis',
+      'Digital Forensics',
+    ],
+    icon: 'forensics',
+  },
+] as const;
 
 export const deliverySteps = [
-  { title: 'Understand', description: 'Define the problem, context, and constraints.' },
-  { title: 'Plan', description: 'Agree on scope, start and end dates, and milestones.' },
-  { title: 'Build & review', description: 'Share a progress update every two weeks.' },
-  { title: 'Handover', description: 'Review the deliverables and document the result.' },
+  {
+    title: 'Understand',
+    description: 'Define the problem, context, and constraints.',
+  },
+  {
+    title: 'Plan',
+    description: 'Agree on scope, start and end dates, and milestones.',
+  },
+  {
+    title: 'Build & Review',
+    description: 'Review progress, validate outcomes, and refine the solution.',
+  },
+  {
+    title: 'Handover',
+    description: 'Review deliverables and document the result.',
+  },
 ];

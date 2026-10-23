@@ -1,0 +1,658 @@
+/* Dark Synapses — Technical & Sophisticated V1 */
+
+.ds-home-v2 {
+  background: #0b131d;
+  color: #e8edf2;
+  overflow: hidden;
+}
+
+.ds-home-v2 * {
+  box-sizing: border-box;
+}
+
+.ds-hero-v2 {
+  position: relative;
+  min-height: 760px;
+  display: grid;
+  grid-template-columns: 52% 48%;
+  align-items: center;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 75% 40%, #18324a 0%, transparent 55%),
+    #0b131d;
+}
+
+.ds-hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.15;
+  background-image:
+    linear-gradient(#6486a8 1px, transparent 1px),
+    linear-gradient(90deg, #6486a8 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to right, transparent, black);
+}
+
+.ds-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 100px 5vw 100px max(5vw, calc((100vw - 1440px) / 2));
+}
+
+.ds-eyebrow {
+  color: #a6bfd8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  line-height: 1.8;
+}
+
+.ds-hero-content h1 {
+  font-size: clamp(54px, 5.6vw, 94px);
+  line-height: 1.03;
+  letter-spacing: -0.055em;
+  margin: 32px 0;
+  font-weight: 750;
+}
+
+.ds-hero-content h1 span,
+.ds-section-top h2 span,
+.ds-approach-heading h2 span,
+.ds-final-cta h2 span {
+  color: #a6bfd8;
+}
+
+.ds-hero-description {
+  max-width: 540px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #b6c5d3;
+}
+
+.ds-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.ds-button-primary,
+.ds-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-height: 50px;
+  padding: 14px 22px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.ds-button-primary {
+  background: #a6bfd8;
+  color: #0b131d;
+  border: 1px solid #a6bfd8;
+}
+
+.ds-button-secondary {
+  background: rgba(11, 19, 29, 0.5);
+  color: #e8edf2;
+  border: 1px solid #6486a8;
+}
+
+.ds-button-primary:hover,
+.ds-button-secondary:hover {
+  transform: translateY(-2px);
+}
+
+.ds-button-primary:hover {
+  background: #c5d9ea;
+}
+
+.ds-button-secondary:hover {
+  border-color: #c5d9ea;
+}
+
+.ds-hero-capabilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: 64px;
+}
+
+.ds-hero-capabilities span {
+  padding: 0 18px;
+  border-right: 1px solid #34475c;
+  font-size: 12px;
+  color: #a6bfd8;
+}
+
+.ds-hero-capabilities span:first-child {
+  padding-left: 0;
+}
+
+.ds-hero-capabilities span:last-child {
+  border-right: none;
+}
+
+.ds-hero-visual {
+  position: relative;
+  align-self: stretch;
+  min-height: 600px;
+}
+
+.ds-visual-image {
+  position: absolute;
+  inset: 0;
+  background: url('/images/hero.png') center / cover no-repeat;
+  opacity: 0.85;
+}
+
+.ds-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #0b131d 0%, transparent 38%),
+    linear-gradient(0deg, #0b131d 0%, transparent 25%);
+}
+
+.ds-floating-label {
+  position: absolute;
+  padding: 12px 16px;
+  background: rgba(11, 19, 29, 0.75);
+  border: 1px solid rgba(166, 191, 216, 0.3);
+  backdrop-filter: blur(12px);
+  border-radius: 6px;
+  color: #a6bfd8;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.ds-label-top {
+  top: 22%;
+  right: 8%;
+}
+
+.ds-label-bottom {
+  bottom: 20%;
+  left: 12%;
+}
+
+.ds-status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #8bc6b3;
+}
+
+.ds-expertise-v2,
+.ds-approach-v2,
+.ds-final-cta {
+  padding: 110px max(5vw, calc((100vw - 1440px) / 2));
+}
+
+.ds-section-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 44px;
+}
+
+.ds-section-top h2,
+.ds-approach-heading h2,
+.ds-final-cta h2 {
+  font-size: clamp(34px, 3.5vw, 58px);
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+  margin: 18px 0 0;
+}
+
+.ds-section-description {
+  max-width: 430px;
+  color: #a6bfd8;
+  line-height: 1.8;
+}
+
+.ds-service-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ds-service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 330px;
+  padding: 30px;
+  color: #e8edf2;
+  text-decoration: none;
+  border: 1px solid #263b50;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #152333, #0d1925);
+  transition: transform 0.25s, border-color 0.25s;
+}
+
+.ds-service-card:hover {
+  transform: translateY(-6px);
+  border-color: #6486a8;
+}
+
+.ds-service-icon {
+  color: #a6bfd8;
+  font-size: 38px;
+  margin-bottom: 24px;
+}
+
+.ds-service-number {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  color: #6486a8;
+  font-size: 12px;
+}
+
+.ds-service-card h3 {
+  font-size: 21px;
+  margin: 0 0 14px;
+}
+
+.ds-service-card p {
+  color: #a6bfd8;
+  line-height: 1.7;
+  font-size: 14px;
+  flex: 1;
+}
+
+.ds-card-link {
+  color: #a6bfd8;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 24px;
+}
+
+
+/* ==========================================
+   OUR APPROACH — PREMIUM PROCESS TIMELINE
+   ========================================== */
+
+.ds-approach-v2 {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 100px max(5vw, calc((100vw - 1440px) / 2));
+  background:
+    radial-gradient(
+      ellipse at 75% 40%,
+      rgba(42, 116, 171, 0.12),
+      transparent 55%
+    ),
+    #101e2c;
+  border-top: 1px solid rgba(145, 201, 239, 0.08);
+  border-bottom: 1px solid rgba(145, 201, 239, 0.08);
+}
+
+.ds-approach-container {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.8fr);
+  align-items: center;
+  gap: clamp(48px, 6vw, 100px);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.ds-approach-heading {
+  position: relative;
+  z-index: 2;
+}
+
+.ds-approach-heading h2 {
+  margin: 18px 0 0;
+  font-size: clamp(42px, 4vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -0.055em;
+}
+
+.ds-approach-heading h2 span {
+  display: block;
+  color: var(--ds-primary-muted, #a6bfd8);
+}
+
+.ds-approach-heading p:not(.ds-eyebrow) {
+  max-width: 420px;
+  margin: 26px 0;
+  color: var(--ds-text-secondary, #adc3d6);
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.ds-approach-v2 .ds-steps-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.ds-approach-v2 .ds-steps-grid::before {
+  content: "";
+  position: absolute;
+  top: 39px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(110, 193, 249, 0.55) 15%,
+    rgba(110, 193, 249, 0.55) 85%,
+    transparent
+  );
+  box-shadow: 0 0 16px rgba(70, 159, 224, 0.2);
+  pointer-events: none;
+}
+
+.ds-approach-v2 .ds-step-card {
+  position: relative;
+  min-width: 0;
+  min-height: 245px;
+  padding: 25px 19px;
+  border: 1px solid rgba(145, 201, 239, 0.22);
+  border-radius: 12px;
+  background: linear-gradient(
+    160deg,
+    rgba(18, 42, 63, 0.9),
+    rgba(8, 22, 37, 0.92)
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(211, 238, 255, 0.05),
+    0 15px 35px rgba(0, 0, 0, 0.13);
+  transition:
+    transform 280ms ease,
+    border-color 280ms ease,
+    box-shadow 280ms ease;
+}
+
+.ds-approach-v2 .ds-step-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(145, 201, 239, 0.55);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.22),
+    0 0 28px rgba(64, 150, 219, 0.12);
+}
+
+.ds-step-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  margin-bottom: 40px;
+}
+
+.ds-approach-v2 .ds-step-index {
+  color: var(--ds-primary, #91c9ef);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+}
+
+.ds-step-marker {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(133, 207, 255, 0.48);
+  border-radius: 50%;
+  background: #102c43;
+  box-shadow: 0 0 18px rgba(74, 165, 232, 0.16);
+}
+
+.ds-step-marker > span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #a5dbff;
+  box-shadow: 0 0 12px rgba(110, 199, 255, 0.7);
+}
+
+.ds-step-content {
+  position: relative;
+  z-index: 2;
+}
+
+.ds-approach-v2 .ds-step-card h3 {
+  margin: 0 0 14px;
+  color: #e8f3fb;
+  font-size: clamp(16px, 1.2vw, 19px);
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.ds-approach-v2 .ds-step-card p {
+  margin: 0;
+  color: #a9c2d6;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+@media (max-width: 1100px) {
+  .ds-approach-container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 800px) {
+  .ds-approach-v2 {
+    padding: 80px 0;
+  }
+
+  .ds-approach-container {
+    width: calc(100% - 44px);
+  }
+
+  .ds-approach-v2 .ds-steps-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+
+  .ds-approach-v2 .ds-steps-grid::before {
+    display: none;
+  }
+
+  .ds-approach-v2 .ds-step-card:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 35px;
+    width: 1px;
+    height: 19px;
+    background: linear-gradient(
+      180deg,
+      rgba(123, 204, 255, 0.7),
+      rgba(123, 204, 255, 0.2)
+    );
+    box-shadow: 0 0 10px rgba(70, 159, 224, 0.25);
+    pointer-events: none;
+  }
+
+
+  .ds-approach-v2 .ds-step-card {
+    min-height: 210px;
+  }
+}
+
+
+@media (max-width: 520px) {
+  .ds-approach-v2 {
+    padding: 64px 0 72px;
+  }
+
+  .ds-approach-container {
+    width: calc(100% - 40px);
+    gap: 32px;
+  }
+
+  .ds-approach-v2 .ds-steps-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  /* Vertical timeline connecting the steps */
+  .ds-approach-v2 .ds-steps-grid::before {
+    display: block;
+    top: 36px;
+    bottom: 36px;
+    left: auto;
+    right: 36px;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(110, 193, 249, 0.42) 12%,
+      rgba(110, 193, 249, 0.42) 88%,
+      transparent
+    );
+    box-shadow: 0 0 12px rgba(70, 159, 224, 0.16);
+  }
+
+  .ds-approach-v2 .ds-step-card {
+    min-height: 0;
+    padding: 20px 22px;
+  }
+
+  .ds-step-top {
+    min-height: 30px;
+    margin-bottom: 16px;
+  }
+
+  .ds-step-marker {
+    width: 28px;
+    height: 28px;
+  }
+
+  .ds-approach-v2 .ds-step-card h3 {
+    margin-bottom: 10px;
+    font-size: 17px;
+    line-height: 1.35;
+  }
+
+  .ds-approach-v2 .ds-step-card p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-approach-v2 .ds-step-card {
+    transition: none;
+  }
+
+  .ds-approach-v2 .ds-step-card:hover {
+    transform: none;
+  }
+}
+
+.ds-final-cta {
+  display: grid;
+  grid-template-columns: 1fr 0.7fr;
+  align-items: center;
+  gap: 60px;
+  background:
+    radial-gradient(ellipse at 70% 100%, #203b55, transparent 60%),
+    #0b131d;
+  border-top: 1px solid #263b50;
+}
+
+.ds-final-cta-action p {
+  color: #a6bfd8;
+  line-height: 1.8;
+  margin-bottom: 26px;
+}
+
+@media (max-width: 1100px) {
+  .ds-hero-v2 {
+    grid-template-columns: 1fr;
+  }
+
+  .ds-hero-content {
+    padding: 90px 6vw 40px;
+  }
+
+  .ds-hero-visual {
+    min-height: 420px;
+  }
+
+  .ds-service-grid,
+  .ds-steps-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ds-approach-v2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .ds-hero-content h1 {
+    font-size: clamp(44px, 11vw, 66px);
+  }
+
+  .ds-hero-capabilities {
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .ds-hero-capabilities span {
+    border: none;
+    padding: 0;
+  }
+
+  .ds-section-top,
+  .ds-final-cta {
+    display: block;
+  }
+
+  .ds-service-grid,
+  .ds-steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ds-expertise-v2,
+  .ds-approach-v2,
+  .ds-final-cta {
+    padding: 75px 6vw;
+  }
+
+  .ds-service-card {
+    min-height: 280px;
+  }
+
+  .ds-final-cta-action {
+    margin-top: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-home-v2 *,
+  .ds-home-v2 *::before,
+  .ds-home-v2 *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -1,0 +1,269 @@
+
+/*
+ * Dark Synapses — Cinematic Service Cards
+ * Import after reference-v6.css.
+ * Preserves React components, routes, and backend behavior.
+ */
+
+.ds-services-v2 {
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    #08213b 0%,
+    #071523 42%,
+    #06111e 100%
+  );
+  padding-block: clamp(72px, 7vw, 108px);
+}
+
+.ds-services-container {
+  width: min(1440px, calc(100% - 64px));
+}
+
+.ds-services-heading {
+  margin-bottom: 38px;
+  gap: 48px;
+}
+
+.ds-services-heading h2 {
+  font-size: clamp(42px, 4.5vw, 70px);
+  line-height: 1.04;
+}
+
+.ds-services-heading h2 span {
+  color: #a9d4f7;
+}
+
+.ds-services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ds-services-grid .ds-service-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 560px;
+  padding: 22px;
+  border: 1px solid rgba(56, 160, 245, 0.5);
+  border-radius: 12px;
+  background: #061421 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(146, 211, 255, 0.08),
+    0 14px 36px rgba(0, 0, 0, 0.22);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.ds-services-grid .ds-service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 58%;
+  z-index: -2;
+  background-image: var(--ds-card-image);
+  background-position: center 35%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.95;
+}
+
+.ds-services-grid .ds-service-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 13, 26, 0.1) 0%,
+    rgba(3, 13, 26, 0.12) 31%,
+    rgba(3, 13, 26, 0.82) 49%,
+    #061421 65%
+  );
+  pointer-events: none;
+}
+
+.ds-services-grid .ds-service-card:nth-child(1) {
+  --ds-card-image: url("/images/service-ai.webp");
+}
+
+.ds-services-grid .ds-service-card:nth-child(2) {
+  --ds-card-image: url("/images/service-cyber.webp");
+}
+
+.ds-services-grid .ds-service-card:nth-child(3) {
+  --ds-card-image: url("/images/service-ai-security.webp");
+}
+
+.ds-services-grid .ds-service-card:nth-child(4) {
+  --ds-card-image: url("/images/service-automation.webp");
+}
+
+.ds-services-grid .ds-service-card:hover {
+  transform: translateY(-7px);
+  border-color: #73c8ff;
+  box-shadow:
+    0 18px 52px rgba(0, 0, 0, 0.32),
+    0 0 32px rgba(37, 142, 236, 0.17);
+}
+
+.ds-services-grid .ds-service-card-top {
+  min-height: 218px;
+  margin-bottom: 0;
+}
+
+.ds-services-grid .ds-service-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  color: #e3f5ff;
+  background: rgba(4, 25, 48, 0.76);
+  border: 1px solid rgba(116, 198, 255, 0.46);
+  box-shadow:
+    inset 0 1px rgba(205, 237, 255, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(8px);
+}
+
+.ds-services-grid .ds-service-index {
+  color: #b6dafa;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+.ds-services-grid .ds-service-category {
+  min-height: 20px;
+  margin: 0 0 12px;
+  color: #9dd5ff;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.ds-services-grid .ds-service-card h3 {
+  min-height: 56px;
+  margin: 0 0 12px;
+  color: #f6fbff;
+  font-size: clamp(19px, 1.5vw, 24px);
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+}
+
+.ds-services-grid .ds-service-description {
+  min-height: 104px;
+  margin: 0;
+  color: #c6d6e8;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.ds-services-grid .ds-service-capabilities {
+  min-height: 62px;
+  align-content: start;
+  margin: 18px 0 14px;
+  gap: 7px;
+}
+
+.ds-services-grid .ds-service-capabilities span {
+  padding: 6px 8px;
+  font-size: 10px;
+  line-height: 1.2;
+  background: rgba(4, 20, 38, 0.72);
+  border: 1px solid rgba(55, 145, 217, 0.34);
+}
+
+.ds-services-grid .ds-service-link {
+  margin-top: auto;
+  padding-top: 18px;
+  border-color: rgba(71, 159, 227, 0.3);
+  color: #f1f8ff;
+}
+
+/* Tablet */
+
+@media (max-width: 1200px) {
+  .ds-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ds-services-grid .ds-service-card {
+    min-height: 530px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .ds-services-v2 {
+    padding-block: 64px 76px;
+  }
+
+  .ds-services-container {
+    width: calc(100% - 36px);
+  }
+
+  .ds-services-heading {
+    gap: 22px;
+    margin-bottom: 30px;
+  }
+
+  .ds-services-heading h2 {
+    font-size: clamp(36px, 9vw, 48px);
+    line-height: 1.08;
+  }
+
+  .ds-services-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .ds-services-grid .ds-service-card {
+    min-height: 0;
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .ds-services-grid .ds-service-card-top {
+    min-height: 180px;
+  }
+
+  .ds-services-grid .ds-service-card::before {
+    height: 58%;
+    background-position: center 35%;
+  }
+
+  .ds-services-grid .ds-service-card h3 {
+    min-height: 0;
+    margin-bottom: 12px;
+    font-size: clamp(22px, 6vw, 27px);
+  }
+
+  .ds-services-grid .ds-service-description {
+    min-height: 0;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .ds-services-grid .ds-service-capabilities {
+    min-height: 0;
+    margin: 20px 0;
+    gap: 7px;
+  }
+
+  .ds-services-grid .ds-service-link {
+    padding-top: 16px;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-services-grid .ds-service-card {
+    transition: none;
+  }
+
+  .ds-services-grid .ds-service-card:hover {
+    transform: none;
+  }
+}
