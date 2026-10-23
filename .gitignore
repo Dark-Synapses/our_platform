@@ -223,3 +223,13 @@ __marimo__/
 
 frontend/node_modules/
 frontend/dist/
+
+
+# Frontend application source code
+!/frontend/src/lib/
+!/frontend/src/lib/**
+
+
+# Frontend application source code
+!/frontend/src/lib/
+!/frontend/src/lib/**
