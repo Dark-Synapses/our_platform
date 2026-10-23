@@ -27,7 +27,7 @@ html {
   padding: 10px clamp(24px, 5vw, 88px);
   background: rgba(5, 16, 29, 0.96);
   border: 0;
-  border-bottom: 1px solid var(--ds-border);
+  border-bottom: 1px solid var(--ds-border-default);
   box-shadow: none;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -59,7 +59,7 @@ html {
   position: relative;
   padding: 12px 10px;
   border: 0;
-  color: #adc2d5;
+  color: var(--ds-text-secondary);
   font-size: 13px;
   font-weight: 550;
   text-decoration: none;
@@ -82,7 +82,7 @@ html {
 
 .ds-nav-v7 .ds-nav-links > a:hover,
 .ds-nav-v7 .ds-nav-links > a.active {
-  color: #e2f4ff;
+  color: var(--ds-primary-light);
 }
 
 .ds-nav-v7 .ds-nav-links > a:hover::after,
@@ -183,7 +183,7 @@ html {
     ),
     #06111e;
   border: 0;
-  color: #e4f1fb;
+  color: var(--ds-text-primary);
 }
 
 .ds-footer-v7-main {
@@ -278,7 +278,7 @@ html {
 
 .ds-footer-v7-column a,
 .ds-footer-v7-contact a {
-  color: #adc8dd;
+  color: var(--ds-text-secondary);
   font-size: 14px;
   line-height: 1.6;
   text-decoration: none;
@@ -294,7 +294,7 @@ html {
 .ds-footer-v7-contact p {
   max-width: 330px;
   margin: 0 0 12px;
-  color: #9fb8ce;
+  color: var(--ds-text-muted);
   font-size: 14px;
   line-height: 1.8;
 }
@@ -385,7 +385,7 @@ html {
     align-items: stretch;
     gap: 6px;
     background: #081827;
-    border-bottom: 1px solid var(--ds-border);
+    border-bottom: 1px solid var(--ds-border-default);
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
   }
 
@@ -443,6 +443,39 @@ html {
   .ds-footer-social a,
   .ds-nav-v7 .ds-nav-cta,
   .ds-nav-v7 .ds-nav-links > a {
+    transition: none;
+  }
+}
+
+/* Corporate interaction refinements */
+
+.ds-nav-v7 .ds-nav-links > a:focus-visible,
+.ds-nav-v7 .ds-nav-cta:focus-visible,
+.ds-footer-v7 a:focus-visible {
+  outline: 2px solid var(--ds-primary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.ds-footer-v7-column a,
+.ds-footer-v7-contact a {
+  transition:
+    color var(--ds-transition-fast),
+    transform var(--ds-transition-fast);
+}
+
+.ds-footer-v7-column a:hover {
+  color: var(--ds-primary-light);
+  transform: translateX(3px);
+}
+
+.ds-footer-v7-contact a:hover {
+  color: var(--ds-primary-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-footer-v7-column a,
+  .ds-footer-v7-contact a {
     transition: none;
   }
 }
