@@ -15,8 +15,8 @@ export function HomePage() {
             </p>
 
             <h1>
-              Intelligent Systems.
-              <span> Secure by Design.</span>
+              Where Intelligence
+              <span> Meets Threats</span>
             </h1>
 
             <p className="ds-hero-description">
@@ -47,7 +47,7 @@ export function HomePage() {
 
             <img
               className="ds-globe"
-              src="/images/technical-globe.svg"
+              src="/images/hero-cyber.png"
               alt=""
             />
 
