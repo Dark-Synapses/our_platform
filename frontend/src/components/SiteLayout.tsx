@@ -275,14 +275,14 @@ export function SiteLayout() {
           </NavLink>
 
           <NavLink
-            to="/expertise"
+            to="/services"
             onClick={() => setMenuOpen(false)}
           >
-            Expertise
+            Services
           </NavLink>
 
           <Link
-            to="/#approach"
+            to="/projects"
             className={
               approachActive ? 'active' : undefined
             }
@@ -291,7 +291,7 @@ export function SiteLayout() {
             }
             onClick={() => setMenuOpen(false)}
           >
-            Our Approach
+            Projects
           </Link>
 
           <NavLink
@@ -398,8 +398,8 @@ export function SiteLayout() {
 
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
-            <Link to="/expertise">Expertise</Link>
-            <Link to="/#approach">Our Approach</Link>
+            <Link to="/services">Services</Link>
+            <Link to="/projects">Projects</Link>
             <Link to="/contact">Contact</Link>
           </div>
 

@@ -1,5 +1,6 @@
 import { ServiceCard } from '../components/ServiceCard';
 import { services } from '../content/site';
+import '../styles/expertise-premium-v1.css';
 
 export function ServicesPage() {
   return (
@@ -10,8 +11,8 @@ export function ServicesPage() {
         </p>
 
         <h1>
-          Engineered for
-          <span> what's next.</span>
+          Building the Future.
+          <span> Securing What Matters.</span>
         </h1>
 
         <p>

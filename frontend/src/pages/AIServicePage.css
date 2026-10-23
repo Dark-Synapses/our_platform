@@ -1,0 +1,67 @@
+/* Exact-reference layout using artwork crops from the user's approved screenshot.
+   All selectors scoped to .ds-ai-ref to avoid altering other pages. */
+.ds-ai-ref{--ref-blue:#55b9ff;--ref-ice:#cce8ff;--ref-navy:#020c17;--ref-border:rgba(70,151,218,.45);background:#020c17;color:#f4f8ff;overflow:hidden;font-family:inherit}
+.ds-ai-ref *{box-sizing:border-box}
+.ds-ai-ref-container{width:min(1200px,calc(100% - 100px));margin-inline:auto}
+.ds-ai-ref-hero{height:505px;position:relative;isolation:isolate;background:radial-gradient(ellipse at 70% 45%,#05244a,#020c17 72%);border-bottom:1px solid rgba(59,117,180,.15)}
+.ds-ai-ref-portal{position:absolute;inset:0 0 0 auto;width:54%;z-index:-1;background:url('/images/ai-service/hero-portal.png') center center / 100% 100% no-repeat}
+.ds-ai-ref-portal:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#020c17 0%,rgba(2,12,23,.15) 14%,transparent 35%)}
+.ds-ai-ref-hero-inner{position:relative;height:100%;padding-top:47px}
+.ds-ai-ref-crumb{display:flex;gap:12px;font-size:13px;color:#d8e9f9}.ds-ai-ref-crumb a{color:#76bff9;text-decoration:none}
+.ds-ai-ref-hero-copy{position:relative;z-index:2;margin-top:52px;width:min(48%,440px)}
+.ds-ai-ref-hero h1{font-size:clamp(44px,5.4vw,65px);letter-spacing:-.06em;font-weight:750;line-height:1.04;margin:0 0 16px;color:white}.ds-ai-ref-hero h1 span{color:#82c5ff}
+.ds-ai-ref-hero h2{font-size:clamp(22px,2.65vw,30px);font-weight:650;letter-spacing:-.035em;line-height:1.12;margin:0 0 17px}
+.ds-ai-ref-hero-copy p{font-size:13px;line-height:1.43;color:#d8e5f3;margin:0 0 22px}
+.ds-ai-ref-actions{display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+.ds-ai-ref-button{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 19px;border-radius:6px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;transition:transform .2s,box-shadow .2s}
+.ds-ai-ref-button:hover{transform:translateY(-2px)}
+.ds-ai-ref-primary{background:linear-gradient(125deg,#64c7ff,#1688f1);box-shadow:0 0 18px rgba(30,151,255,.36);color:white}
+.ds-ai-ref-secondary{border:1px solid rgba(94,164,226,.53);background:rgba(1,11,22,.8);color:#f2f8ff}
+.ds-ai-ref-portal-words{position:absolute;top:31%;right:10%;color:#eef7ff;text-align:center;font-size:18px;line-height:1.42;text-shadow:0 0 13px rgba(5,24,51,.9)}
+.ds-ai-ref-section{padding-top:46px}
+.ds-ai-ref-eyebrow{color:#81bff5;font-size:12px;letter-spacing:.075em;font-weight:500;margin:0 0 12px}
+.ds-ai-ref h2{font-size:clamp(26px,3.15vw,33px);line-height:1.15;letter-spacing:-.04em;font-weight:660;margin:0}
+.ds-ai-ref-challenge-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}
+.ds-ai-ref-challenge-head>p{font-size:12px;color:#adc8e1;line-height:1.55;margin:0 2px 3px 0;max-width:290px}
+.ds-ai-ref-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ds-ai-ref-image-card{display:block;min-width:0;overflow:hidden;border-radius:11px;line-height:0;transition:transform .25s,filter .25s}
+.ds-ai-ref-image-card img{width:100%;height:auto;display:block}
+.ds-ai-ref-image-card:hover{transform:translateY(-3px);filter:brightness(1.12)}
+.ds-ai-ref-solutions{padding-top:48px;padding-bottom:22px;border-bottom:1px solid rgba(56,112,162,.17)}
+.ds-ai-ref-four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:25px}
+.ds-ai-ref-solution{min-width:0;position:relative}
+.ds-ai-ref-solution:not(:last-child):after{content:"";position:absolute;top:30px;left:70px;right:-17px;height:1px;background:linear-gradient(90deg,rgba(30,145,239,.55),rgba(30,145,239,.1))}
+.ds-ai-ref-solution summary{list-style:none;display:flex;flex-direction:column;align-items:flex-start;cursor:pointer;gap:10px}
+.ds-ai-ref-solution summary::-webkit-details-marker{display:none}
+.ds-ai-ref-icon{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;border:1px solid rgba(32,154,255,.85);background:radial-gradient(circle,rgba(23,132,222,.24),rgba(3,16,34,.92) 70%);box-shadow:0 0 17px rgba(18,139,239,.25),inset 0 0 13px rgba(17,115,212,.14);color:#49baff}
+.ds-ai-ref-icon svg{width:35px;height:35px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ds-ai-ref-solution-name{font-size:15px;line-height:1.4;font-weight:550;max-width:185px;min-height:42px}
+.ds-ai-ref-solution-arrow{font-size:24px;color:#b5ddff;line-height:1}
+.ds-ai-ref-solution>p{font-size:12px;color:#b7d1e5;line-height:1.55;margin:12px 0 0;max-width:210px}
+.ds-ai-ref-impact{padding-top:30px}
+.ds-ai-ref-impact-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:15px}
+.ds-ai-ref-impact-head a{font-size:13px;color:#67c4ff;text-decoration:none}
+.ds-ai-ref-project-grid{gap:16px}
+.ds-ai-ref-cta-wrap{padding-top:35px;padding-bottom:50px}
+.ds-ai-ref-cta{position:relative;isolation:isolate;overflow:visible;min-height:170px;display:grid;grid-template-columns:1.25fr .75fr;gap:20px;align-items:start;padding:24px 22px;border:1px solid rgba(31,105,169,.25);border-radius:12px;background:radial-gradient(ellipse at 100% 80%,#083465 0%,#03182d 45%,#020c17 95%)}
+.ds-ai-ref-cta:after{content:"";position:absolute;z-index:-1;left:-5%;right:-5%;bottom:-45px;height:110px;background:url('/images/ai-service/cta-wave.svg') center bottom / 100% 100% no-repeat;pointer-events:none}
+.ds-ai-ref-cta .ds-ai-ref-eyebrow{margin-bottom:10px}
+.ds-ai-ref-cta h2{font-size:31px}
+.ds-ai-ref-cta>div:last-child{padding-top:21px}
+.ds-ai-ref-cta>div:last-child p{color:#c0d8eb;font-size:12px;line-height:1.5;max-width:270px;margin:0 0 23px}
+.ds-ai-ref-cta .ds-ai-ref-button{min-width:150px}
+@media(min-width:1100px){.ds-ai-ref-hero{height:590px}.ds-ai-ref-hero-inner{padding-top:60px}.ds-ai-ref-hero-copy{margin-top:70px}.ds-ai-ref-portal-words{font-size:22px}.ds-ai-ref-section{padding-top:60px}.ds-ai-ref-image-card{border-radius:13px}.ds-ai-ref-cta-wrap{padding-top:55px}}
+@media(max-width:760px){.ds-ai-ref-container{width:calc(100% - 36px)}.ds-ai-ref-hero{height:auto;min-height:670px}.ds-ai-ref-portal{width:100%;height:400px;opacity:.7;background-size:auto 100%;background-position:right top;mask-image:linear-gradient(0deg,transparent,#000 40%);-webkit-mask-image:linear-gradient(0deg,transparent,#000 40%)}.ds-ai-ref-hero-inner{min-height:670px;padding-top:28px}.ds-ai-ref-hero-copy{width:min(100%,490px);margin-top:330px}.ds-ai-ref-portal-words{top:120px;right:22%;font-size:16px}.ds-ai-ref-challenge-head{display:block}.ds-ai-ref-challenge-head>p{margin-top:15px}.ds-ai-ref-three{grid-template-columns:1fr;gap:16px}.ds-ai-ref-image-card{max-width:500px;width:100%;margin:auto}.ds-ai-ref-four{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}.ds-ai-ref-solution:nth-child(2):after{display:none}.ds-ai-ref-impact-head{align-items:start}.ds-ai-ref-cta{grid-template-columns:1fr;padding:25px}.ds-ai-ref-cta>div:last-child{padding-top:0}}
+@media(max-width:410px){.ds-ai-ref-hero-copy{margin-top:300px}.ds-ai-ref-hero{min-height:710px}.ds-ai-ref-hero-inner{min-height:710px}.ds-ai-ref-actions{gap:9px}.ds-ai-ref-button{padding:11px 13px}.ds-ai-ref-four{gap:17px}.ds-ai-ref-solution-name{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.ds-ai-ref *{transition:none!important;scroll-behavior:auto!important}}
+
+/* Independent artwork: real React overlays, no text baked into images */
+.ds-ai-ref-image-card{position:relative;aspect-ratio:1.43; background:#041628;border:1px solid rgba(78,166,240,.48);box-shadow:inset 0 0 18px rgba(14,86,155,.1)}
+.ds-ai-ref-image-card img{width:100%;height:100%;object-fit:cover}
+.ds-ai-ref-image-card:after{content:attr(aria-label);position:absolute;inset:auto 0 0;padding:50px 20px 20px;font-size:16px;line-height:1.3;font-weight:650;color:#fff;background:linear-gradient(transparent,rgba(0,9,20,.96));pointer-events:none}
+.ds-ai-ref-project-grid .ds-ai-ref-image-card{aspect-ratio:1.85}
+.ds-ai-ref-project-grid .ds-ai-ref-image-card:after{padding:38px 16px 14px;font-size:14px}
+.ds-ai-ref-portal{background-size:cover;background-position:center right}
+.ds-ai-ref-cta{overflow:hidden}
+.ds-ai-ref-cta:after{inset:0;left:0;right:0;bottom:0;height:100%;background-position:center;background-size:cover;opacity:.78}
+.ds-ai-ref-cta>div{position:relative;z-index:1}

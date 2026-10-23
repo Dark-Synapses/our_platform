@@ -1,17 +1,18 @@
-import { ServicesSection } from '../components/ServicesSection';
-import { Link } from 'react-router-dom';
-import { deliverySteps, services } from '../content/site';
 
-const serviceIcons = ['◈', '⬡', '◇', '✧'];
+import { Link } from 'react-router-dom';
+
+import { ServicesSection } from '../components/ServicesSection';
+import { deliverySteps } from '../content/site';
 
 export function HomePage() {
   return (
     <div className="ds-home-v2">
+      {/* HERO SECTION */}
       <section className="ds-hero-v3">
         <div className="ds-hero-v3-inner">
           <div className="ds-hero-v3-copy">
             <p className="ds-eyebrow">
-              AI ENGINEERING / CYBERSECURITY / INTELLIGENT DEFENSE
+              AI ENGINEERING / CYBERSECURITY / AI SECURITY / AI-Powered Security
             </p>
 
             <h1>
@@ -20,9 +21,7 @@ export function HomePage() {
             </h1>
 
             <p className="ds-hero-description">
-              We design and build AI-powered solutions,
-              cybersecurity services, and intelligent security
-              systems that help businesses innovate with confidence.
+              Architecting the future of intelligent defense where artificial intelligence meets next generation cybersecurity to power secure, autonomous ecosystems.
             </p>
 
             <div className="ds-hero-actions">
@@ -30,8 +29,8 @@ export function HomePage() {
                 Discuss Your Project ↗
               </Link>
 
-              <Link className="ds-button-secondary" to="/expertise">
-                Explore Our Expertise ↗
+              <Link className="ds-button-secondary" to="/services">
+                Explore Our Services ↗
               </Link>
             </div>
 
@@ -55,8 +54,14 @@ export function HomePage() {
               <small>THREAT INTELLIGENCE</small>
 
               <div className="ds-panel-bars">
-                <i /><i /><i /><i />
-                <i /><i /><i /><i />
+                <i />
+                <i />
+                <i />
+                <i />
+                <i />
+                <i />
+                <i />
+                <i />
               </div>
 
               <span>Security insights</span>
@@ -77,40 +82,76 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* OUR EXPERTISE */}
       <ServicesSection />
 
-      <section className="ds-approach-v2" id="approach">
-        <div className="ds-approach-heading">
-          <p className="ds-eyebrow">OUR APPROACH</p>
-          <h2>
-            From Insight<br />
-            <span>to Impact.</span>
-          </h2>
-          <p>
-            A structured, collaborative approach to building
-            secure, scalable, and effective solutions.
-          </p>
-          <Link to="/about" className="ds-button-secondary">
-            About Our Approach ↗
-          </Link>
-        </div>
+      {/* OUR APPROACH — PREMIUM TIMELINE */}
+      <section
+        className="ds-approach-v2"
+        id="approach"
+        aria-labelledby="approach-heading"
+      >
+        <div className="ds-approach-container">
+          <div className="ds-approach-heading">
+            <p className="ds-eyebrow">OUR APPROACH</p>
 
-        <div className="ds-steps-grid">
-          {deliverySteps.map((step, index) => (
-            <article className="ds-step-card" key={step.title}>
-              <span className="ds-step-index">
-                0{index + 1}
-              </span>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
-            </article>
-          ))}
+            <h2 id="approach-heading">
+              From Insight
+              <span> to Impact.</span>
+            </h2>
+
+            <p>
+              A structured, collaborative approach to building
+              secure, scalable, and effective solutions.
+            </p>
+
+            <Link
+              to="/about"
+              className="ds-button-secondary"
+            >
+              About Our Approach ↗
+            </Link>
+          </div>
+
+          <div
+            className="ds-steps-grid"
+            aria-label="Our delivery process"
+          >
+            {deliverySteps.map((step, index) => (
+              <article
+                className="ds-step-card"
+                key={step.title}
+              >
+                <div className="ds-step-top">
+                  <span className="ds-step-index">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+
+                  <span
+                    className="ds-step-marker"
+                    aria-hidden="true"
+                  >
+                    <span />
+                  </span>
+                </div>
+
+                <div className="ds-step-content">
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
+      {/* FINAL CALL TO ACTION */}
       <section className="ds-final-cta">
         <div>
-          <p className="ds-eyebrow">LET'S BUILD TOGETHER</p>
+          <p className="ds-eyebrow">
+            LET&apos;S BUILD TOGETHER
+          </p>
+
           <h2>
             Turn your ideas into secure,
             <span> intelligent solutions.</span>
@@ -124,7 +165,10 @@ export function HomePage() {
             project, we're here to help.
           </p>
 
-          <Link to="/contact" className="ds-button-primary">
+          <Link
+            to="/contact"
+            className="ds-button-primary"
+          >
             Get in Touch ↗
           </Link>
         </div>

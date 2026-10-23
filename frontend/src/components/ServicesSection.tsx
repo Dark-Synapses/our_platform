@@ -1,17 +1,17 @@
+
 import { Link } from 'react-router-dom';
 import { ServiceCard } from './ServiceCard';
 import { services } from '../content/site';
 
 export function ServicesSection() {
   return (
-    <section className="ds-services-v2" id="services">
+    <section
+      className="ds-services-v2 ds-home-premium-services"
+      id="services"
+    >
       <div className="ds-services-container">
         <div className="ds-services-heading">
           <div>
-            <p className="ds-services-eyebrow">
-              OUR EXPERTISE / 01—04
-            </p>
-
             <h2>
               Intelligence meets
               <span> protection.</span>
@@ -20,12 +20,13 @@ export function ServicesSection() {
 
           <div className="ds-services-heading-right">
             <p>
-              From intelligent software to secure digital
-              infrastructure, we engineer solutions that
-              help businesses move forward with confidence.
+              From AI-powered software solutions to cybersecurity
+              and digital forensics, we engineer secure,
+              scalable technology that helps businesses
+              move forward with confidence.
             </p>
 
-            <Link to="/expertise">
+            <Link to="/services">
               Explore all expertise ↗
             </Link>
           </div>

@@ -25,6 +25,13 @@ function ServiceIcon({ type }: { type: Service['icon'] }) {
         <path d="M8 10h2M14 10h2M8 15h2M14 15h2" />
       </>
     ),
+    forensics: (
+      <>
+        <rect x="3" y="3" width="18" height="18" rx="3" />
+        <path d="M8 8h8v8H8zM10 12h4M12 10v4" />
+        <path d="M3 9h3M18 9h3M9 3v3M9 18v3" />
+      </>
+    ),
     network: (
       <>
         <circle cx="12" cy="4" r="2" />
@@ -67,7 +74,7 @@ export function ServiceCard({
           <ServiceIcon type={service.icon} />
         </span>
         <span className="ds-service-index">
-          0{index + 1} / 04
+          0{index + 1} / 0{services.length}
         </span>
       </div>
 
@@ -84,7 +91,7 @@ export function ServiceCard({
       </div>
 
       <Link
-        to={`/expertise#${service.id}`}
+        to={`/services#${service.id}`}
         className="ds-service-link"
         aria-label={`Explore ${service.title}`}
       >

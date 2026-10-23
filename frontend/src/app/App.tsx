@@ -1,3 +1,4 @@
+import { AIServicePage } from '../pages/AIServicePage';
 import AdminRequestDetailsPage from '../pages/AdminRequestDetailsPage';
 import AdminDashboardPage from '../pages/AdminDashboardPage';
 import ServiceRequestsPage from '../pages/ServiceRequestsPage';
@@ -6,11 +7,12 @@ import RegisterPage from '../pages/RegisterPage';
 import ClientDashboardPage from '../pages/ClientDashboardPage';
 import { AboutPage } from '../pages/AboutPage';
 import { ContactPage } from '../pages/ContactPage';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { SiteLayout } from '../components/SiteLayout';
 import { HomePage } from '../pages/HomePage';
 import { ServicesPage } from '../pages/ServicesPage';
 import { SystemPage } from '../pages/SystemPage';
+import { ProjectsPage } from '../pages/ProjectsPage';
 
 export function App() {
   return <Routes><Route element={<SiteLayout />}>
@@ -24,8 +26,11 @@ export function App() {
 
     <Route path="about" element={<AboutPage />} />
     <Route path="contact" element={<ContactPage />} />
-    <Route path="expertise" element={<ServicesPage />} />
+    <Route path="services" element={<ServicesPage />} />
+    <Route path="expertise" element={<Navigate to="/services" replace />} />
+    <Route path="projects" element={<ProjectsPage />} />
     <Route path="system" element={<SystemPage />} />
     <Route path="*" element={<section className="section"><h1>Page not found.</h1><a href="/">Back to home</a></section>} />
-  </Route></Routes>;
+  </Route>  <Route path="/services/ai" element={<AIServicePage />} />
+      </Routes>;
 }

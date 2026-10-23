@@ -4,7 +4,7 @@ export const services = [
     title: 'AI Services',
     category: 'INTELLIGENT ENGINEERING',
     description:
-      'Design and development of intelligent solutions that automate workflows, connect business systems, and create meaningful experiences.',
+      'AI Software Development،AI Agents،Chatbots & Voice Agents، RAG & Knowledge Assistants، Workflow Automation، Computer Vision، NLP،AI Integration.',
     capabilities: [
       'AI Agents & Assistants',
       'Intelligent Automation',
@@ -17,10 +17,10 @@ export const services = [
     title: 'Cybersecurity Services',
     category: 'DIGITAL PROTECTION',
     description:
-      'Security assessments, risk analysis, and practical cybersecurity solutions designed around your business priorities.',
+      'Security Assessments,Penetration Testing،Vulnerability Assessment، Web & API Security Testing، Security Consulting،Security Hardening.',
     capabilities: [
       'Security Assessments',
-      'Risk Analysis',
+      'Penetration Testing',
       'Security Architecture',
     ],
     icon: 'shield',
@@ -30,11 +30,11 @@ export const services = [
     title: 'AI Security',
     category: 'SECURING INTELLIGENCE',
     description:
-      'Evaluate and strengthen the security of AI-powered applications, connected tools, and the data they interact with.',
+      'AI Application Security،LLM Security Assessments،Prompt Injection Testing،RAG Security، AI Risk Assessment، Security Testing for AI Integrations.',
     capabilities: [
       'AI Application Security',
       'Data & Access Protection',
-      'AI Risk Assessment',
+      'AI Penetration Testing',
     ],
     icon: 'brain',
   },
@@ -43,13 +43,26 @@ export const services = [
     title: 'AI-Powered Security Systems',
     category: 'INTELLIGENT DEFENSE',
     description:
-      'Develop intelligent security capabilities that support monitoring, anomaly detection, and automated security workflows.',
+      'Intelligent Threat Detection، Automated Security Analysis، AI-Assisted Monitoring، Security Workflow Automation، Custom Security Intelligence Tools.',
     capabilities: [
       'Intelligent Monitoring',
       'Anomaly Detection',
       'Security Automation',
     ],
     icon: 'network',
+  },
+  {
+    id: 'content-forensics',
+    title: 'AI Content Authenticity & Digital Forensics',
+    category: 'DIGITAL CONTENT AUTHENTICITY',
+    description:
+      'AI-powered detection and digital forensic analysis of synthetic or manipulated images, videos, audio, and text, including deepfakes and voice cloning, to help organizations assess content authenticity and identify potential digital threats.',
+    capabilities: [
+      'Deepfake Detection',
+      'Synthetic Media Analysis',
+      'Digital Forensics',
+    ],
+    icon: 'forensics',
   },
 ] as const;
 

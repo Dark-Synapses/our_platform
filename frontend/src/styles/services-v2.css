@@ -1,7 +1,13 @@
 .ds-services-v2 {
   position: relative;
-  padding: 110px 0 130px;
-  background: #0b131d;
+  padding: 82px 0 120px;
+  background:
+    linear-gradient(
+      180deg,
+      #071421 0%,
+      #0b131d 24%,
+      #0b131d 100%
+    );
   color: #e8edf2;
 }
 
