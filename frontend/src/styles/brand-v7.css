@@ -55,7 +55,7 @@ html {
   gap: clamp(8px, 1.3vw, 22px);
 }
 
-.ds-nav-v7 .ds-nav-links > a:not(.ds-mobile-contact) {
+.ds-nav-v7 .ds-nav-links > a:not(.ds-mobile-contact):not(.ds-mobile-portal) {
   position: relative;
   padding: 12px 10px;
   border: 0;
@@ -66,7 +66,7 @@ html {
   transition: color 0.25s ease;
 }
 
-.ds-nav-v7 .ds-nav-links > a:not(.ds-mobile-contact)::after {
+.ds-nav-v7 .ds-nav-links > a:not(.ds-mobile-contact):not(.ds-mobile-portal)::after {
   content: "";
   position: absolute;
   bottom: 4px;
@@ -477,5 +477,53 @@ html {
   .ds-footer-v7-column a,
   .ds-footer-v7-contact a {
     transition: none;
+  }
+}
+
+.ds-nav-v7 .ds-portal-link,
+.ds-nav-v7 .ds-portal-label {
+  color: var(--ds-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ds-nav-v7 .ds-portal-link {
+  transition: color var(--ds-transition-fast);
+}
+
+.ds-nav-v7 .ds-portal-link:hover {
+  color: var(--ds-primary-light);
+}
+
+@media (max-width: 760px) {
+  .ds-nav-v7 .ds-portal-link,
+  .ds-nav-v7 .ds-portal-label {
+    font-size: 12px;
+  }
+}
+
+/* Portal visibility — desktop */
+.ds-nav-v7 .ds-nav-links > a.ds-mobile-portal,
+.ds-nav-v7 .ds-nav-links > .ds-mobile-portal-label {
+  display: none;
+}
+
+
+/* Portal visibility — mobile */
+@media (max-width: 760px) {
+  .ds-nav-v7 .ds-nav-links.is-open > a.ds-mobile-portal,
+  .ds-nav-v7 .ds-nav-links.is-open > .ds-mobile-portal-label {
+    display: block;
+    padding: 14px 12px;
+    color: var(--ds-primary-light);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .ds-nav-v7 > .ds-portal-link,
+  .ds-nav-v7 > .ds-portal-label {
+    display: none;
   }
 }
