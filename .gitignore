@@ -233,3 +233,24 @@ frontend/dist/
 # Frontend application source code
 !/frontend/src/lib/
 !/frontend/src/lib/**
+
+# Local design backups
+ai-services-v2-backup/
+ai-services-v3-backup/
+service-navigation-backup/
+*.bak
+*.bak_*
+*.backup
+*.backup-*
+*.before-*
+*.debug-backup
+*.mobile-backup
+
+# Local installation helpers and accidental files
+dark-synapses-frontend@0.1.0
+/npm
+/tsc
+
+# Environment secrets
+.env.*
+!.env.example

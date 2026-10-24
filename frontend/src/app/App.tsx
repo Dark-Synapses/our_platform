@@ -1,3 +1,8 @@
+import ContentAuthenticityPage from '../pages/ContentAuthenticityPage';
+import SecurityResearcherPage from '../pages/SecurityResearcherPage';
+import AIPoweredSecurityPage from '../pages/AIPoweredSecurityPage';
+import AISecurityServicePage from '../pages/AISecurityServicePage';
+import CybersecurityServicePage from '../pages/CybersecurityServicePage';
 import { AIServicePage } from '../pages/AIServicePage';
 import AdminRequestDetailsPage from '../pages/AdminRequestDetailsPage';
 import AdminDashboardPage from '../pages/AdminDashboardPage';
@@ -30,7 +35,14 @@ export function App() {
     <Route path="expertise" element={<Navigate to="/services" replace />} />
     <Route path="projects" element={<ProjectsPage />} />
     <Route path="system" element={<SystemPage />} />
-    <Route path="*" element={<section className="section"><h1>Page not found.</h1><a href="/">Back to home</a></section>} />
-  </Route>  <Route path="/services/ai" element={<AIServicePage />} />
+    <Route path="services/ai" element={<AIServicePage />} />
+    <Route path="services/content-authenticity-digital-forensics" element={<ContentAuthenticityPage />} />
+    <Route path="services/ai-powered-security" element={<AIPoweredSecurityPage />} />
+
+    <Route path="services/ai-security" element={<AISecurityServicePage />} />
+    <Route path="services/cybersecurity" element={<CybersecurityServicePage />} />
+     <Route path="*" element={<section className="section"><h1>Page not found.</h1><a href="/">Back to home</a></section>} />
+  </Route>
+    <Route path="security-researcher" element={<SecurityResearcherPage />} />
       </Routes>;
 }

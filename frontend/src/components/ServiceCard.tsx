@@ -92,7 +92,11 @@ export function ServiceCard({
       </div>
 
       <Link
-        to={`/services#${service.id}`}
+        to={
+          service.id === 'content-forensics'
+            ? '/services/content-authenticity-digital-forensics'
+            : service.path
+        }
         className="ds-service-link"
         aria-label={`Explore ${service.title}`}
       >

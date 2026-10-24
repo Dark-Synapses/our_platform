@@ -1,0 +1,113 @@
+/* AI-Powered Security — visual refinement */
+
+.dsps .dsps-container {
+  width: min(1400px, calc(100% - 80px));
+}
+
+.dsps .dsps-hero {
+  min-height: 430px;
+  background-position: center 48%;
+}
+
+.dsps .dsps-hero-copy {
+  max-width: 560px;
+  padding: 46px 0 38px;
+}
+
+.dsps h1 {
+  font-size: clamp(36px, 3.2vw, 54px);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.dsps .dsps-hero-copy > p:not(.dsps-eyebrow) {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.dsps .dsps-actions {
+  margin: 18px 0;
+}
+
+.dsps .dsps-hero-meta {
+  margin-top: 18px;
+}
+
+.dsps .dsps-section {
+  padding-top: 42px;
+  padding-bottom: 45px;
+}
+
+.dsps h2 {
+  font-size: clamp(25px, 2.2vw, 34px);
+}
+
+.dsps .dsps-heading-row {
+  margin-bottom: 18px;
+}
+
+.dsps .dsps-cap {
+  min-height: 160px;
+  padding: 18px 16px;
+}
+
+.dsps .dsps-cap-icon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 12px;
+}
+
+.dsps .dsps-cap h3 {
+  font-size: 14px;
+}
+
+.dsps .dsps-cap p {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.dsps .dsps-research {
+  min-height: 320px;
+}
+
+.dsps .dsps-research-copy {
+  padding: 30px;
+}
+
+.dsps .dsps-workflow {
+  gap: 8px;
+}
+
+.dsps .dsps-step {
+  min-height: 72px;
+  padding: 12px 10px;
+}
+
+@media (max-width: 1000px) {
+  .dsps .dsps-container {
+    width: calc(100% - 40px);
+  }
+}
+
+@media (max-width: 650px) {
+  .dsps .dsps-container {
+    width: calc(100% - 32px);
+  }
+
+  .dsps .dsps-hero {
+    min-height: 510px;
+  }
+
+  .dsps .dsps-hero-copy {
+    padding: 70px 0 40px;
+  }
+
+  .dsps .dsps-cap {
+    min-height: auto;
+  }
+}
+
+/* Temporarily hide the duplicate page-level chat launcher. */
+.dsps .dsps-chat-fab {
+  display: none;
+}

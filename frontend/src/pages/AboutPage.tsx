@@ -9,8 +9,8 @@ const values = [
 ];
 
 const team = [
-  { name: 'Youanes Zaki', role: 'Cybersecurity', image: '/images/team-youanes.jpg', linkedin: 'https://www.linkedin.com/in/youanesssafwat', description: 'Offensive Security · Bug Bounty · CTF · AI Security' },
-  { name: 'Mirna Botros', role: 'AI Software Engineering', image: '/images/team-mirna.jpg', linkedin: 'https://www.linkedin.com/in/mirna-nageh-botros', description: 'Generative AI · Computer Vision · AI Agents · AI Security' },
+  { name: 'Youanes Zaki', role: 'Cybersecurity', image: '/images/team-youanes.jpg', linkedin: 'https://www.linkedin.com/in/youanesssafwat', description: 'Offensive Security | Bug Bounty Hunter | CTF Player | Building@CyberSharks | OSINT Practitioner |AI Security.' },
+  { name: 'Mirna Botros', role: 'AI Software Engineering', image: '/images/team-mirna.jpg', linkedin: 'https://www.linkedin.com/in/mirna-nageh-botros', description: 'AI Software Engineer | Building Intelligent Solutions with ML, Computer Vision, NLP & Generative AI | AI Agents & Data Science |AI Security' },
 ];
 
 export function AboutPage() {

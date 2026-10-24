@@ -1,6 +1,7 @@
 export const services = [
   {
     id: 'ai',
+    path: '/services/ai',
     title: 'AI Services',
     category: 'INTELLIGENT ENGINEERING',
     description:
@@ -14,6 +15,7 @@ export const services = [
   },
   {
     id: 'cybersecurity',
+    path: '/services/cybersecurity',
     title: 'Cybersecurity Services',
     category: 'DIGITAL PROTECTION',
     description:
@@ -27,6 +29,7 @@ export const services = [
   },
   {
     id: 'ai-security',
+    path: '/services/ai-security',
     title: 'AI Security',
     category: 'SECURING INTELLIGENCE',
     description:
@@ -39,7 +42,8 @@ export const services = [
     icon: 'brain',
   },
   {
-    id: 'automation',
+    id: 'ai-powered-security',
+    path: '/services/ai-powered-security',
     title: 'AI-Powered Security Systems',
     category: 'INTELLIGENT DEFENSE',
     description:
@@ -53,6 +57,7 @@ export const services = [
   },
   {
     id: 'content-forensics',
+    path: '/services/content-forensics',
     title: 'AI Content Authenticity & Digital Forensics',
     category: 'DIGITAL CONTENT AUTHENTICITY',
     description:

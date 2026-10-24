@@ -1,0 +1,58 @@
+/* Dark Synapses — Cybersecurity Services. Styles scoped to this page only. */
+.ds-cyber{--cyber-blue:#4db9ff;--cyber-ink:#eaf5ff;--cyber-muted:#b2c8dc;--cyber-line:rgba(78,165,237,.28);background:#020e1b;color:var(--cyber-ink);overflow:hidden}
+.ds-cyber *{box-sizing:border-box}
+.ds-cyber-container{width:min(1200px,calc(100% - 64px));margin-inline:auto}
+.ds-cyber a{color:inherit}
+.ds-cyber-hero{position:relative;min-height:590px;isolation:isolate;border-bottom:1px solid var(--cyber-line);background:#020e1b}
+.ds-cyber-hero-art{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(90deg,#020e1b 0%,rgba(2,14,27,.94) 22%,rgba(2,14,27,.55) 43%,rgba(2,14,27,.04) 68%),url('/images/cybersecurity-service/hero-shield.webp');background-size:cover;background-position:center center}
+.ds-cyber-hero-inner{min-height:590px;padding-top:44px}
+.ds-cyber-crumb{display:flex;align-items:center;gap:12px;font-size:13px;color:#c8dcf0}
+.ds-cyber-crumb a{color:#79c7ff;text-decoration:none}
+.ds-cyber-hero-copy{width:min(440px,45%);padding:80px 0 65px}
+.ds-cyber-hero h1{margin:0 0 16px;font-size:clamp(46px,5.3vw,70px);line-height:1.02;letter-spacing:-.055em;font-weight:750;color:#fff}
+.ds-cyber-hero h1 span,.ds-cyber h2 span{color:#79caff}
+.ds-cyber-hero h2{margin:0 0 14px;font-size:clamp(21px,2.4vw,29px);line-height:1.19;letter-spacing:-.025em;font-weight:600;color:#fff}
+.ds-cyber-hero-copy p{font-size:14px;line-height:1.7;color:#c3d8e9;margin:0 0 24px}
+.ds-cyber-actions{display:flex;flex-wrap:wrap;gap:12px}
+.ds-cyber-btn{display:inline-flex;align-items:center;justify-content:center;gap:16px;padding:13px 17px;border-radius:6px;font-size:12px;font-weight:700;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.ds-cyber-btn:hover{transform:translateY(-3px)}
+.ds-cyber-btn-primary{color:#fff!important;background:linear-gradient(125deg,#5ac5ff,#168cec);box-shadow:0 0 22px rgba(30,153,255,.3)}
+.ds-cyber-btn-outline{color:#eff9ff!important;background:rgba(2,13,28,.68);border:1px solid rgba(119,197,255,.45)}
+.ds-cyber-section{padding-top:66px}
+.ds-cyber-section h2,.ds-cyber-cta h2{margin:0;font-size:clamp(28px,3.25vw,39px);line-height:1.13;letter-spacing:-.038em;font-weight:650}
+.ds-cyber-section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:27px}
+.ds-cyber-section-head>p{margin:0 0 4px;max-width:350px;font-size:13px;line-height:1.65;color:var(--cyber-muted)}
+.ds-cyber-services-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ds-cyber-service-card{appearance:none;border:1px solid var(--cyber-line);border-radius:11px;background:linear-gradient(135deg,rgba(15,49,81,.65),rgba(3,20,37,.9));min-height:115px;display:flex;align-items:flex-start;gap:16px;padding:22px;color:inherit;text-align:left;cursor:pointer;transition:border-color .2s,transform .2s,box-shadow .2s}
+.ds-cyber-service-card:hover,.ds-cyber-service-card.is-open{transform:translateY(-2px);border-color:#62c4ff;box-shadow:0 10px 28px rgba(0,110,255,.13)}
+.ds-cyber-service-icon{width:58px;height:58px;flex:none;display:grid;place-items:center;border-radius:12px;border:1px solid rgba(100,198,255,.43);background:radial-gradient(circle,rgba(39,151,249,.32),rgba(7,31,56,.95));color:#79ceff;box-shadow:0 0 17px rgba(46,154,255,.2)}
+.ds-cyber-service-icon svg{width:35px;height:35px}
+.ds-cyber-service-copy{display:flex;flex-direction:column;gap:7px;flex:1;min-width:0}
+.ds-cyber-service-copy strong{font-size:16px;font-weight:650}
+.ds-cyber-service-copy>span{font-size:12px;line-height:1.6;color:var(--cyber-muted)}
+.ds-cyber-service-copy em{font-size:12px;line-height:1.6;color:#d8eafa;font-style:normal;padding-top:7px;border-top:1px solid var(--cyber-line)}
+.ds-cyber-service-arrow{color:#93d5ff;font-size:20px}
+.ds-cyber-approach{margin-top:64px;padding:62px 0 68px;border-block:1px solid rgba(69,140,207,.18);background:linear-gradient(180deg,#031425,#020e1b)}
+.ds-cyber-timeline{padding:0;margin:40px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;list-style:none;counter-reset:none}
+.ds-cyber-timeline li{position:relative;min-width:0}
+.ds-cyber-timeline li:not(:last-child)::after{content:'';position:absolute;left:61px;right:-11px;top:27px;height:1px;background:linear-gradient(90deg,rgba(83,184,255,.6),rgba(83,184,255,.1))}
+.ds-cyber-phase-number{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;border:1px solid #4eb8ff;background:radial-gradient(circle,#144f83,#04182d 70%);box-shadow:0 0 23px rgba(39,145,245,.35);font-size:17px;color:#d5f0ff}
+.ds-cyber-timeline h3{margin:17px 0 7px;font-size:16px;font-weight:650}
+.ds-cyber-timeline p{margin:0;max-width:185px;font-size:12px;line-height:1.6;color:var(--cyber-muted)}
+.ds-cyber-impact .ds-cyber-section-head{margin-bottom:24px}
+.ds-cyber-all-projects{color:#8cd3ff!important;text-decoration:none;font-size:13px;white-space:nowrap}
+.ds-cyber-project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.ds-cyber-project{margin:0;overflow:hidden;border-radius:10px;border:1px solid var(--cyber-line);background:#05182a;transition:transform .2s,border-color .2s}
+.ds-cyber-project:hover{transform:translateY(-4px);border-color:#69c8ff}
+.ds-cyber-project img{width:100%;aspect-ratio:1.75;object-fit:cover;display:block}
+.ds-cyber-project h3{font-size:15px;line-height:1.4;font-weight:600;margin:0;padding:15px 16px 18px}
+.ds-cyber-cta-wrap{padding-top:65px;padding-bottom:70px}
+.ds-cyber-cta{min-height:280px;display:flex;align-items:center;padding:34px 40px;border-radius:13px;border:1px solid var(--cyber-line);background-image:linear-gradient(90deg,rgba(2,13,27,.95),rgba(2,13,27,.7) 35%,rgba(2,13,27,.03) 75%),url('/images/cybersecurity-service/cta-digital-globe.webp');background-position:center;background-size:cover}
+.ds-cyber-cta-content{max-width:390px}
+.ds-cyber-cta p{font-size:13px;line-height:1.65;color:#c6d9eb;margin:15px 0 20px}
+.ds-cyber :is(a,button):focus-visible{outline:2px solid #b1e4ff;outline-offset:4px}
+#cyber-capabilities{scroll-margin-top:100px}
+@media(max-width:850px){.ds-cyber-hero-copy{width:min(430px,55%)}.ds-cyber-section-head>p{max-width:260px}.ds-cyber-service-card{padding:16px}.ds-cyber-service-icon{width:50px;height:50px}}
+@media(max-width:650px){.ds-cyber-container{width:calc(100% - 36px)}.ds-cyber-hero,.ds-cyber-hero-inner{min-height:750px}.ds-cyber-hero-inner{padding-top:23px}.ds-cyber-hero-art{background-image:linear-gradient(0deg,#020e1b 0%,rgba(2,14,27,.98) 12%,rgba(2,14,27,.2) 55%),url('/images/cybersecurity-service/hero-shield.webp');background-position:center top,66% top;background-size:cover,auto 390px;background-repeat:no-repeat}.ds-cyber-hero-copy{width:100%;padding:335px 0 30px}.ds-cyber-hero h1{font-size:clamp(42px,10vw,56px)}.ds-cyber-hero h2{font-size:23px}.ds-cyber-section{padding-top:48px}.ds-cyber-section-head{display:block}.ds-cyber-section-head>p{margin-top:16px;max-width:500px}.ds-cyber-services-grid,.ds-cyber-project-grid{grid-template-columns:1fr}.ds-cyber-approach{margin-top:48px;padding:48px 0}.ds-cyber-timeline{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:34px}.ds-cyber-timeline li:nth-child(2)::after{display:none}.ds-cyber-project img{aspect-ratio:1.8}.ds-cyber-all-projects{display:inline-block;margin-top:18px}.ds-cyber-cta-wrap{padding-top:48px;padding-bottom:48px}.ds-cyber-cta{min-height:330px;padding:26px;background-position:60% center}}
+@media(max-width:380px){.ds-cyber-hero,.ds-cyber-hero-inner{min-height:790px}.ds-cyber-actions{gap:9px}.ds-cyber-btn{padding:11px 12px}.ds-cyber-service-card{gap:10px}.ds-cyber-timeline{column-gap:14px}}
+@media(prefers-reduced-motion:reduce){.ds-cyber *, .ds-cyber *::before,.ds-cyber *::after{transition:none!important;scroll-behavior:auto!important}}
