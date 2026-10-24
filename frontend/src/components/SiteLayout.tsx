@@ -1,3 +1,4 @@
+import { UiIcon } from './UiIcons';
 
 import { useEffect, useState } from 'react';
 import {
@@ -322,7 +323,7 @@ export function SiteLayout() {
             to="/contact"
             onClick={() => setMenuOpen(false)}
           >
-            Get in Touch ↗
+            Get in Touch <UiIcon name="arrow" />
           </Link>
         </nav>
 
@@ -343,7 +344,7 @@ export function SiteLayout() {
 
         <Link className="ds-nav-cta" to="/contact">
           Get in Touch
-          <span aria-hidden="true">↗</span>
+          <span aria-hidden="true"><UiIcon name="arrow" /></span>
         </Link>
       </header>
 
@@ -421,7 +422,7 @@ export function SiteLayout() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              WhatsApp: +20 101 457 9056 ↗
+              WhatsApp: +20 101 457 9056 <UiIcon name="arrow" />
             </a>
           </div>
         </div>

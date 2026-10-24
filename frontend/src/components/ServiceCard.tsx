@@ -1,3 +1,4 @@
+import { UiIcon } from './UiIcons';
 import { Link } from 'react-router-dom';
 import { services } from '../content/site';
 
@@ -95,7 +96,7 @@ export function ServiceCard({
         className="ds-service-link"
         aria-label={`Explore ${service.title}`}
       >
-        Explore service <span aria-hidden="true">↗</span>
+        Explore service <span aria-hidden="true"><UiIcon name="arrow" /></span>
       </Link>
     </article>
   );

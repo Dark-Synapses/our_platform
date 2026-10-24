@@ -1,3 +1,4 @@
+import { UiIcon } from './UiIcons';
 
 import { Link } from 'react-router-dom';
 import { ServiceCard } from './ServiceCard';
@@ -27,7 +28,7 @@ export function ServicesSection() {
             </p>
 
             <Link to="/services">
-              Explore all expertise ↗
+              Explore all expertise <UiIcon name="arrow" />
             </Link>
           </div>
         </div>

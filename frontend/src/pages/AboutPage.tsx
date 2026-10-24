@@ -1,10 +1,11 @@
+import { UiIcon } from '../components/UiIcons';
 import { Link } from 'react-router-dom';
 import '../styles/about-premium.css';
 
 const values = [
-  { number: '01', icon: '◇', title: 'Engineering Excellence', description: 'We prioritize reliable architectures, maintainable systems, and thoughtful technical execution.' },
-  { number: '02', icon: '⬡', title: 'Security First', description: 'Security is considered throughout the design, development, and deployment lifecycle.' },
-  { number: '03', icon: '✧', title: 'Practical Innovation', description: 'We focus on solutions that address real business challenges and create measurable value.' },
+  { number: '01', icon: 'engineering', title: 'Engineering Excellence', description: 'We prioritize reliable architectures, maintainable systems, and thoughtful technical execution.' },
+  { number: '02', icon: 'security', title: 'Security First', description: 'Security is considered throughout the design, development, and deployment lifecycle.' },
+  { number: '03', icon: 'innovation', title: 'Practical Innovation', description: 'We focus on solutions that address real business challenges and create measurable value.' },
 ];
 
 const team = [
@@ -23,7 +24,7 @@ export function AboutPage() {
           <div className="ds-about-values">
             {values.map(value => (
               <article className="ds-about-value" key={value.number}>
-                <div className="ds-about-value-top"><span>{value.number}</span><span className="ds-about-value-icon" aria-hidden="true">{value.icon}</span></div>
+                <div className="ds-about-value-top"><span>{value.number}</span><span className="ds-about-value-icon" aria-hidden="true"><UiIcon name={value.icon as 'engineering' | 'security' | 'innovation'} size={27} /></span></div>
                 <h2>{value.title}</h2><p>{value.description}</p>
               </article>
             ))}
@@ -37,7 +38,7 @@ export function AboutPage() {
             <p className="ds-about-eyebrow">OUR TEAM</p>
             <h2 id="ds-team-heading">The minds behind <span>Dark Synapses.</span></h2>
             <p>AI software engineering and cybersecurity expertise, working together to develop practical AI services and security-focused solutions.</p>
-            <a className="ds-about-outline-button" href="#team-members">Meet Our Team <span aria-hidden="true">↗</span></a>
+            <a className="ds-about-outline-button" href="#team-members">Meet Our Team <span aria-hidden="true"><UiIcon name="arrow" /></span></a>
           </div>
           <div className="ds-about-team-grid" id="team-members">
             {team.map(person => (
@@ -46,7 +47,7 @@ export function AboutPage() {
                 <div className="ds-about-person-body">
                   <h3>{person.name}</h3><p className="ds-about-person-role">{person.role}</p>
                   <p>{person.description}</p>
-                  <a href={person.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+                  <a href={person.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true"><UiIcon name="arrow" /></span></a>
                 </div>
               </article>
             ))}
@@ -112,7 +113,7 @@ export function AboutPage() {
           <p className="ds-about-eyebrow">LET'S BUILD TOGETHER</p>
           <h2 id="ds-about-cta-title">Ready to build <span>AI-powered, secure solutions?</span></h2>
           <p>Let's discuss your project, your challenges, and how we can work together.</p>
-          <Link to="/contact" className="ds-about-outline-button">Get in Touch <span aria-hidden="true">↗</span></Link>
+          <Link to="/contact" className="ds-about-outline-button">Get in Touch <span aria-hidden="true"><UiIcon name="arrow" /></span></Link>
         </div>
       </section>
     </main>

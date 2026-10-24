@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from './app/App';
 import './styles/tokens.css';
 import './styles/global.css';
-import './styles/global.css';
 import './styles/redesign.css';
 import './styles/technical.css';
 import './styles/technical-v3.css';

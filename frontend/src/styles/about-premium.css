@@ -67,3 +67,24 @@
 @media(max-width:1050px){.ds-about-collaboration-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:700px){.ds-about-collaboration{padding:72px 0;}.ds-about-collaboration-grid{gap:12px;}.ds-about-collaboration-step{padding:22px 18px;}.ds-about-maintenance{padding-bottom:72px;}.ds-about-maintenance-card{grid-template-columns:1fr;gap:28px;padding:28px 22px;}.ds-about-maintenance-highlight{min-height:180px;}}
 @media(max-width:420px){.ds-about-collaboration-grid{grid-template-columns:1fr;}.ds-about-collaboration-step h3{margin-top:14px;}}
+
+/* UI refinement: stable photo proportions and readable team cards */
+.ds-about-person-image { height:auto; aspect-ratio: 1.28 / 1; }
+.ds-about-person-image img { width:100%; height:100%; object-fit:cover; object-position:center 25%; }
+.ds-about-value-icon { display:inline-flex; align-items:center; justify-content:center; }
+.ds-about-outline-button svg, .ds-about-person a svg { margin-left:6px; }
+@media (max-width:700px) {
+  .ds-about-team-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .ds-about-person-image { height:auto; aspect-ratio:1.28 / 1; }
+  .ds-about-person-body { padding:14px; }
+  .ds-about-person-body p { overflow-wrap:anywhere; }
+}
+@media (max-width:420px) {
+  .ds-about-team-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  .ds-about-person-image { height:auto; aspect-ratio:1.28 / 1; }
+  .ds-about-person h3 { font-size:15px; }
+  .ds-about-person-body p { font-size:12px; }
+}
+@media (max-width:340px) {
+  .ds-about-team-grid { grid-template-columns:1fr; }
+}
