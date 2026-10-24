@@ -9,8 +9,8 @@ const values = [
 ];
 
 const team = [
-  { name: 'Youanes Zaki', role: 'Cybersecurity', image: '/images/team-youanes.jpg', linkedin: 'https://www.linkedin.com/in/youanesssafwat', description: 'Offensive Security | Bug Bounty Hunter | CTF Player | Building@CyberSharks | OSINT Practitioner |AI Security.' },
-  { name: 'Mirna Botros', role: 'AI Software Engineering', image: '/images/team-mirna.jpg', linkedin: 'https://www.linkedin.com/in/mirna-nageh-botros', description: 'AI Software Engineer | Building Intelligent Solutions with ML, Computer Vision, NLP & Generative AI | AI Agents & Data Science |AI Security' },
+  { name: 'Youanes Zaki', role: 'Cybersecurity', image: '/images/team-youanes.jpg', linkedin: 'https://www.linkedin.com/in/youanesssafwat', description: 'Offensive Security · Bug Bounty · CTF · AI Security' },
+  { name: 'Mirna Botros', role: 'AI Software Engineering', image: '/images/team-mirna.jpg', linkedin: 'https://www.linkedin.com/in/mirna-nageh-botros', description: 'Generative AI · Computer Vision · AI Agents · AI Security' },
 ];
 
 export function AboutPage() {
@@ -47,7 +47,7 @@ export function AboutPage() {
                 <div className="ds-about-person-body">
                   <h3>{person.name}</h3><p className="ds-about-person-role">{person.role}</p>
                   <p>{person.description}</p>
-                  <a href={person.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true"><UiIcon name="arrow" /></span></a>
+                  <a href={person.linkedin} target="_blank" rel="noopener noreferrer"><UiIcon name="linkedin" size={17} /><span>LinkedIn</span><UiIcon name="arrow" size={15} /></a>
                 </div>
               </article>
             ))}
