@@ -1,3 +1,4 @@
+import { siTiktok, siWhatsapp } from 'simple-icons';
 import { UiIcon } from './UiIcons';
 
 import { useEffect, useState } from 'react';
@@ -15,7 +16,8 @@ type SocialPlatform =
   | 'instagram'
   | 'tiktok'
   | 'linkedin'
-  | 'facebook';
+  | 'facebook'
+  | 'whatsapp';
 
 const socialLinks: {
   label: string;
@@ -41,6 +43,11 @@ const socialLinks: {
     label: 'Facebook',
     href: brand.social.facebook,
     icon: 'facebook',
+  },
+  {
+    label: 'WhatsApp',
+    href: brand.whatsappUrl,
+    icon: 'whatsapp',
   },
 ];
 
@@ -75,12 +82,12 @@ function SocialIcon({ type }: { type: SocialPlatform }) {
       return (
         <svg
           viewBox="0 0 24 24"
-          fill="currentColor"
           width="19"
           height="19"
+          fill="currentColor"
           aria-hidden="true"
         >
-          <path d="M16.7 2h-3.1v13.1a3.1 3.1 0 1 1-2.7-3.1V8.8a6.3 6.3 0 0 0 4.7 1.5V6.8A5.3 5.3 0 0 1 16.7 2Z" />
+          <path d={siTiktok.path} />
         </svg>
       );
 
@@ -94,6 +101,19 @@ function SocialIcon({ type }: { type: SocialPlatform }) {
           aria-hidden="true"
         >
           <path d="M5.2 3a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4ZM3.5 9h3.4v12H3.5V9Zm5.7 0h3.3v1.6h.1A3.7 3.7 0 0 1 16 8.7c3.6 0 4.3 2.3 4.3 5.3v7h-3.5v-6.2c0-1.5 0-3.4-2.1-3.4s-2.4 1.6-2.4 3.3V21H9.2V9Z" />
+        </svg>
+      );
+
+    case 'whatsapp':
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          width="19"
+          height="19"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d={siWhatsapp.path} />
         </svg>
       );
 
@@ -417,13 +437,6 @@ export function SiteLayout() {
               {brand.email}
             </a>
 
-            <a
-              href={brand.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              WhatsApp: +20 101 457 9056 <UiIcon name="arrow" />
-            </a>
           </div>
         </div>
 
