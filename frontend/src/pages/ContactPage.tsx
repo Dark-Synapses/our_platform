@@ -1,3 +1,4 @@
+import { UiIcon } from '../components/UiIcons';
 
 export function ContactPage() {
   return (
@@ -34,7 +35,7 @@ export function ContactPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="ds-contact-option-icon">↗</span>
+            <span className="ds-contact-option-icon"><UiIcon name="arrow" /></span>
             <span className="ds-contact-option-label">
               DIRECT CONVERSATION
             </span>
@@ -43,14 +44,14 @@ export function ContactPage() {
               Start a conversation with our team about
               your ideas and requirements.
             </p>
-            <strong>+20 101 457 9056 ↗</strong>
+            <strong>+20 101 457 9056 <UiIcon name="arrow" /></strong>
           </a>
 
           <a
             className="ds-contact-option"
             href="mailto:darksynapses@darksynapses.site?subject=Project%20Inquiry%20-%20Dark%20Synapses"
           >
-            <span className="ds-contact-option-icon">✉</span>
+            <span className="ds-contact-option-icon"><UiIcon name="mail" /></span>
             <span className="ds-contact-option-label">
               PROJECT INQUIRIES
             </span>
@@ -60,7 +61,7 @@ export function ContactPage() {
               or collaboration opportunities.
             </p>
             <strong>
-              darksynapses@darksynapses.site ↗
+              darksynapses@darksynapses.site <UiIcon name="arrow" />
             </strong>
           </a>
         </div>

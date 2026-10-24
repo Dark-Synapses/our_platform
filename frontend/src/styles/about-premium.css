@@ -67,3 +67,87 @@
 @media(max-width:1050px){.ds-about-collaboration-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:700px){.ds-about-collaboration{padding:72px 0;}.ds-about-collaboration-grid{gap:12px;}.ds-about-collaboration-step{padding:22px 18px;}.ds-about-maintenance{padding-bottom:72px;}.ds-about-maintenance-card{grid-template-columns:1fr;gap:28px;padding:28px 22px;}.ds-about-maintenance-highlight{min-height:180px;}}
 @media(max-width:420px){.ds-about-collaboration-grid{grid-template-columns:1fr;}.ds-about-collaboration-step h3{margin-top:14px;}}
+
+/* UI refinement: stable photo proportions and readable team cards */
+.ds-about-person-image { height:auto; aspect-ratio: 1.28 / 1; }
+.ds-about-person-image img { width:100%; height:100%; object-fit:cover; object-position:center 25%; }
+.ds-about-value-icon { display:inline-flex; align-items:center; justify-content:center; }
+.ds-about-outline-button svg, .ds-about-person a svg { margin-left:6px; }
+@media (max-width:700px) {
+  .ds-about-team-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .ds-about-person-image { height:auto; aspect-ratio:1.28 / 1; }
+  .ds-about-person-body { padding:14px; }
+  .ds-about-person-body p { overflow-wrap:anywhere; }
+}
+@media (max-width:420px) {
+  .ds-about-team-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  .ds-about-person-image { height:auto; aspect-ratio:1.28 / 1; }
+  .ds-about-person h3 { font-size:15px; }
+  .ds-about-person-body p { font-size:12px; }
+}
+@media (max-width:340px) {
+  .ds-about-team-grid { grid-template-columns:1fr; }
+}
+
+
+/* DS TEAM REFINEMENT V2 */
+.ds-about-person {
+  display: flex;
+  flex-direction: column;
+}
+.ds-about-person-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+.ds-about-person-body > p:not(.ds-about-person-role) {
+  margin-bottom: 18px;
+  overflow-wrap: break-word;
+}
+.ds-about-person-body > a {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 7px;
+  margin-top: auto;
+  padding: 9px 0 0;
+  color: #b0deff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+}
+.ds-about-person-body > a svg {
+  margin-left: 0;
+}
+.ds-about-person-body > a:hover {
+  color: #eaf6ff;
+  text-decoration: none;
+}
+.ds-about-person-body > a:focus-visible {
+  outline: 2px solid #9ad5ff;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+.ds-about-outline-button > span {
+  display: inline-flex;
+  align-items: center;
+}
+.ds-about-outline-button > span svg {
+  margin-left: 0;
+}
+@media (max-width: 700px) {
+  .ds-about-person-body {
+    padding: 15px 14px 17px;
+  }
+  .ds-about-person-body > p:not(.ds-about-person-role) {
+    font-size: 12px;
+    line-height: 1.6;
+    overflow-wrap: normal;
+  }
+  .ds-about-person-body > a {
+    font-size: 12px;
+    gap: 5px;
+  }
+}

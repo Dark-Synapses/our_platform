@@ -1,0 +1,54 @@
+/* Mandark Researcher — dashboard refinements */
+
+.dsr {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.dsr-layout {
+  height: calc(100dvh - 70px);
+  min-height: 0;
+}
+
+.dsr-sidebar,
+.dsr-center,
+.dsr-tools {
+  min-height: 0;
+}
+
+.dsr-sidebar {
+  overflow-y: auto;
+}
+
+.dsr-center {
+  height: 100%;
+  max-height: none;
+  overflow: hidden;
+}
+
+.dsr-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.dsr-composer {
+  flex-shrink: 0;
+}
+
+.dsr-tools {
+  max-height: none;
+  height: 100%;
+  overflow-y: auto;
+}
+
+@media (max-width: 600px) {
+  .dsr-layout {
+    height: calc(100dvh - 70px);
+  }
+
+  .dsr-center {
+    max-height: none;
+  }
+}

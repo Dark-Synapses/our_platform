@@ -1,3 +1,4 @@
+import { UiIcon } from '../components/UiIcons';
 
 import { Link } from 'react-router-dom';
 
@@ -26,11 +27,11 @@ export function HomePage() {
 
             <div className="ds-hero-actions">
               <Link className="ds-button-primary" to="/contact">
-                Discuss Your Project ↗
+                Discuss Your Project <UiIcon name="arrow" />
               </Link>
 
               <Link className="ds-button-secondary" to="/services">
-                Explore Our Services ↗
+                Explore Our Services <UiIcon name="arrow" />
               </Link>
             </div>
 
@@ -109,7 +110,7 @@ export function HomePage() {
               to="/about"
               className="ds-button-secondary"
             >
-              About Our Approach ↗
+              About Our Approach <UiIcon name="arrow" />
             </Link>
           </div>
 
@@ -169,7 +170,7 @@ export function HomePage() {
             to="/contact"
             className="ds-button-primary"
           >
-            Get in Touch ↗
+            Get in Touch <UiIcon name="arrow" />
           </Link>
         </div>
       </section>
