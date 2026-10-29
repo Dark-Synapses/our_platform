@@ -14,6 +14,39 @@ const escapeHtml = (value) =>
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
+
+const privateRoutes = [
+  '/login',
+  '/register',
+  '/dashboard',
+  '/admin',
+  '/service-requests',
+  '/system',
+];
+
+const privateHtml = template
+  .replace(/<title>[\s\S]*?<\/title>/, `<title>Dark Synapses | Private Page</title>`)
+  .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="Dark Synapses account and internal pages.">`)
+  .replace('</head>', '    <meta name="robots" content="noindex, nofollow">\\n  </head>');
+
+for (const route of privateRoutes) {
+  const target = path.join(dist, route.slice(1), 'index.html');
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.writeFileSync(target, privateHtml);
+  console.log(`Generated private ${route}`);
+}
+
+
+const fallbackHtml = privateHtml
+  .replace('Dark Synapses | Private Page', 'Page Not Found | Dark Synapses')
+  .replace(
+    'Dark Synapses account and internal pages.',
+    'The requested page could not be found.'
+  );
+
+fs.writeFileSync(path.join(dist, 'fallback.html'), fallbackHtml);
+console.log('Generated fallback.html');
+
 for (const [route, { title, description }] of Object.entries(pages)) {
   const url = SITE + route;
   const tags = [
