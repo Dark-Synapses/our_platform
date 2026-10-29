@@ -3,6 +3,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './app/App';
+import { SeoManager } from './components/seo/SeoManager';
 import './styles/tokens.css';
 import './styles/global.css';
 import './styles/redesign.css';
@@ -19,5 +20,5 @@ import './styles/reference-cards-v6.css';
 import './styles/brand-v7.css';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode><BrowserRouter><App /><KarenChat /></BrowserRouter></StrictMode>,
+  <StrictMode><BrowserRouter><SeoManager /><App /><KarenChat /></BrowserRouter></StrictMode>,
 );

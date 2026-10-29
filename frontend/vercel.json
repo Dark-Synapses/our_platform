@@ -1,6 +1,50 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/services/index.html"
+    },
+    {
+      "source": "/services/ai",
+      "destination": "/services/ai/index.html"
+    },
+    {
+      "source": "/services/cybersecurity",
+      "destination": "/services/cybersecurity/index.html"
+    },
+    {
+      "source": "/services/ai-security",
+      "destination": "/services/ai-security/index.html"
+    },
+    {
+      "source": "/services/ai-powered-security",
+      "destination": "/services/ai-powered-security/index.html"
+    },
+    {
+      "source": "/services/content-authenticity-digital-forensics",
+      "destination": "/services/content-authenticity-digital-forensics/index.html"
+    },
+    {
+      "source": "/projects",
+      "destination": "/projects/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact/index.html"
+    },
+    {
+      "source": "/security-researcher",
+      "destination": "/security-researcher/index.html"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
