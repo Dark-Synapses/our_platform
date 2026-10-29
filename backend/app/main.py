@@ -1,3 +1,5 @@
+from app.modules.contact_inquiries.router import router as contact_inquiries_router
+from app.modules.contact_inquiries.rate_limit import ensure_indexes as ensure_contact_indexes
 from app.modules.admin.router import router as admin_router
 from contextlib import asynccontextmanager
 
@@ -19,14 +21,22 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         app.state.mongo = client
         app.state.database = client[config.mongo_database]
         await auth_repository.ensure_indexes(app.state.database)
+        await ensure_contact_indexes(app.state.database)
         try:
             yield
         finally:
             await client.close()
 
     application = FastAPI(title="Dark Synapses API", lifespan=lifespan)
-    application.state.cookie_secure = False  # Local HTTP only
+    config = settings or Settings()
+    application.state.cookie_secure = config.cookie_secure
+    application.state.allowed_origins = {
+        origin.strip()
+        for origin in config.allowed_origins.split(",")
+        if origin.strip()
+    }
     application.include_router(auth_router, prefix="/api/v1")
+    application.include_router(contact_inquiries_router, prefix="/api/v1")
     application.include_router(service_requests_router, prefix="/api/v1")
     application.include_router(admin_router, prefix="/api/v1")
     application.include_router(health_router, prefix="/api/v1")

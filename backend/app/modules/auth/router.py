@@ -25,10 +25,7 @@ def check_origin(request: Request):
     if origin is None:
         return
 
-    allowed_origins = {
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    }
+    allowed_origins = request.app.state.allowed_origins
 
     if origin not in allowed_origins:
         raise HTTPException(

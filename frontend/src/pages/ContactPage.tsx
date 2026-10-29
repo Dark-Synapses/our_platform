@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { brand } from '../content/brand';
+import { submitContactInquiry } from '../lib/contactInquiries';
 
 const services = [
   'AI Services',
@@ -29,21 +30,35 @@ const initialForm: Inquiry = {
 export function ContactPage() {
   const [form, setForm] = useState<Inquiry>(initialForm);
   const [notice, setNotice] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [website, setWebsite] = useState('');
 
   const update = (field: keyof Inquiry, value: string) => {
     setForm(previous => ({ ...previous, [field]: value }));
     setNotice('');
   };
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (submitting) return;
 
-    // Backend integration pending.
-    // Do not report success until the API confirms persistence.
-    setNotice(
-      'Online submissions are being prepared. ' +
-      'Please contact us via WhatsApp or email below.'
-    );
+    setSubmitting(true);
+    setNotice('');
+
+    try {
+      await submitContactInquiry({ ...form, website });
+      setForm({ ...initialForm });
+      setWebsite('');
+      setNotice('Your inquiry has been submitted successfully. We will be in touch.');
+    } catch (error) {
+      setNotice(
+        error instanceof Error
+          ? error.message
+          : 'Unable to submit your inquiry. Please try again.'
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -121,6 +136,21 @@ export function ContactPage() {
           </div>
 
           <form onSubmit={submit} className="ds-contact-v2-form">
+            <div
+              aria-hidden="true"
+              style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}
+            >
+              <label htmlFor="contact-website">Leave this field empty</label>
+              <input
+                id="contact-website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={event => setWebsite(event.target.value)}
+              />
+            </div>
             <div className="ds-contact-v2-field-row">
               <label>
                 <span className="ds-contact-v2-label-text">Full name <em>*</em></span>
@@ -195,14 +225,13 @@ export function ContactPage() {
               Fields marked * are required.
             </p>
 
-            <button type="submit" className="ds-contact-v2-submit">
-              Submit inquiry
+            <button type="submit" className="ds-contact-v2-submit" disabled={submitting}>
+              {submitting ? 'Submitting...' : 'Submit inquiry'}
               <span aria-hidden="true">↗</span>
             </button>
 
             <p className="ds-contact-v2-pending">
-              Online submissions are not available yet.
-              You can reach us directly below.
+              We will review your inquiry and get back to you.
             </p>
 
             {notice && (
