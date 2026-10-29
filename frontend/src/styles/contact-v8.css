@@ -1,200 +1,495 @@
 
-.ds-contact-page {
-  min-height: 70vh;
-  background: #071320;
-  color: #e7f2ff;
-}
+/* Dark Synapses — Contact Page V2 */
 
-.ds-contact-hero {
+.ds-contact-v2 {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(50px, 7vw, 110px);
-  align-items: center;
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: clamp(85px, 9vw, 150px) 40px;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #061320;
+  color: #eaf5ff;
 }
 
-.ds-contact-hero::before {
-  content: "";
+.ds-contact-v2-glow {
   position: absolute;
-  top: 10%;
-  right: 0;
-  width: 550px;
-  height: 550px;
+  top: -180px;
+  left: 25%;
+  width: 850px;
+  height: 850px;
+  pointer-events: none;
   background: radial-gradient(
     circle,
-    rgba(45, 128, 194, 0.14),
-    transparent 70%
+    rgba(36, 114, 180, .15),
+    transparent 65%
   );
-  pointer-events: none;
 }
 
-.ds-contact-intro,
-.ds-contact-options {
+.ds-contact-v2-layout {
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1fr);
+  gap: clamp(50px, 7vw, 120px);
+  align-items: start;
+  max-width: 1320px;
+  margin: auto;
+  padding: 110px 40px 115px;
 }
 
-.ds-contact-intro h1 {
-  max-width: 700px;
-  margin: 25px 0;
-  font-size: clamp(44px, 5.3vw, 78px);
+.ds-contact-v2-intro {
+  padding-top: 60px;
+}
+
+.ds-contact-v2-eyebrow {
+  margin: 0;
+  color: #92cfff;
+  font-size: 11px;
   font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.055em;
+  letter-spacing: .21em;
 }
 
-.ds-contact-intro h1 span {
+.ds-contact-v2-intro h1 {
+  margin: 28px 0;
+  font-size: clamp(44px, 5vw, 74px);
+  font-weight: 600;
+  line-height: 1.09;
+  letter-spacing: -.055em;
+}
+
+.ds-contact-v2-intro h1 span {
   display: block;
-  color: #a1c9e8;
+  color: #a1cdf2;
 }
 
-.ds-contact-description {
-  max-width: 530px;
-  color: #adc3d6;
+.ds-contact-v2-lead {
+  max-width: 510px;
+  color: #acc5d8;
   font-size: 16px;
   line-height: 1.9;
 }
 
-.ds-contact-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 35px;
-}
-
-.ds-contact-tags span {
-  padding: 9px 13px;
-  border: 1px solid rgba(135, 194, 235, 0.2);
-  border-radius: 6px;
-  color: #a9c8df;
-  font-size: 12px;
-}
-
-.ds-contact-options {
+.ds-contact-v2-highlights {
   display: grid;
-  gap: 20px;
+  gap: 27px;
+  margin-top: 48px;
 }
 
-.ds-contact-option {
-  position: relative;
+.ds-contact-v2-highlights > div {
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  min-width: 0;
-  padding: 32px;
-  overflow: hidden;
-  border: 1px solid rgba(128, 190, 235, 0.22);
-  border-radius: 14px;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(29, 60, 87, 0.68),
-      rgba(9, 25, 42, 0.96)
-    );
-  color: #e5f2ff;
-  text-decoration: none;
-  transition:
-    transform 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  gap: 18px;
 }
 
-.ds-contact-option:hover {
-  transform: translateY(-5px);
-  border-color: rgba(132, 204, 255, 0.55);
-  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.2);
-}
-
-.ds-contact-option-icon {
+.ds-contact-v2-highlight-icon {
   display: grid;
+  flex: 0 0 42px;
   place-items: center;
-  width: 48px;
-  height: 48px;
-  margin-bottom: 22px;
-  border: 1px solid rgba(151, 205, 242, 0.25);
+  height: 42px;
+  border: 1px solid rgba(135, 201, 249, .25);
   border-radius: 10px;
-  background: rgba(118, 183, 230, 0.1);
-  color: #b9e2ff;
-  font-size: 23px;
-}
-
-.ds-contact-option-label {
-  color: #8ebbdc;
-  font-size: 10px;
+  background: rgba(37, 99, 148, .13);
+  color: #91cfff;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.17em;
 }
 
-.ds-contact-option h2 {
-  margin: 12px 0;
-  color: #edf6ff;
-  font-size: 28px;
-  letter-spacing: -0.035em;
-}
-
-.ds-contact-option p {
-  max-width: 370px;
-  margin: 0 0 25px;
-  color: #adc3d6;
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-.ds-contact-option strong {
-  max-width: 100%;
-  color: #b4dcf7;
-  font-size: 14px;
-  font-weight: 600;
-  overflow-wrap: anywhere;
-}
-
-.ds-contact-closing {
-  padding: 45px 24px 65px;
-  border-top: 1px solid rgba(128, 190, 235, 0.12);
-  text-align: center;
-}
-
-.ds-contact-closing p {
-  margin: 14px 0 0;
-  color: #a7c0d4;
+.ds-contact-v2-highlights strong {
+  color: #e6f3ff;
   font-size: 15px;
 }
 
-@media (max-width: 900px) {
-  .ds-contact-hero {
+.ds-contact-v2-highlights p {
+  margin: 7px 0 0;
+  color: #96b4ca;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.ds-contact-v2-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 390px);
+  height: 230px;
+  margin-top: 45px;
+  overflow: hidden;
+  border: 1px solid rgba(110, 185, 240, .15);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(35, 126, 199, .25),
+      rgba(5, 19, 34, .6) 65%),
+    linear-gradient(145deg, #0b2b46, #061321);
+}
+
+.ds-contact-v2-orbit {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border: 1px solid rgba(112, 196, 255, .3);
+  border-radius: 50%;
+}
+
+.ds-contact-v2-orbit.orbit-two {
+  width: 305px;
+  height: 305px;
+  border-style: dashed;
+  opacity: .45;
+}
+
+.ds-contact-v2-core {
+  display: grid;
+  place-items: center;
+  width: 94px;
+  height: 94px;
+  border: 1px solid #73c7ff;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #164d77, #092137);
+  box-shadow: 0 0 55px rgba(50, 151, 227, .24);
+  transform: rotate(-12deg);
+}
+
+.ds-contact-v2-core span {
+  color: #d6efff;
+  font-size: 31px;
+  font-weight: 700;
+  transform: rotate(12deg);
+}
+
+.ds-contact-v2-visual-caption {
+  position: absolute;
+  bottom: 18px;
+  color: #91bddd;
+  font-size: 9px;
+  letter-spacing: .2em;
+}
+
+.ds-contact-v2-panel {
+  padding: 38px;
+  border: 1px solid rgba(123, 193, 242, .27);
+  border-radius: 20px;
+  background: linear-gradient(
+    155deg,
+    rgba(19, 47, 72, .95),
+    rgba(7, 23, 40, .98)
+  );
+  box-shadow: 0 25px 90px rgba(0, 0, 0, .24);
+}
+
+.ds-contact-v2-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.ds-contact-v2-panel-heading h2 {
+  margin: 13px 0 10px;
+  font-size: clamp(25px, 2.4vw, 34px);
+  font-weight: 600;
+  letter-spacing: -.04em;
+}
+
+.ds-contact-v2-panel-heading p:last-child {
+  margin: 0;
+  color: #9cb7cd;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.ds-contact-v2-panel-symbol {
+  display: grid;
+  flex: 0 0 43px;
+  place-items: center;
+  height: 43px;
+  border: 1px solid rgba(133, 200, 247, .27);
+  border-radius: 10px;
+  color: #a9dbff;
+}
+
+.ds-contact-v2-form {
+  display: grid;
+  gap: 19px;
+}
+
+.ds-contact-v2-field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ds-contact-v2-form label {
+  display: grid;
+  min-width: 0;
+  gap: 9px;
+  color: #c6dcec;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ds-contact-v2-form label span {
+  color: #8dcbfa;
+}
+
+.ds-contact-v2-form input,
+.ds-contact-v2-form select,
+.ds-contact-v2-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 14px 15px;
+  border: 1px solid rgba(116, 176, 222, .24);
+  border-radius: 8px;
+  outline: none;
+  background: #081c2f;
+  color: #edf7ff;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.ds-contact-v2-form textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.7;
+}
+
+.ds-contact-v2-form input::placeholder,
+.ds-contact-v2-form textarea::placeholder {
+  color: #728fa6;
+}
+
+.ds-contact-v2-form input:focus,
+.ds-contact-v2-form select:focus,
+.ds-contact-v2-form textarea:focus {
+  border-color: #86c9fa;
+  box-shadow: 0 0 0 3px rgba(96, 180, 244, .12);
+}
+
+.ds-contact-v2-form-note,
+.ds-contact-v2-pending {
+  margin: 0;
+  color: #91adc2;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.ds-contact-v2-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  min-height: 50px;
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(110deg, #c6e6ff, #89bfe8);
+  color: #071a2b;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter .2s, transform .2s;
+}
+
+.ds-contact-v2-submit:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+.ds-contact-v2-submit:focus-visible,
+.ds-contact-v2-direct-link:focus-visible {
+  outline: 2px solid #b4e2ff;
+  outline-offset: 4px;
+}
+
+.ds-contact-v2-notice {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(139, 205, 250, .3);
+  border-radius: 8px;
+  background: rgba(44, 104, 149, .14);
+  color: #d3eaff;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.ds-contact-v2-direct {
+  margin-top: 29px;
+}
+
+.ds-contact-v2-divider {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 19px;
+  color: #9dbbd1;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  white-space: nowrap;
+}
+
+.ds-contact-v2-divider::before,
+.ds-contact-v2-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(127, 183, 226, .2);
+}
+
+.ds-contact-v2-direct-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ds-contact-v2-direct-link {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  padding: 14px 12px;
+  border: 1px solid rgba(120, 183, 231, .24);
+  border-radius: 10px;
+  background: rgba(13, 39, 61, .8);
+  color: #e3f2ff;
+  text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+
+.ds-contact-v2-direct-link:hover {
+  border-color: rgba(151, 213, 255, .65);
+  background: rgba(23, 65, 96, .8);
+}
+
+.ds-contact-v2-direct-icon {
+  display: grid;
+  flex: 0 0 34px;
+  place-items: center;
+  height: 34px;
+  border: 1px solid rgba(135, 201, 247, .25);
+  border-radius: 8px;
+  color: #a3d7fb;
+}
+
+.ds-contact-v2-direct-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ds-contact-v2-direct-link > span:nth-child(2) {
+  min-width: 0;
+}
+
+.ds-contact-v2-direct-link strong,
+.ds-contact-v2-direct-link small {
+  display: block;
+}
+
+.ds-contact-v2-direct-link strong {
+  font-size: 12px;
+}
+
+.ds-contact-v2-direct-link small {
+  margin-top: 5px;
+  color: #9cb8cd;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+
+.ds-contact-v2-link-arrow {
+  margin-left: auto;
+  color: #9dd5ff;
+}
+
+.ds-contact-v2-footer {
+  padding: 45px 20px 65px;
+  border-top: 1px solid rgba(129, 194, 241, .12);
+  text-align: center;
+}
+
+.ds-contact-v2-footer p {
+  margin: 0 0 10px;
+  color: #9bcfff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .2em;
+}
+
+.ds-contact-v2-footer span {
+  color: #98b6ca;
+  font-size: 13px;
+}
+
+@media (max-width: 1000px) {
+  .ds-contact-v2-layout {
     grid-template-columns: 1fr;
     gap: 45px;
-    padding: 75px 30px;
+    padding: 70px 30px 85px;
   }
 
-  .ds-contact-options {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .ds-contact-v2-intro {
+    padding-top: 0;
+  }
+
+  .ds-contact-v2-visual {
+    display: none;
   }
 }
 
 @media (max-width: 600px) {
-  .ds-contact-hero {
-    padding: 65px 22px;
+  .ds-contact-v2-layout {
+    padding: 60px 20px 75px;
+    gap: 32px;
   }
 
-  .ds-contact-intro h1 {
-    font-size: clamp(40px, 11vw, 56px);
+  .ds-contact-v2-intro h1 {
+    font-size: clamp(40px, 10vw, 56px);
   }
 
-  .ds-contact-options {
+  .ds-contact-v2-highlights {
+    margin-top: 30px;
+    gap: 18px;
+  }
+
+  .ds-contact-v2-panel {
+    padding: 24px 18px;
+    border-radius: 14px;
+  }
+
+  .ds-contact-v2-field-row,
+  .ds-contact-v2-direct-links {
     grid-template-columns: 1fr;
-  }
-
-  .ds-contact-option {
-    padding: 26px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ds-contact-option {
+  .ds-contact-v2-submit,
+  .ds-contact-v2-direct-link {
     transition: none;
   }
 }
+
+/* Contact V2 — required-field marker alignment */
+.ds-contact-v2-form label {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ds-contact-v2-form label > span {
+  display: inline;
+}
+
+
+/* Contact V2 — final label alignment */
+.ds-contact-v2-form .ds-contact-v2-label-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #c6dcec;
+}
+
+.ds-contact-v2-form .ds-contact-v2-label-text em {
+  color: #8dcbfa;
+  font-style: normal;
+}
+

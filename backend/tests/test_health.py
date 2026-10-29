@@ -9,6 +9,11 @@ from app.main import create_app
 
 def test_readiness_checks_database_and_closes_client():
     mongo = AsyncMock()
+
+    # AsyncMongoClient.__getitem__ returns an async database object.
+    db = AsyncMock()
+    mongo.__getitem__.return_value = db
+
     mongo.admin.command.return_value = {"ok": 1}
     with patch("app.main.create_client", return_value=mongo):
         with TestClient(create_app(Settings(mongo_password="test"))) as client:
@@ -21,6 +26,11 @@ def test_readiness_checks_database_and_closes_client():
 
 def test_database_failure_returns_503_without_exposing_details():
     mongo = AsyncMock()
+
+    # AsyncMongoClient.__getitem__ returns an async database object.
+    db = AsyncMock()
+    mongo.__getitem__.return_value = db
+
     mongo.admin.command.side_effect = ServerSelectionTimeoutError("private detail")
     with patch("app.main.create_client", return_value=mongo):
         with TestClient(create_app(Settings(mongo_password="test"))) as client:

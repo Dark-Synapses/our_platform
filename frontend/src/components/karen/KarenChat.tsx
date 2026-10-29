@@ -1,7 +1,8 @@
+import { useLocation } from "react-router-dom";
 import { useState, type FormEvent } from "react";
 import "./KarenChat.css";
 
-const avatar = "/images/karen/karen-avatar.jpg";
+const avatar = "/images/karen/karen-new.jpg";
 type Message = { id: number; role: "karen" | "visitor"; text: string };
 const intro = `Welcome to Dark Synapses — Where Intelligence Meets Threats!
 
@@ -24,6 +25,9 @@ function reply(question: string): string {
   return "I'm in preview mode right now, so I can help with our five services, team, projects, and contact details. Try a topic below!";
 }
 export function KarenChat() {
+  const location = useLocation();
+  const hideKaren = location.pathname.startsWith("/security-researcher");
+
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([{id: 1, role: "karen", text: intro}]);
@@ -36,6 +40,8 @@ export function KarenChat() {
     setInput("");
   }
   function submit(e: FormEvent<HTMLFormElement>) { e.preventDefault(); send(input); }
+  if (hideKaren) return null;
+
   return <div className="karen-widget">
     {open && <section className="karen-panel" aria-label="Karen chat assistant">
       <header className="karen-header">

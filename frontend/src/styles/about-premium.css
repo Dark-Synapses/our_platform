@@ -151,3 +151,95 @@
     gap: 5px;
   }
 }
+
+
+/* DS TEAM REFINEMENT V3 */
+
+.ds-about-team-grid {
+  align-items: stretch;
+}
+
+.ds-about-person {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+}
+
+.ds-about-person-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: radial-gradient(
+    circle at 50% 45%,
+    #17456c 0%,
+    #071525 75%
+  );
+}
+
+.ds-about-person-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.ds-about-person-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ds-about-person-body > a {
+  margin-top: auto;
+}
+
+@media (max-width: 600px) {
+  .ds-about-team-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .ds-about-person-image {
+    aspect-ratio: 4 / 4.5;
+  }
+
+  .ds-about-person-body {
+    padding: 20px;
+  }
+
+  .ds-about-person h3 {
+    font-size: 19px;
+  }
+
+  .ds-about-person-body > p:not(.ds-about-person-role) {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: 380px) {
+  .ds-about-person-image {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* DS TEAM TYPOGRAPHY FINAL */
+
+.ds-about-person-body > p:not(.ds-about-person-role) {
+  font-size: 13px;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 600px) {
+  .ds-about-person-body > p:not(.ds-about-person-role) {
+    font-size: 13px;
+    line-height: 1.75;
+  }
+}

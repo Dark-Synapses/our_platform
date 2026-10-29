@@ -9,5 +9,6 @@ export const brand = {
     tiktok: 'https://www.tiktok.com/@dark_synapses',
     linkedin: 'https://www.linkedin.com/company/dark-synapses/',
     facebook: 'https://www.facebook.com/share/18ym4dXdnC/',
+    youtube: 'https://www.youtube.com/@darksynapses',
   },
 } as const;

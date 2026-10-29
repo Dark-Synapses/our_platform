@@ -1,4 +1,4 @@
-import { siTiktok, siWhatsapp } from 'simple-icons';
+import { siTiktok, siWhatsapp, siYoutube } from 'simple-icons';
 import { UiIcon } from './UiIcons';
 
 import { useEffect, useState } from 'react';
@@ -17,6 +17,7 @@ type SocialPlatform =
   | 'tiktok'
   | 'linkedin'
   | 'facebook'
+  | 'youtube'
   | 'whatsapp';
 
 const socialLinks: {
@@ -43,6 +44,11 @@ const socialLinks: {
     label: 'Facebook',
     href: brand.social.facebook,
     icon: 'facebook',
+  },
+  {
+    label: 'YouTube',
+    href: brand.social.youtube,
+    icon: 'youtube',
   },
   {
     label: 'WhatsApp',
@@ -101,6 +107,19 @@ function SocialIcon({ type }: { type: SocialPlatform }) {
           aria-hidden="true"
         >
           <path d="M5.2 3a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4ZM3.5 9h3.4v12H3.5V9Zm5.7 0h3.3v1.6h.1A3.7 3.7 0 0 1 16 8.7c3.6 0 4.3 2.3 4.3 5.3v7h-3.5v-6.2c0-1.5 0-3.4-2.1-3.4s-2.4 1.6-2.4 3.3V21H9.2V9Z" />
+        </svg>
+      );
+
+    case 'youtube':
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          width="19"
+          height="19"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d={siYoutube.path} />
         </svg>
       );
 
