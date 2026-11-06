@@ -8,6 +8,7 @@ from pymongo import DESCENDING
 
 from app.modules.auth import service as auth_service
 from app.modules.auth.router import check_origin, get_db
+from app.modules.notifications.events import notify_client
 from app.modules.service_requests.router import serialize_request
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
@@ -113,6 +114,17 @@ async def update_request_status(
     updated = await db.service_requests.find_one(
         {"_id": object_id}
     )
+
+    if existing["status"] != data.status:
+        await notify_client(
+            db,
+            client_id=existing["client_id"],
+            notification_type="request_status_changed",
+            title="Service request updated",
+            message=f"Your request status changed to {data.status}.",
+            reference_id=object_id,
+        )
+
     return serialize_request(updated)
 
 

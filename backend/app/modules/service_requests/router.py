@@ -2,6 +2,7 @@ from fastapi import APIRouter, Cookie, Depends, HTTPException, Request
 
 from app.modules.auth import service as auth_service
 from app.modules.auth.router import check_origin, get_db
+from app.modules.notifications.events import notify_admins
 from app.modules.service_requests import repository
 from app.modules.service_requests.schemas import (
     ServiceRequestCreate,
@@ -53,6 +54,15 @@ async def create_service_request(
     document = await repository.create_request(
         db, user["id"], data
     )
+
+    await notify_admins(
+        db,
+        notification_type="new_service_request",
+        title="New service request",
+        message="A new service request has been submitted.",
+        reference_id=document["_id"],
+    )
+
     return serialize_request(document)
 
 

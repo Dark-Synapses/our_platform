@@ -1,13 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException, Request
 
-from app.modules.auth.router import check_origin, get_db
 from app.modules.admin.router import require_admin
+from app.modules.auth.router import check_origin, get_db
 from app.modules.contact_inquiries import repository
 from app.modules.contact_inquiries.rate_limit import check_rate_limit
 from app.modules.contact_inquiries.schemas import (
     ContactInquiryCreate,
     ContactInquiryResponse,
 )
+from app.modules.notifications.events import notify_admins
 
 router = APIRouter(tags=["Contact Inquiries"])
 
@@ -46,7 +47,17 @@ async def create_contact_inquiry(
             headers={"Retry-After": "900"},
         )
 
-    return await repository.create_inquiry(db, data)
+    result = await repository.create_inquiry(db, data)
+
+    await notify_admins(
+        db,
+        notification_type="new_contact_inquiry",
+        title="New contact inquiry",
+        message="A new contact inquiry has been submitted.",
+        reference_id=result["id"],
+    )
+
+    return result
 
 
 @router.get("/admin/contact-inquiries")
