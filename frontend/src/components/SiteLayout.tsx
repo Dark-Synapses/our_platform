@@ -1,5 +1,6 @@
 import { siTiktok, siWhatsapp, siYoutube } from 'simple-icons';
 import { UiIcon } from './UiIcons';
+import { NotificationBell } from './NotificationBell';
 
 import { useEffect, useState } from 'react';
 import {
@@ -365,6 +366,13 @@ export function SiteLayout() {
             Get in Touch <UiIcon name="arrow" />
           </Link>
         </nav>
+
+        {!authLoading && currentUser && (
+          <NotificationBell
+            key={currentUser.id}
+            userId={currentUser.id}
+          />
+        )}
 
         {/* Portal link on desktop */}
         {!authLoading &&
