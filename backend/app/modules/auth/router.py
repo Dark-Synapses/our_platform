@@ -18,13 +18,32 @@ def get_db(request: Request):
 
 
 def check_origin(request: Request):
-    origin = request.headers.get("origin")
-
-    # Non-browser clients may omit Origin.
-    if origin is None:
-        return
+    from urllib.parse import urlsplit
 
     allowed_origins = request.app.state.allowed_origins
+    origin = request.headers.get("origin")
+
+    if origin is None:
+        referer = request.headers.get("referer")
+        if referer:
+            try:
+                parsed = urlsplit(referer)
+                if (
+                    parsed.scheme in ("http", "https")
+                    and parsed.hostname
+                    and parsed.username is None
+                    and parsed.password is None
+                ):
+                    port = parsed.port
+                    host = parsed.hostname
+                    if ":" in host:
+                        host = f"[{host}]"
+                    origin = (
+                        f"{parsed.scheme}://{host}"
+                        + (f":{port}" if port is not None else "")
+                    )
+            except ValueError:
+                pass
 
     if origin not in allowed_origins:
         raise HTTPException(

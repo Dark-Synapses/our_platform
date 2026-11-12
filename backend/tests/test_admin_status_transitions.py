@@ -36,7 +36,7 @@ def test_invalid_transition_does_not_write(current, target):
     db.service_requests.update_one = AsyncMock()
     db.service_request_audit.insert_one = AsyncMock()
 
-    client = TestClient(app)
+    client = TestClient(app, headers={"Origin": "http://localhost:5173"})
     response = client.patch(
         f"/api/v1/admin/service-requests/{REQUEST_ID}/status",
         json={"status": target},
@@ -82,7 +82,7 @@ def test_approved_request_can_be_reopened():
         "app.modules.admin.router.notify_client",
         new_callable=AsyncMock,
     ):
-        client = TestClient(app)
+        client = TestClient(app, headers={"Origin": "http://localhost:5173"})
         response = client.patch(
             f"/api/v1/admin/service-requests/{REQUEST_ID}/status",
             json={"status": "in_review"},

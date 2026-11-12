@@ -21,7 +21,7 @@ def make_client(authenticated=True):
             "role": "client",
         }
 
-    return TestClient(app), db
+    return TestClient(app, headers={"Origin": "http://localhost:5173"}), db
 
 
 def test_notifications_require_auth():

@@ -20,7 +20,7 @@ def make_client():
     db = MagicMock()
     app.dependency_overrides[get_db] = lambda: db
     app.state.database = db
-    return TestClient(app), db
+    return TestClient(app, headers={"Origin": "http://localhost:5173"}), db
 
 
 def test_register_success():
