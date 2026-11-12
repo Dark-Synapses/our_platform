@@ -2,7 +2,8 @@ export type ServiceType =
   | 'ai_services'
   | 'cybersecurity'
   | 'ai_security'
-  | 'ai_powered_security';
+  | 'ai_powered_security'
+  | 'digital_forensics';
 
 export type ServiceRequest = {
   id: string;

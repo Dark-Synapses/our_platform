@@ -3,7 +3,6 @@ from datetime import datetime, timezone
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 
-
 WINDOW_SECONDS = 15 * 60
 MAX_REQUESTS = 5
 

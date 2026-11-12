@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Cookie, Depends, HTTPException, Request, Response
-from starlette.responses import JSONResponse
 
 from app.core.security import hash_session_token
 from app.modules.auth import repository, service

@@ -9,6 +9,7 @@ from pymongo import DESCENDING
 from app.modules.auth import service as auth_service
 from app.modules.auth.router import check_origin, get_db
 from app.modules.notifications.events import notify_client
+from app.modules.service_requests.lifecycle import can_transition
 from app.modules.service_requests.router import serialize_request
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
@@ -81,7 +82,21 @@ async def update_request_status(
             detail="Service request not found",
         )
 
+    if not can_transition(existing['status'], data.status):
+        raise HTTPException(
+            status_code=409,
+            detail='Invalid status transition',
+        )
+
     now = datetime.now(timezone.utc)
+
+    audit_event = {
+        "_id": ObjectId(),
+        "admin_id": admin["id"],
+        "previous_status": existing["status"],
+        "new_status": data.status,
+        "created_at": now,
+    }
 
     result = await db.service_requests.update_one(
         {
@@ -93,7 +108,8 @@ async def update_request_status(
                 "status": data.status,
                 "updated_at": now,
                 "updated_by": admin["id"],
-            }
+            },
+            "$push": {"status_history": audit_event},
         },
     )
 
@@ -102,14 +118,6 @@ async def update_request_status(
             status_code=409,
             detail="Request changed. Refresh and retry.",
         )
-
-    await db.service_request_audit.insert_one({
-        "request_id": object_id,
-        "admin_id": admin["id"],
-        "previous_status": existing["status"],
-        "new_status": data.status,
-        "created_at": now,
-    })
 
     updated = await db.service_requests.find_one(
         {"_id": object_id}
@@ -187,6 +195,21 @@ async def get_request_details(
         }
         for event in history_docs
     ]
+
+    history.extend(
+        {
+            "id": str(event["_id"]),
+            "previous_status": event.get("previous_status"),
+            "new_status": event.get("new_status"),
+            "admin_id": str(event.get("admin_id", "")),
+            "created_at": event["created_at"],
+        }
+        for event in document.get("status_history", [])
+    )
+
+    history.sort(
+        key=lambda event: event["created_at"]
+    )
 
     return {
         "request": serialize_request(document),
