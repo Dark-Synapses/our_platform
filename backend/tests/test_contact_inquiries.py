@@ -37,7 +37,7 @@ def make_client(admin=False):
             "role": "admin",
         }
 
-    return TestClient(app), db
+    return TestClient(app, headers={"Origin": "http://localhost:5173"}), db
 
 
 def test_create_contact_inquiry():

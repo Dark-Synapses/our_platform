@@ -39,7 +39,7 @@ def make_client(role="client"):
             "role": "admin",
         }
 
-    return TestClient(app), db
+    return TestClient(app, headers={"Origin": "http://localhost:5173"}), db
 
 
 def test_create_digital_forensics_request():

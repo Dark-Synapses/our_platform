@@ -40,7 +40,7 @@ def test_contact_inquiry_notifies_all_admins():
             new_callable=AsyncMock,
         ) as create,
     ):
-        client = TestClient(app)
+        client = TestClient(app, headers={"Origin": "http://localhost:5173"})
         response = client.post(
             "/api/v1/contact-inquiries",
             json={
@@ -82,7 +82,7 @@ def test_failed_contact_inquiry_does_not_notify_admins():
             new_callable=AsyncMock,
         ) as create,
     ):
-        client = TestClient(app, raise_server_exceptions=False)
+        client = TestClient(app, headers={"Origin": "http://localhost:5173"}, raise_server_exceptions=False)
         response = client.post(
             "/api/v1/contact-inquiries",
             json={
