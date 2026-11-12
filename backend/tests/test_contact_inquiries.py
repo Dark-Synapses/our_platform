@@ -1,14 +1,10 @@
-from datetime import datetime, timezone
 from unittest.mock import AsyncMock, MagicMock
 
 from fastapi.testclient import TestClient
 
 from app.main import create_app
-from app.modules.auth.router import get_db
 from app.modules.admin.router import require_admin
-from app.modules.contact_inquiries import repository
-from app.modules.contact_inquiries.rate_limit import check_rate_limit
-
+from app.modules.auth.router import get_db
 
 VALID = {
     "name": "Test Client",

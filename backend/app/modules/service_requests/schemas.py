@@ -3,12 +3,12 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-
 ServiceType = Literal[
     "ai_services",
     "cybersecurity",
     "ai_security",
     "ai_powered_security",
+    "digital_forensics",
 ]
 
 
