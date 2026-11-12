@@ -27,7 +27,7 @@ const privateRoutes = [
 const privateHtml = template
   .replace(/<title>[\s\S]*?<\/title>/, `<title>Dark Synapses | Private Page</title>`)
   .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="Dark Synapses account and internal pages.">`)
-  .replace('</head>', '    <meta name="robots" content="noindex, nofollow">\\n  </head>');
+  .replace('</head>', '    <meta name="robots" content="noindex, nofollow">\n  </head>');
 
 for (const route of privateRoutes) {
   const target = path.join(dist, route.slice(1), 'index.html');
