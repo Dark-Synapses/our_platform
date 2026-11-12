@@ -560,3 +560,60 @@ html {
     display: none;
   }
 }
+
+/* ===== UI Polish V1 — Responsive Refinements ===== */
+
+@media (max-width: 700px) {
+  .ds-home-v2 .ds-hero-v3-inner {
+    width: calc(100% - 40px);
+    max-width: 100%;
+  }
+
+  .ds-home-v2 .ds-hero-v3-copy {
+    min-width: 0;
+  }
+
+  .ds-home-v2 .ds-hero-v3-copy h1 {
+    overflow-wrap: break-word;
+    text-wrap: balance;
+  }
+
+  .ds-home-v2 .ds-hero-actions {
+    align-items: stretch;
+  }
+
+  .ds-home-v2 .ds-hero-actions > a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ds-home-v2 .ds-hero-v3-visual {
+    max-width: 100%;
+  }
+
+  .ds-nav-v7 .ds-nav-links.is-open {
+    overscroll-behavior: contain;
+  }
+}
+
+@media (max-width: 380px) {
+  .ds-home-v2 .ds-hero-v3-inner {
+    width: calc(100% - 32px);
+  }
+
+  .ds-home-v2 .ds-hero-v3-copy h1 {
+    font-size: clamp(32px, 9.2vw, 36px);
+  }
+
+  .ds-home-v2 .ds-hero-actions > a {
+    width: 100%;
+  }
+}
+
+.ds-nav-v7 .ds-brand-v3:focus-visible,
+.ds-home-v2 .ds-hero-actions > a:focus-visible {
+  outline: 2px solid #a6dcff;
+  outline-offset: 4px;
+}

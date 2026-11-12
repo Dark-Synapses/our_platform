@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useState, type FormEvent } from "react";
 import "./KarenChat.css";
 
-const avatar = "/images/karen/karen-new.jpg";
+const avatar = "/images/karen/karen-avatar.jpg";
 type Message = { id: number; role: "karen" | "visitor"; text: string };
 const intro = `Welcome to Dark Synapses — Where Intelligence Meets Threats!
 

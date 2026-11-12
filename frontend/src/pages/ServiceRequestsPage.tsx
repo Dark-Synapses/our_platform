@@ -14,6 +14,7 @@ const services: { value: ServiceType; label: string }[] = [
   { value: 'cybersecurity', label: 'Cybersecurity' },
   { value: 'ai_security', label: 'AI Security' },
   { value: 'ai_powered_security', label: 'AI-Powered Security Systems' },
+  { value: 'digital_forensics', label: 'Digital Forensics & Content Authenticity' },
 ];
 
 export default function ServiceRequestsPage() {
