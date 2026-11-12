@@ -32,6 +32,17 @@ jobs:
       - name: Build Frontend
         run: docker build -f frontend/Dockerfile -t dark-synapses-frontend ./frontend
 
+  frontend-production-build:
+    name: Build Frontend Production Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Frontend Production
+        run: docker build -f frontend/Dockerfile.prod -t dark-synapses-frontend:prod ./frontend
+
   frontend-typecheck:
     name: Frontend TypeScript and Production Build
     runs-on: ubuntu-latest
