@@ -93,7 +93,7 @@
   cursor: wait;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1150px) {
   .ds-notifications {
     margin-left: auto;
   }

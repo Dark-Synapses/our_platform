@@ -58,6 +58,11 @@ export const pages: Record<string, SeoInfo> = {
     description:
       'Explore Dark Synapses AI-assisted security research initiative, focused on adaptive investigation, reproducible evidence, and authorized security testing.',
   },
+  '/tech-news': {
+    title: 'Tech News | Dark Synapses',
+    description:
+      'New releases, tools, and security alerts across AI, cybersecurity, AI security, AI-powered defense, and digital forensics.',
+  },
   '/contact': {
     title: 'Contact Us | Dark Synapses',
     description:

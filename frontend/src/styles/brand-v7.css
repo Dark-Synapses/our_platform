@@ -330,7 +330,7 @@ html {
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1150px) {
   .header.ds-nav-v3.ds-nav-v7 {
     min-height: 76px;
     padding: 8px 20px;
@@ -528,7 +528,7 @@ html {
   color: var(--ds-primary-light);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1150px) {
   .ds-nav-v7 .ds-portal-link,
   .ds-nav-v7 .ds-portal-label {
     font-size: 12px;
@@ -543,7 +543,7 @@ html {
 
 
 /* Portal visibility — mobile */
-@media (max-width: 760px) {
+@media (max-width: 1150px) {
   .ds-nav-v7 .ds-nav-links.is-open > a.ds-mobile-portal,
   .ds-nav-v7 .ds-nav-links.is-open > .ds-mobile-portal-label {
     display: block;

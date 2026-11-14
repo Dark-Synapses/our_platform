@@ -41,6 +41,10 @@
       "destination": "/projects/index.html"
     },
     {
+      "source": "/tech-news",
+      "destination": "/tech-news/index.html"
+    },
+    {
       "source": "/contact",
       "destination": "/contact/index.html"
     },
