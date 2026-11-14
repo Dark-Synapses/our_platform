@@ -8,8 +8,11 @@ export function TechNewsPage() {
   return (
     <section className="tech-news" aria-labelledby="tech-news-title">
       <div className="tech-news-artwork">
-        <h1 id="tech-news-title" className="tech-news-title">Tech News</h1>
+        <div className="tech-news-backdrop" aria-hidden="true" />
         <div className="tech-news-copy">
+          <h1 id="tech-news-title" className="tech-news-title" aria-label="Dark Synapses Tech News">
+            <span>The</span> News
+          </h1>
           <p>{pages['/tech-news'].description}</p>
           {newsUrl ? (
             <a className="tech-news-link" href={newsUrl}>
