@@ -13,6 +13,7 @@ def create_client(settings: Settings) -> AsyncMongoClient:
         return AsyncMongoClient(
             uri,
             serverSelectionTimeoutMS=10000,
+            tz_aware=True,
         )
 
     if settings.mongo_password is None:
@@ -26,4 +27,5 @@ def create_client(settings: Settings) -> AsyncMongoClient:
         password=settings.mongo_password.get_secret_value(),
         authSource="admin",
         serverSelectionTimeoutMS=3000,
+        tz_aware=True,
     )
