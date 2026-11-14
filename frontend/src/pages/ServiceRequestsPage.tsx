@@ -1,7 +1,8 @@
 import { useEffect, useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../components/auth/AuthProvider';
+import { ApiError } from '../lib/apiError';
 
-import { getCurrentUser } from '../lib/auth';
 import {
   createServiceRequest,
   getServiceRequests,
@@ -18,7 +19,7 @@ const services: { value: ServiceType; label: string }[] = [
 ];
 
 export default function ServiceRequestsPage() {
-  const navigate = useNavigate();
+  const { status, captureSession, invalidateSession } = useAuth();
 
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
   const [serviceType, setServiceType] = useState<ServiceType>('ai_services');
@@ -30,32 +31,45 @@ export default function ServiceRequestsPage() {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
+    if (status !== 'authenticated') return;
+
     let active = true;
+    const token = captureSession();
 
     async function load() {
       try {
-        const user = await getCurrentUser();
+        const data = await getServiceRequests();
 
-        if (user.role !== 'client') {
-          navigate('/login', { replace: true });
+        if (active && token === captureSession()) {
+          setRequests(data);
+        }
+      } catch (error) {
+        if (!active || token !== captureSession()) return;
+
+        if (error instanceof ApiError && error.status === 401) {
+          invalidateSession(token);
           return;
         }
 
-        const data = await getServiceRequests();
-        if (active) setRequests(data);
-      } catch {
-        if (active) setError('Unable to load your requests. Please sign in again if your session expired.');
+        setError(
+          error instanceof ApiError && error.status === 403
+            ? 'Access denied.'
+            : 'Unable to load your requests.',
+        );
       } finally {
-        if (active) setLoading(false);
+        if (active && token === captureSession()) {
+          setLoading(false);
+        }
       }
     }
 
     void load();
     return () => { active = false; };
-  }, [navigate]);
+  }, [status, captureSession, invalidateSession]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const token = captureSession();
     setError('');
     setSuccess('');
     setSubmitting(true);
@@ -67,14 +81,31 @@ export default function ServiceRequestsPage() {
         description,
       });
 
+      if (token !== captureSession()) return;
+
       setRequests((previous) => [created, ...previous]);
       setTitle('');
       setDescription('');
       setSuccess('Your request has been submitted successfully.');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Submission failed.');
+      if (token !== captureSession()) return;
+
+      if (err instanceof ApiError && err.status === 401) {
+        invalidateSession(token);
+        return;
+      }
+
+      setError(
+        err instanceof ApiError && err.status === 403
+          ? 'Access denied.'
+          : err instanceof Error
+            ? err.message
+            : 'Submission failed.',
+      );
     } finally {
-      setSubmitting(false);
+      if (token === captureSession()) {
+        setSubmitting(false);
+      }
     }
   }
 

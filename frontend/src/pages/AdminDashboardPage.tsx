@@ -1,8 +1,10 @@
+import { useAuth } from '../components/auth/AuthProvider';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getCurrentUser, logout } from '../lib/auth';
+import { logout } from '../lib/auth';
+import { ApiError } from '../lib/apiError';
 import {
   getAdminRequests,
   updateRequestStatus,
@@ -24,8 +26,16 @@ const statusLabels: Record<RequestStatus, string> = {
   rejected: 'Rejected',
 };
 
+const allowedTransitions: Record<RequestStatus, RequestStatus[]> = {
+  submitted: ['in_review'],
+  in_review: ['approved', 'rejected'],
+  approved: ['in_review'],
+  rejected: ['in_review'],
+};
+
 export default function AdminDashboardPage() {
   const navigate = useNavigate();
+  const { status, clearSession, captureSession, invalidateSession } = useAuth();
 
   const [requests, setRequests] = useState<
     AdminServiceRequest[]
@@ -40,28 +50,35 @@ export default function AdminDashboardPage() {
   >('all');
 
   useEffect(() => {
+    if (status !== 'authenticated') return;
+
     let active = true;
+    const token = captureSession();
 
     async function load() {
       try {
-        const user = await getCurrentUser();
+        const data = await getAdminRequests();
 
-        if (!active) return;
+        if (active && token === captureSession()) {
+          setRequests(data);
+        }
+      } catch (error) {
+        if (!active || token !== captureSession()) return;
 
-        if (user.role !== 'admin') {
-          navigate('/login', { replace: true });
+        if (error instanceof ApiError && error.status === 401) {
+          invalidateSession(token);
           return;
         }
 
-        const data = await getAdminRequests();
-
-        if (active) setRequests(data);
-      } catch {
-        if (active) {
-          setError('Unable to load admin requests.');
-        }
+        setError(
+          error instanceof ApiError && error.status === 403
+            ? 'Access denied.'
+            : 'Unable to load admin requests.',
+        );
       } finally {
-        if (active) setLoading(false);
+        if (active && token === captureSession()) {
+          setLoading(false);
+        }
       }
     }
 
@@ -70,36 +87,50 @@ export default function AdminDashboardPage() {
     return () => {
       active = false;
     };
-  }, [navigate]);
+  }, [status, captureSession, invalidateSession]);
 
   async function changeStatus(
     id: string,
     status: RequestStatus,
   ) {
+    const token = captureSession();
     setSavingId(id);
     setError('');
 
     try {
-      const updated = await updateRequestStatus(
-        id,
-        status,
-      );
+      const updated = await updateRequestStatus(id, status);
+
+      if (token !== captureSession()) return;
 
       setRequests((current) =>
         current.map((item) =>
           item.id === id ? updated : item,
         ),
       );
-    } catch {
-      setError('Could not update request status.');
+    } catch (error) {
+      if (token !== captureSession()) return;
+
+      if (error instanceof ApiError && error.status === 401) {
+        invalidateSession(token);
+        return;
+      }
+
+      setError(
+        error instanceof ApiError && error.status === 403
+          ? 'Access denied.'
+          : 'Could not update request status.',
+      );
     } finally {
-      setSavingId(null);
+      if (token === captureSession()) {
+        setSavingId(null);
+      }
     }
   }
 
   async function signOut() {
     try {
       await logout();
+      clearSession();
       navigate('/login', { replace: true });
     } catch {
       setError('Could not sign out.');
@@ -254,7 +285,10 @@ export default function AdminDashboardPage() {
                           )
                         }
                       >
-                        {statuses.map((status) => (
+                        {[
+                          item.status,
+                          ...allowedTransitions[item.status],
+                        ].map((status) => (
                           <option
                             key={status}
                             value={status}

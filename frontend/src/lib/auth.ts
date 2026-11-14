@@ -18,6 +18,16 @@ export type LoginData = {
   password: string;
 };
 
+export class AuthError extends Error {
+  constructor(
+    message: string,
+    public readonly status: number,
+  ) {
+    super(message);
+    this.name = 'AuthError';
+  }
+}
+
 async function authRequest<T>(
   path: string,
   options: RequestInit = {},
@@ -33,10 +43,11 @@ async function authRequest<T>(
 
   if (!response.ok) {
     const data = await response.json().catch(() => null);
-    throw new Error(
+    throw new AuthError(
       typeof data?.detail === 'string'
         ? data.detail
         : 'Something went wrong. Please try again.',
+      response.status,
     );
   }
 

@@ -1,39 +1,18 @@
+import { useAuth } from '../components/auth/AuthProvider';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser, logout, type User } from '../lib/auth';
+import { logout } from '../lib/auth';
 
 export default function ClientDashboardPage() {
   const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(null);
+  const { user, clearSession } = useAuth();
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    let active = true;
-
-    getCurrentUser()
-      .then((currentUser) => {
-        if (!active) return;
-
-        if (currentUser.role !== 'client') {
-          navigate('/login', { replace: true });
-          return;
-        }
-
-        setUser(currentUser);
-      })
-      .catch(() => {
-        if (active) navigate('/login', { replace: true });
-      });
-
-    return () => {
-      active = false;
-    };
-  }, [navigate]);
 
   async function handleLogout() {
     try {
       await logout();
+      clearSession();
       navigate('/login', { replace: true });
     } catch {
       setError('Could not sign out. Please try again.');

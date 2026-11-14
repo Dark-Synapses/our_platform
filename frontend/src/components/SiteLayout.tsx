@@ -10,7 +10,8 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import { getCurrentUser, type User } from '../lib/auth';
+import type { User } from '../lib/auth';
+import { useAuth } from './auth/AuthProvider';
 import { brand } from '../content/brand';
 
 type SocialPlatform =
@@ -181,7 +182,7 @@ function getPortalInfo(user: User | null): PortalInfo {
 
   return {
     label: 'Team Account',
-    href: null,
+    href: '/team',
   };
 }
 
@@ -189,44 +190,14 @@ export function SiteLayout() {
   const location = useLocation();
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState<User | null>(
-    null,
-  );
-  const [authLoading, setAuthLoading] = useState(true);
+  const { user: currentUser, status } = useAuth();
+  const authLoading = status === 'loading';
 
   const approachActive =
     location.pathname === '/' &&
     location.hash === '#approach';
 
   const portal = getPortalInfo(currentUser);
-
-  // Check the existing backend session.
-  useEffect(() => {
-    let active = true;
-
-    setAuthLoading(true);
-
-    getCurrentUser()
-      .then((user) => {
-        if (active) {
-          setCurrentUser(user);
-        }
-      })
-      .catch(() => {
-        if (active) {
-          setCurrentUser(null);
-        }
-      })
-      .finally(() => {
-        if (active) {
-          setAuthLoading(false);
-        }
-      });
-
-    return () => {
-      active = false;
-    };
-  }, [location.pathname]);
 
   // Close mobile navigation and handle page scrolling.
   useEffect(() => {

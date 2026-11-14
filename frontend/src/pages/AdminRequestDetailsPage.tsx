@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useAuth } from '../components/auth/AuthProvider';
+import { ApiError } from '../lib/apiError';
 
-import { getCurrentUser } from '../lib/auth';
 import {
   getAdminRequestDetails,
   type AdminRequestDetails,
@@ -9,7 +10,7 @@ import {
 
 export default function AdminRequestDetailsPage() {
   const { requestId } = useParams();
-  const navigate = useNavigate();
+  const { status, captureSession, invalidateSession } = useAuth();
 
   const [details, setDetails] =
     useState<AdminRequestDetails | null>(null);
@@ -17,36 +18,43 @@ export default function AdminRequestDetailsPage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    if (status !== 'authenticated') return;
+
     let active = true;
+    const token = captureSession();
 
     async function load() {
+      setLoading(true);
+      setError('');
+      setDetails(null);
+
       try {
-        const user = await getCurrentUser();
-
-        if (!active) return;
-
-        if (user.role !== 'admin') {
-          navigate('/login', { replace: true });
-          return;
-        }
-
         if (!requestId) {
           throw new Error('Missing request ID');
         }
 
-        const result = await getAdminRequestDetails(
-          requestId,
-        );
+        const result = await getAdminRequestDetails(requestId);
 
-        if (active) setDetails(result);
-      } catch {
-        if (active) {
-          setError(
-            'Unable to load request details. Check your access or request ID.',
-          );
+        if (active && token === captureSession()) {
+          setDetails(result);
         }
+      } catch (error) {
+        if (!active || token !== captureSession()) return;
+
+        if (error instanceof ApiError && error.status === 401) {
+          invalidateSession(token);
+          return;
+        }
+
+        setError(
+          error instanceof ApiError && error.status === 403
+            ? 'Access denied.'
+            : 'Unable to load request details. Check your access or request ID.',
+        );
       } finally {
-        if (active) setLoading(false);
+        if (active && token === captureSession()) {
+          setLoading(false);
+        }
       }
     }
 
@@ -55,7 +63,7 @@ export default function AdminRequestDetailsPage() {
     return () => {
       active = false;
     };
-  }, [navigate, requestId]);
+  }, [requestId, status, captureSession, invalidateSession]);
 
   return (
     <main className="admin-dashboard">

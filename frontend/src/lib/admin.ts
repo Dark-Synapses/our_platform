@@ -1,3 +1,5 @@
+import { ApiError } from './apiError';
+
 export type RequestStatus =
   | 'submitted'
   | 'in_review'
@@ -27,8 +29,9 @@ async function api<T>(
   });
 
   if (!response.ok) {
-    throw new Error(
+    throw new ApiError(
       `Request failed (${response.status})`,
+      response.status,
     );
   }
 
