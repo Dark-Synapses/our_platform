@@ -21,6 +21,7 @@ import { HomePage } from '../pages/HomePage';
 import { ServicesPage } from '../pages/ServicesPage';
 import { SystemPage } from '../pages/SystemPage';
 import { ProjectsPage } from '../pages/ProjectsPage';
+import { TechNewsPage } from '../pages/TechNewsPage';
 
 export function App() {
   return <Routes><Route element={<SiteLayout />}>
@@ -45,6 +46,7 @@ export function App() {
     <Route path="services" element={<ServicesPage />} />
     <Route path="expertise" element={<Navigate to="/services" replace />} />
     <Route path="projects" element={<ProjectsPage />} />
+    <Route path="tech-news" element={<TechNewsPage />} />
     <Route element={<ProtectedRoute allowedRoles={['admin', 'team']} />}>
       <Route path="system" element={<SystemPage />} />
     </Route>

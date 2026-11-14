@@ -307,6 +307,13 @@ export function SiteLayout() {
           </Link>
 
           <NavLink
+            to="/tech-news"
+            onClick={() => setMenuOpen(false)}
+          >
+            Tech News
+          </NavLink>
+
+          <NavLink
             to="/contact"
             onClick={() => setMenuOpen(false)}
           >
@@ -419,6 +426,7 @@ export function SiteLayout() {
             <Link to="/about">About</Link>
             <Link to="/services">Services</Link>
             <Link to="/projects">Projects</Link>
+            <Link to="/tech-news">Tech News</Link>
             <Link to="/contact">Contact</Link>
           </div>
 
