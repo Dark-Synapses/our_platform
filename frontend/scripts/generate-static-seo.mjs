@@ -20,6 +20,7 @@ const privateRoutes = [
   '/register',
   '/dashboard',
   '/admin',
+  '/admin/contact-inquiries',
   '/team',
   '/service-requests',
   '/system',

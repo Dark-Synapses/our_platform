@@ -105,3 +105,11 @@
     max-height: 65vh;
   }
 }
+
+.ds-notification-inbox-link {
+  display: block;
+  width: fit-content;
+  margin-top: 8px;
+  color: #b9d5f1;
+  text-decoration: underline;
+}

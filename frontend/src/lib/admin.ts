@@ -83,3 +83,21 @@ export function getAdminRequestDetails(id: string) {
     `/api/v1/admin/service-requests/${encodeURIComponent(id)}`,
   );
 }
+
+export interface AdminContactInquiry {
+  id: string;
+  name: string;
+  email: string;
+  company: string;
+  service: string;
+  message: string;
+  status: string;
+  created_at: string;
+}
+
+export function getAdminContactInquiries(signal: AbortSignal) {
+  return api<AdminContactInquiry[]>('/api/v1/admin/contact-inquiries', {
+    signal,
+    cache: 'no-store',
+  });
+}

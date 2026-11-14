@@ -5,6 +5,7 @@ import AISecurityServicePage from '../pages/AISecurityServicePage';
 import CybersecurityServicePage from '../pages/CybersecurityServicePage';
 import { AIServicePage } from '../pages/AIServicePage';
 import AdminRequestDetailsPage from '../pages/AdminRequestDetailsPage';
+import AdminContactInquiriesPage from '../pages/AdminContactInquiriesPage';
 import AdminDashboardPage from '../pages/AdminDashboardPage';
 import ServiceRequestsPage from '../pages/ServiceRequestsPage';
 import LoginPage from '../pages/LoginPage';
@@ -35,6 +36,7 @@ export function App() {
         </Route>
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
           <Route path="admin" element={<AdminDashboardPage />} />
+          <Route path="admin/contact-inquiries" element={<AdminContactInquiriesPage />} />
           <Route path="admin/requests/:requestId" element={<AdminRequestDetailsPage />} />
         </Route>
 

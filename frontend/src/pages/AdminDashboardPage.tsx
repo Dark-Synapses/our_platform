@@ -207,6 +207,7 @@ export default function AdminDashboardPage() {
             <h2>Service Requests</h2>
             <p>
               Review and manage client submissions.
+              {' '}<Link to="/admin/contact-inquiries" className="admin-request-link">View contact inquiries</Link>
             </p>
           </div>
 
