@@ -1,3 +1,5 @@
+import { ApiError } from './apiError';
+
 export type Notification = {
   id: string;
   type: string;
@@ -25,8 +27,9 @@ async function request<T>(
   });
 
   if (!response.ok) {
-    throw new Error(
+    throw new ApiError(
       `Notification request failed: ${response.status}`,
+      response.status,
     );
   }
 

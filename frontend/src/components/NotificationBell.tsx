@@ -1,5 +1,7 @@
 import '../styles/notifications.css';
 import { useEffect, useState } from 'react';
+import { useAuth } from './auth/AuthProvider';
+import { ApiError } from '../lib/apiError';
 import {
   getNotifications,
   getUnreadCount,
@@ -8,6 +10,7 @@ import {
 } from '../lib/notifications';
 
 export function NotificationBell({ userId }: { userId: string }) {
+  const { status, captureSession, invalidateSession } = useAuth();
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<Notification[]>([]);
   const [unread, setUnread] = useState(0);
@@ -17,38 +20,77 @@ export function NotificationBell({ userId }: { userId: string }) {
 
   useEffect(() => {
     let active = true;
+    const token = captureSession();
+
     setOpen(false);
     setItems([]);
     setUnread(0);
     setError('');
 
+    if (status !== 'authenticated') {
+      return () => {
+        active = false;
+      };
+    }
+
     getUnreadCount()
       .then((result) => {
-        if (active) setUnread(result.unread_count);
+        if (active && token === captureSession()) {
+          setUnread(result.unread_count);
+        }
       })
-      .catch(() => {
-        if (active) setError('Could not load notifications.');
+      .catch((error: unknown) => {
+        if (!active || token !== captureSession()) return;
+
+        if (error instanceof ApiError && error.status === 401) {
+          invalidateSession(token);
+          return;
+        }
+
+        setError(
+          error instanceof ApiError && error.status === 403
+            ? 'Access denied.'
+            : 'Could not load notifications.',
+        );
       });
 
     return () => {
       active = false;
     };
-  }, [userId]);
+  }, [userId, status, captureSession, invalidateSession]);
 
   async function loadNotifications() {
+    const token = captureSession();
     setLoading(true);
     setError('');
+
     try {
       const [notifications, count] = await Promise.all([
         getNotifications(),
         getUnreadCount(),
       ]);
+
+      if (token !== captureSession()) return;
+
       setItems(notifications);
       setUnread(count.unread_count);
-    } catch {
-      setError('Could not load notifications.');
+    } catch (error) {
+      if (token !== captureSession()) return;
+
+      if (error instanceof ApiError && error.status === 401) {
+        invalidateSession(token);
+        return;
+      }
+
+      setError(
+        error instanceof ApiError && error.status === 403
+          ? 'Access denied.'
+          : 'Could not load notifications.',
+      );
     } finally {
-      setLoading(false);
+      if (token === captureSession()) {
+        setLoading(false);
+      }
     }
   }
 
@@ -63,21 +105,44 @@ export function NotificationBell({ userId }: { userId: string }) {
 
   async function markRead(id: string) {
     if (busyId) return;
+
+    const token = captureSession();
     setBusyId(id);
     setError('');
+
     try {
       await markNotificationRead(id);
+
+      if (token !== captureSession()) return;
+
       setItems((previous) =>
         previous.map((item) =>
           item.id === id ? { ...item, is_read: true } : item,
         ),
       );
+
       const count = await getUnreadCount();
+
+      if (token !== captureSession()) return;
+
       setUnread(count.unread_count);
-    } catch {
-      setError('Could not update notification.');
+    } catch (error) {
+      if (token !== captureSession()) return;
+
+      if (error instanceof ApiError && error.status === 401) {
+        invalidateSession(token);
+        return;
+      }
+
+      setError(
+        error instanceof ApiError && error.status === 403
+          ? 'Access denied.'
+          : 'Could not update notification.',
+      );
     } finally {
-      setBusyId(null);
+      if (token === captureSession()) {
+        setBusyId(null);
+      }
     }
   }
 

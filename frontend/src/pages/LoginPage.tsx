@@ -1,9 +1,11 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../lib/auth';
+import { useAuth } from '../components/auth/AuthProvider';
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { setAuthenticatedUser } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -16,6 +18,7 @@ export default function LoginPage() {
 
     try {
       const user = await login({ email, password });
+      setAuthenticatedUser(user);
 
       if (user.role === 'admin') {
         navigate('/admin', { replace: true });

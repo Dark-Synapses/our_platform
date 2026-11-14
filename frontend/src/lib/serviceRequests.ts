@@ -1,3 +1,5 @@
+import { ApiError } from './apiError';
+
 export type ServiceType =
   | 'ai_services'
   | 'cybersecurity'
@@ -26,7 +28,7 @@ export async function getServiceRequests(): Promise<ServiceRequest[]> {
   });
 
   if (!response.ok) {
-    throw new Error('Unable to load service requests.');
+    throw new ApiError('Unable to load service requests.', response.status);
   }
 
   return response.json() as Promise<ServiceRequest[]>;
@@ -44,10 +46,11 @@ export async function createServiceRequest(
 
   if (!response.ok) {
     const result = await response.json().catch(() => null);
-    throw new Error(
+    throw new ApiError(
       typeof result?.detail === 'string'
         ? result.detail
         : 'Unable to submit service request.',
+      response.status,
     );
   }
 

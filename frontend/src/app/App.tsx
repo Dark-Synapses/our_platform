@@ -8,6 +8,8 @@ import AdminRequestDetailsPage from '../pages/AdminRequestDetailsPage';
 import AdminDashboardPage from '../pages/AdminDashboardPage';
 import ServiceRequestsPage from '../pages/ServiceRequestsPage';
 import LoginPage from '../pages/LoginPage';
+import TeamLandingPage from '../pages/TeamLandingPage';
+import { ProtectedRoute } from '../components/auth/ProtectedRoute';
 import RegisterPage from '../pages/RegisterPage';
 import ClientDashboardPage from '../pages/ClientDashboardPage';
 import { AboutPage } from '../pages/AboutPage';
@@ -24,17 +26,26 @@ export function App() {
     <Route index element={<HomePage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
-        <Route path="dashboard" element={<ClientDashboardPage />} />
-        <Route path="admin" element={<AdminDashboardPage />} />
-        <Route path="admin/requests/:requestId" element={<AdminRequestDetailsPage />} />
-        <Route path="service-requests" element={<ServiceRequestsPage />} />
+        <Route element={<ProtectedRoute allowedRoles={['client']} />}>
+          <Route path="dashboard" element={<ClientDashboardPage />} />
+          <Route path="service-requests" element={<ServiceRequestsPage />} />
+        </Route>
+        <Route element={<ProtectedRoute allowedRoles={['team']} />}>
+          <Route path="team" element={<TeamLandingPage />} />
+        </Route>
+        <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+          <Route path="admin" element={<AdminDashboardPage />} />
+          <Route path="admin/requests/:requestId" element={<AdminRequestDetailsPage />} />
+        </Route>
 
     <Route path="about" element={<AboutPage />} />
     <Route path="contact" element={<ContactPage />} />
     <Route path="services" element={<ServicesPage />} />
     <Route path="expertise" element={<Navigate to="/services" replace />} />
     <Route path="projects" element={<ProjectsPage />} />
-    <Route path="system" element={<SystemPage />} />
+    <Route element={<ProtectedRoute allowedRoles={['admin', 'team']} />}>
+      <Route path="system" element={<SystemPage />} />
+    </Route>
     <Route path="services/ai" element={<AIServicePage />} />
     <Route path="services/content-authenticity-digital-forensics" element={<ContentAuthenticityPage />} />
     <Route path="services/ai-powered-security" element={<AIPoweredSecurityPage />} />
