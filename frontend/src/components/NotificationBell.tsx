@@ -1,5 +1,6 @@
 import '../styles/notifications.css';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from './auth/AuthProvider';
 import { ApiError } from '../lib/apiError';
 import {
@@ -10,7 +11,7 @@ import {
 } from '../lib/notifications';
 
 export function NotificationBell({ userId }: { userId: string }) {
-  const { status, captureSession, invalidateSession } = useAuth();
+  const { user, status, captureSession, invalidateSession } = useAuth();
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<Notification[]>([]);
   const [unread, setUnread] = useState(0);
@@ -195,6 +196,15 @@ export function NotificationBell({ userId }: { userId: string }) {
               <small>
                 {new Date(item.created_at).toLocaleString()}
               </small>
+              {user?.role === 'admin' && item.type === 'new_contact_inquiry' && (
+                <Link
+                  className="ds-notification-inbox-link"
+                  to="/admin/contact-inquiries"
+                  onClick={() => setOpen(false)}
+                >
+                  View contact inbox
+                </Link>
+              )}
               {!item.is_read && (
                 <button
                   type="button"

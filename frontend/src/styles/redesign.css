@@ -755,3 +755,20 @@ nav a:hover {
     grid-template-columns: 1fr;
   }
 }
+
+.admin-inquiries {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-inquiry {
+  overflow-wrap: anywhere;
+}
+
+.admin-inquiry time {
+  color: #a6bfd8;
+}
+
+.admin-inquiry-message {
+  white-space: pre-wrap;
+}

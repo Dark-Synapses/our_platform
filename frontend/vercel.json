@@ -77,6 +77,10 @@
       "destination": "/system/index.html"
     },
     {
+      "source": "/admin/contact-inquiries",
+      "destination": "/admin/contact-inquiries/index.html"
+    },
+    {
       "source": "/admin/requests/:requestId",
       "destination": "/admin/index.html"
     },
@@ -124,6 +128,15 @@
     },
     {
       "source": "/team",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/admin/contact-inquiries",
       "headers": [
         {
           "key": "X-Robots-Tag",
