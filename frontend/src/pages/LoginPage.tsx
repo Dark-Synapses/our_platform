@@ -66,7 +66,7 @@ export default function LoginPage() {
 
           {error && <p className="auth-error" role="alert">{error}</p>}
 
-          <button type="submit" disabled={loading}>
+          <button data-public-cta="primary" type="submit" disabled={loading}>
             {loading ? 'Signing in...' : 'Sign in'}
           </button>
         </form>

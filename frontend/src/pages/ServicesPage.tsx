@@ -1,3 +1,4 @@
+import { HeroSignal } from '../components/HeroSignal';
 import { ServiceCard } from '../components/ServiceCard';
 import { services } from '../content/site';
 import '../styles/expertise-premium-v1.css';
@@ -5,7 +6,8 @@ import '../styles/expertise-premium-v1.css';
 export function ServicesPage() {
   return (
     <div className="ds-expertise-page">
-      <section className="ds-expertise-intro">
+      <section className="ds-expertise-intro" data-signal-hero="">
+        <HeroSignal />
         <p className="ds-services-eyebrow">
           DARK SYNAPSES / CAPABILITIES
         </p>
@@ -25,11 +27,10 @@ export function ServicesPage() {
       <section className="ds-services-v2">
         <div className="ds-services-container">
           <div className="ds-services-grid">
-            {services.map((service, index) => (
+            {services.map((service) => (
               <ServiceCard
                 key={service.id}
                 service={service}
-                index={index}
               />
             ))}
           </div>

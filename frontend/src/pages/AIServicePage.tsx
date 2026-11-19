@@ -1,3 +1,4 @@
+import { HeroSignal } from '../components/HeroSignal';
 import { Link } from 'react-router-dom';
 import './AIServicePage.css';
 
@@ -30,12 +31,13 @@ function CapabilityIcon({ name }: { name: typeof capabilities[number]['icon'] })
 function ImageCard({ title, image, href }: { title: string; image: string; href: string }) {
   return <a className="ds-ai-v2-card" href={href} aria-label={title}>
     <img src={base + image} alt="" loading="lazy" />
-    <span className="ds-ai-v2-card-content"><strong>{title}</strong><span aria-hidden="true">↗</span></span>
+    <span className="ds-ai-v2-card-content"><strong>{title}</strong></span>
   </a>;
 }
 export function AIServicePage() {
   return <main className="ds-ai-v2">
-    <section className="ds-ai-v2-hero">
+    <section className="ds-ai-v2-hero" data-signal-hero="">
+        <HeroSignal />
       <div className="ds-ai-v2-hero-art" aria-hidden="true" />
       <div className="ds-ai-v2-container ds-ai-v2-hero-inner">
         <nav className="ds-ai-v2-crumb" aria-label="Breadcrumb"><Link to="/services">Services</Link><span>/</span><span>AI Services</span></nav>
@@ -43,7 +45,7 @@ export function AIServicePage() {
           <h1>AI Services</h1>
           <h2>From complex challenges<br/>to intelligent solutions.</h2>
           <p>We help organizations leverage AI to automate processes, uncover insights, and build innovative products — combining domain expertise with secure, scalable, and production-ready systems.</p>
-          <div className="ds-ai-v2-actions"><Link className="ds-ai-v2-btn ds-ai-v2-primary" to="/contact?service=ai">Request this service <span>→</span></Link><a className="ds-ai-v2-btn ds-ai-v2-secondary" href="#ai-capabilities">Explore capabilities ↓</a></div>
+          <div className="ds-ai-v2-actions"><Link className="ds-ai-v2-btn ds-ai-v2-primary" data-public-cta="primary" to="/contact?service=ai">Request this service</Link><a className="ds-ai-v2-btn ds-ai-v2-secondary" data-public-cta="secondary" href="#ai-capabilities">Explore capabilities</a></div>
         </div>
         <div className="ds-ai-v2-hero-words" aria-hidden="true">Ideas<br/>Intelligence<br/>Impact</div>
       </div>
@@ -54,12 +56,12 @@ export function AIServicePage() {
     </section>
     <section className="ds-ai-v2-section ds-ai-v2-container ds-ai-v2-solutions" id="ai-capabilities" aria-labelledby="ai-capabilities-title">
       <p className="ds-ai-v2-kicker">OUR SOLUTIONS</p><h2 id="ai-capabilities-title">Powerful AI capabilities.<br/>Real business value.</h2>
-      <div className="ds-ai-v2-four">{capabilities.map(c => <details className="ds-ai-v2-capability" key={c.title}><summary><span className="ds-ai-v2-icon"><CapabilityIcon name={c.icon}/></span><span className="ds-ai-v2-cap-title">{c.title}</span><span className="ds-ai-v2-cap-arrow">→</span></summary><p>{c.description}</p></details>)}</div>
+      <div className="ds-ai-v2-four">{capabilities.map(c => <details className="ds-ai-v2-capability" key={c.title}><summary><span className="ds-ai-v2-icon"><CapabilityIcon name={c.icon}/></span><span className="ds-ai-v2-cap-title">{c.title}</span></summary><p>{c.description}</p></details>)}</div>
     </section>
     <section className="ds-ai-v2-section ds-ai-v2-container" aria-labelledby="ai-impact-title">
       <div className="ds-ai-v2-section-head ds-ai-v2-impact-head"><div><p className="ds-ai-v2-kicker">REAL-WORLD IMPACT</p><h2 id="ai-impact-title">Turning AI into results.</h2></div><Link to="/projects">View all projects →</Link></div>
       <div className="ds-ai-v2-three ds-ai-v2-projects">{projects.map(p => <ImageCard key={p.title} {...p} href="/projects" />)}</div>
     </section>
-    <section className="ds-ai-v2-container ds-ai-v2-cta-wrap"><div className="ds-ai-v2-cta"><div><p className="ds-ai-v2-kicker">LET'S BUILD TOGETHER</p><h2>Have a project<br/>in mind?</h2></div><div><p>Tell us about your goals, and we'll help you design the right AI solution.</p><Link className="ds-ai-v2-btn ds-ai-v2-primary" to="/contact?service=ai">Get in touch →</Link></div></div></section>
+    <section className="ds-ai-v2-container ds-ai-v2-cta-wrap"><div className="ds-ai-v2-cta"><div><p className="ds-ai-v2-kicker">LET'S BUILD TOGETHER</p><h2>Have a project<br/>in mind?</h2></div><div><p>Tell us about your goals, and we'll help you design the right AI solution.</p><Link className="ds-ai-v2-btn ds-ai-v2-primary" data-public-cta="primary" to="/contact?service=ai">Get in touch</Link></div></div></section>
   </main>;
 }

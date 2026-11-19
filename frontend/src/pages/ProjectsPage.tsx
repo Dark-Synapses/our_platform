@@ -1,9 +1,11 @@
+import { HeroSignal } from '../components/HeroSignal';
 import '../styles/projects-page.css';
 
 export function ProjectsPage() {
   return (
     <main className="ds-projects-page">
-      <section className="ds-projects-hero">
+      <section className="ds-projects-hero" data-signal-hero="">
+        <HeroSignal />
         <p className="ds-projects-eyebrow">
           DARK SYNAPSES / SELECTED WORK
         </p>

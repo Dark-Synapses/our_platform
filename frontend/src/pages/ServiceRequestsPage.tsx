@@ -161,7 +161,7 @@ export default function ServiceRequestsPage() {
             {error && <p role="alert" className="auth-error">{error}</p>}
             {success && <p role="status">{success}</p>}
 
-            <button type="submit" disabled={submitting}>
+            <button data-public-cta="primary" type="submit" disabled={submitting}>
               {submitting ? 'Submitting...' : 'Submit request'}
             </button>
           </form>

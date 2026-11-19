@@ -1,5 +1,3 @@
-import { UiIcon } from './UiIcons';
-
 import { Link } from 'react-router-dom';
 import { ServiceCard } from './ServiceCard';
 import { services } from '../content/site';
@@ -27,18 +25,17 @@ export function ServicesSection() {
               move forward with confidence.
             </p>
 
-            <Link to="/services">
-              Explore all expertise <UiIcon name="arrow" />
+            <Link to="/services" data-public-cta="secondary">
+              Explore all expertise
             </Link>
           </div>
         </div>
 
         <div className="ds-services-grid">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <ServiceCard
               key={service.id}
               service={service}
-              index={index}
             />
           ))}
         </div>
