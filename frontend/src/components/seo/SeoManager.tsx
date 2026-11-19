@@ -81,7 +81,7 @@ export function SeoManager() {
         '@type': 'Organization',
         name: BRAND,
         url: SITE,
-        logo: `${SITE}/images/logo.png`,
+        logo: `${SITE}/images/brand-full.png`,
         description,
       });
       document.head.appendChild(script);
