@@ -1,0 +1,164 @@
+.ds-home-premium-services,
+.ds-expertise-page .ds-services-v2 {
+  padding: clamp(32px, 5vw, 72px) 0 clamp(64px, 8vw, 108px);
+  background: radial-gradient(ellipse at 50% 0, #10283d 0%, #091724 48%, #06111e 100%);
+}
+
+#main .ds-services-v2 .ds-services-container {
+  width: min(1440px, calc(100% - max(32px, 10vw)));
+}
+
+#main .ds-services-v2 .ds-services-heading {
+  margin-bottom: clamp(24px, 3.5vw, 44px);
+}
+
+#main .ds-services-v2 .ds-services-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(14px, 1.8vw, 24px);
+  align-items: stretch;
+}
+
+#main .ds-services-grid .ds-service-card {
+  --card-surface: #0b1928;
+  --card-image-height: clamp(130px, 15vw, 210px);
+  --card-padding: clamp(16px, 1.75vw, 26px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  grid-column: span 2;
+  isolation: isolate;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  padding: var(--card-padding);
+  overflow: hidden;
+  border: 1px solid #294259;
+  border-radius: 12px;
+  background: var(--card-surface);
+  box-shadow: 0 8px 28px #0003;
+  transition: translate .24s ease, border-color .24s ease, box-shadow .24s ease;
+}
+
+#main .ds-services-grid .ds-service-card:nth-child(n + 4) { grid-column: span 3; }
+
+#main .ds-service-card#ai { --card-image: url('/images/ai-services.jpg'); }
+#main .ds-service-card#cybersecurity { --card-image: url('/images/cybersecurity.jpg'); }
+#main .ds-service-card#ai-security { --card-image: url('/images/ai-security.jpg'); }
+#main .ds-service-card#ai-powered-security { --card-image: url('/images/ai-powered-security.jpg'); }
+#main .ds-service-card#content-forensics { --card-image: url('/images/content-forensics.jpg'); }
+
+#main .ds-services-grid .ds-service-card::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto;
+  width: 100%;
+  height: var(--card-image-height);
+  background: linear-gradient(180deg, #06101b20 35%, var(--card-surface)), var(--card-image) center 36% / cover no-repeat;
+  pointer-events: none;
+}
+
+#main .ds-services-grid .ds-service-card::after { content: none; }
+
+#main .ds-service-card .ds-service-card-top {
+  display: flex;
+  align-items: flex-start;
+  min-height: calc(var(--card-image-height) - var(--card-padding) - 8px);
+  margin: 0;
+}
+
+#main .ds-service-card .ds-service-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #709cbe80;
+  border-radius: 7px;
+  background: #0a1b2be8;
+  color: #c0e0f7;
+}
+
+#main .ds-service-card .ds-service-icon svg { width: 20px; height: 20px; }
+
+#main .ds-service-card .ds-service-category {
+  margin: 0;
+  color: #a0c1db;
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: .09em;
+}
+
+#main .ds-service-card h3 {
+  color: #eef6ff;
+  font-size: clamp(19px, 2vw, 27px);
+  line-height: 1.2;
+  margin: 8px 0 12px;
+  text-wrap: balance;
+}
+
+#main .ds-service-card .ds-service-description {
+  margin: 0 0 18px;
+  color: #c2d3e4;
+  font-size: 14px;
+  line-height: 1.57;
+  overflow-wrap: anywhere;
+}
+
+#main .ds-service-card .ds-service-capabilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: auto 0 16px;
+}
+
+#main .ds-service-card .ds-service-capabilities span {
+  padding: 4px 7px;
+  border: 1px solid #2f4860;
+  border-radius: 5px;
+  color: #c1d9ec;
+  background: #102133;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+#main .ds-service-card .ds-service-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 12px;
+  margin: 0;
+  text-align: center;
+  color: #edf6ff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+#main .ds-service-card .ds-service-link:is(:hover, :focus-visible) { color: #a9d9ff; }
+
+@media (prefers-reduced-motion: no-preference) {
+  #main .ds-services-grid .ds-service-card:is(:hover, :focus-within) {
+    border-color: #70a7d2;
+    box-shadow: 0 16px 30px #02091380;
+  }
+
+}
+
+@media (min-width: 1280px) {
+  #main .ds-services-v2 .ds-services-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  #main .ds-services-grid .ds-service-card:nth-child(n) { grid-column: auto; }
+  #main .ds-services-grid .ds-service-card { --card-padding: 16px; }
+  #main .ds-service-card h3 { font-size: clamp(18px, 1.48vw, 23px); }
+}
+
+@media (max-width: 959px) {
+  #main .ds-services-v2 .ds-services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #main .ds-services-grid .ds-service-card:nth-child(n) { grid-column: auto; }
+  #main .ds-services-grid .ds-service-card:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 600px) {
+  #main .ds-services-v2 .ds-services-grid { grid-template-columns: minmax(0, 1fr); }
+  #main .ds-services-grid .ds-service-card { --card-image-height: 154px; }
+}

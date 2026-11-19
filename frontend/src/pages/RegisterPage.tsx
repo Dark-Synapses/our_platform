@@ -88,7 +88,7 @@ export default function RegisterPage() {
 
           {error && <p className="auth-error" role="alert">{error}</p>}
 
-          <button type="submit" disabled={loading}>
+          <button data-public-cta="primary" type="submit" disabled={loading}>
             {loading ? 'Creating account...' : 'Create account'}
           </button>
         </form>

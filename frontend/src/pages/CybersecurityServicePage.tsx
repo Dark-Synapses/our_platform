@@ -1,3 +1,4 @@
+import { HeroSignal } from '../components/HeroSignal';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CybersecurityServicePage.css';
@@ -41,7 +42,8 @@ export default function CybersecurityServicePage() {
 
   return (
     <main className="ds-cyber" id="top">
-      <section className="ds-cyber-hero" aria-labelledby="ds-cyber-heading">
+      <section className="ds-cyber-hero" data-signal-hero="" aria-labelledby="ds-cyber-heading">
+        <HeroSignal />
         <div className="ds-cyber-hero-art" aria-hidden="true" />
         <div className="ds-cyber-container ds-cyber-hero-inner">
           <nav className="ds-cyber-crumb" aria-label="Breadcrumb"><Link to="/services">Services</Link><span>/</span><span>Cybersecurity Services</span></nav>
@@ -50,8 +52,8 @@ export default function CybersecurityServicePage() {
             <h2>Proactive security for a more resilient tomorrow.</h2>
             <p>Comprehensive cybersecurity services to protect your digital assets, detect threats, and strengthen your security posture.</p>
             <div className="ds-cyber-actions">
-              <Link className="ds-cyber-btn ds-cyber-btn-primary" to="/contact">Request this service <span aria-hidden="true">↗</span></Link>
-              <a className="ds-cyber-btn ds-cyber-btn-outline" href="#cyber-capabilities">Explore capabilities <span aria-hidden="true">↓</span></a>
+              <Link className="ds-cyber-btn ds-cyber-btn-primary" data-public-cta="primary" to="/contact">Request this service</Link>
+              <a className="ds-cyber-btn ds-cyber-btn-outline" data-public-cta="secondary" href="#cyber-capabilities">Explore capabilities</a>
             </div>
           </div>
         </div>
@@ -67,7 +69,7 @@ export default function CybersecurityServicePage() {
             <button type="button" className={`ds-cyber-service-card ${expanded === service.title ? 'is-open' : ''}`} key={service.title} aria-expanded={expanded === service.title} onClick={() => setExpanded(expanded === service.title ? null : service.title)}>
               <span className="ds-cyber-service-icon"><SecurityIcon name={service.icon} /></span>
               <span className="ds-cyber-service-copy"><strong>{service.title}</strong><span>{service.description}</span>{expanded === service.title && <em>{service.detail}</em>}</span>
-              <span className="ds-cyber-service-arrow" aria-hidden="true">↗</span>
+
             </button>
           ))}
         </div>
@@ -83,11 +85,11 @@ export default function CybersecurityServicePage() {
       </section>
 
       <section className="ds-cyber-section ds-cyber-container ds-cyber-impact" aria-labelledby="ds-cyber-impact-title">
-        <div className="ds-cyber-section-head"><h2 id="ds-cyber-impact-title">Stronger security.<br/><span>Greater confidence.</span></h2><Link className="ds-cyber-all-projects" to="/projects">View all projects <span aria-hidden="true">↗</span></Link></div>
+        <div className="ds-cyber-section-head"><h2 id="ds-cyber-impact-title">Stronger security.<br/><span>Greater confidence.</span></h2><Link className="ds-cyber-all-projects" to="/projects">View all projects </Link></div>
         <div className="ds-cyber-project-grid">{projects.map((project) => <article className="ds-cyber-project" key={project.title}><img src={project.image} alt={project.alt} loading="lazy"/><h3>{project.title}</h3></article>)}</div>
       </section>
 
-      <section className="ds-cyber-container ds-cyber-cta-wrap" aria-labelledby="ds-cyber-cta-title"><div className="ds-cyber-cta"><div className="ds-cyber-cta-content"><h2 id="ds-cyber-cta-title">Let's strengthen<br/><span>your security.</span></h2><p>Tell us about your security challenges, and we'll help you design the right solution.</p><Link className="ds-cyber-btn ds-cyber-btn-primary" to="/contact">Get in touch <span aria-hidden="true">↗</span></Link></div></div></section>
+      <section className="ds-cyber-container ds-cyber-cta-wrap" aria-labelledby="ds-cyber-cta-title"><div className="ds-cyber-cta"><div className="ds-cyber-cta-content"><h2 id="ds-cyber-cta-title">Let's strengthen<br/><span>your security.</span></h2><p>Tell us about your security challenges, and we'll help you design the right solution.</p><Link className="ds-cyber-btn ds-cyber-btn-primary" data-public-cta="primary" to="/contact">Get in touch</Link></div></div></section>
     </main>
   );
 }

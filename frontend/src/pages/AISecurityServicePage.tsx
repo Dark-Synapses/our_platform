@@ -1,3 +1,4 @@
+import { HeroSignal } from '../components/HeroSignal';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './AISecurityServicePage.css';
@@ -31,20 +32,21 @@ const projects = [
 export default function AISecurityServicePage() {
   const [expanded, setExpanded] = useState<string | null>(null);
   return <main className="ds-aisec" id="top">
-    <section className="ds-aisec-hero" aria-labelledby="ds-aisec-title">
+    <section className="ds-aisec-hero" data-signal-hero="" aria-labelledby="ds-aisec-title">
+        <HeroSignal />
       <div className="ds-aisec-hero-art" aria-hidden="true" />
       <div className="ds-aisec-container ds-aisec-hero-inner">
         <nav className="ds-aisec-crumb" aria-label="Breadcrumb"><Link to="/services">Services</Link><span>/</span><span>AI Security</span></nav>
         <div className="ds-aisec-hero-copy"><h1 id="ds-aisec-title">Secure AI.<br/><span>Trusted Intelligence.</span></h1><p>Specialized security for AI systems, from model protection to data privacy and adversarial threat defense.</p>
-          <div className="ds-aisec-actions"><Link className="ds-aisec-btn ds-aisec-primary" to="/contact?service=ai-security">Request this service <span aria-hidden="true">↗</span></Link><a className="ds-aisec-btn ds-aisec-outline" href="#ai-security-capabilities">Explore capabilities <span aria-hidden="true">↓</span></a></div>
+          <div className="ds-aisec-actions"><Link className="ds-aisec-btn ds-aisec-primary" data-public-cta="primary" to="/contact?service=ai-security">Request this service</Link><a className="ds-aisec-btn ds-aisec-outline" data-public-cta="secondary" href="#ai-security-capabilities">Explore capabilities</a></div>
         </div>
       </div>
     </section>
     <section className="ds-aisec-section ds-aisec-container" id="ai-security-capabilities" aria-labelledby="ds-aisec-cap-title"><div className="ds-aisec-heading"><h2 id="ds-aisec-cap-title">Security for every<br/><span>stage of the AI lifecycle.</span></h2><p>We help organizations build, deploy, and maintain secure AI systems with robust defenses against emerging AI-specific threats.</p></div>
-      <div className="ds-aisec-cap-grid">{capabilities.map(c => <button type="button" key={c.title} className={'ds-aisec-cap-card'+(expanded===c.title?' is-open':'')} aria-expanded={expanded===c.title} onClick={()=>setExpanded(expanded===c.title?null:c.title)}><span className="ds-aisec-cap-icon"><CapabilityIcon name={c.icon}/></span><span className="ds-aisec-cap-copy"><strong>{c.title}</strong><span>{c.description}</span>{expanded===c.title && <em>{c.detail}</em>}</span><span className="ds-aisec-arrow" aria-hidden="true">↗</span></button>)}</div>
+      <div className="ds-aisec-cap-grid">{capabilities.map(c => <button type="button" key={c.title} className={'ds-aisec-cap-card'+(expanded===c.title?' is-open':'')} aria-expanded={expanded===c.title} onClick={()=>setExpanded(expanded===c.title?null:c.title)}><span className="ds-aisec-cap-icon"><CapabilityIcon name={c.icon}/></span><span className="ds-aisec-cap-copy"><strong>{c.title}</strong><span>{c.description}</span>{expanded===c.title && <em>{c.detail}</em>}</span></button>)}</div>
     </section>
     <section className="ds-aisec-section ds-aisec-approach" aria-labelledby="ds-aisec-approach-title"><div className="ds-aisec-container ds-aisec-approach-layout"><h2 id="ds-aisec-approach-title">A secure foundation<br/><span>for AI innovation.</span></h2><ol className="ds-aisec-timeline">{phases.map((p,i)=><li key={p.title}><div className="ds-aisec-step">{String(i+1).padStart(2,'0')}</div><div><h3>{p.title}</h3><p>{p.description}</p></div></li>)}</ol></div></section>
-    <section className="ds-aisec-section ds-aisec-container" aria-labelledby="ds-aisec-projects-title"><div className="ds-aisec-heading ds-aisec-project-heading"><h2 id="ds-aisec-projects-title">Built for real-world AI systems.</h2><Link to="/projects">View all projects <span aria-hidden="true">↗</span></Link></div><div className="ds-aisec-project-grid">{projects.map(p=><article className="ds-aisec-project" key={p.title}><img src={p.image} alt={p.alt} loading="lazy"/><h3>{p.title}</h3></article>)}</div></section>
-    <section className="ds-aisec-container ds-aisec-cta-wrap" aria-labelledby="ds-aisec-cta-title"><div className="ds-aisec-cta"><div><h2 id="ds-aisec-cta-title">Build AI with confidence.</h2><p>Let's discuss your AI security requirements and a solution tailored to your goals.</p></div><Link className="ds-aisec-btn ds-aisec-primary" to="/contact?service=ai-security">Get in touch <span aria-hidden="true">↗</span></Link></div></section>
+    <section className="ds-aisec-section ds-aisec-container" aria-labelledby="ds-aisec-projects-title"><div className="ds-aisec-heading ds-aisec-project-heading"><h2 id="ds-aisec-projects-title">Built for real-world AI systems.</h2><Link to="/projects">View all projects </Link></div><div className="ds-aisec-project-grid">{projects.map(p=><article className="ds-aisec-project" key={p.title}><img src={p.image} alt={p.alt} loading="lazy"/><h3>{p.title}</h3></article>)}</div></section>
+    <section className="ds-aisec-container ds-aisec-cta-wrap" aria-labelledby="ds-aisec-cta-title"><div className="ds-aisec-cta"><div><h2 id="ds-aisec-cta-title">Build AI with confidence.</h2><p>Let's discuss your AI security requirements and a solution tailored to your goals.</p></div><Link className="ds-aisec-btn ds-aisec-primary" data-public-cta="primary" to="/contact?service=ai-security">Get in touch</Link></div></section>
   </main>;
 }

@@ -1,6 +1,5 @@
-import { UiIcon } from './UiIcons';
 import { Link } from 'react-router-dom';
-import { services } from '../content/site';
+import type { services } from '../content/site';
 
 type Service = (typeof services)[number];
 
@@ -63,19 +62,14 @@ function ServiceIcon({ type }: { type: Service['icon'] }) {
 
 export function ServiceCard({
   service,
-  index,
 }: {
   service: Service;
-  index: number;
 }) {
   return (
     <article className="ds-service-card" id={service.id}>
       <div className="ds-service-card-top">
         <span className="ds-service-icon">
           <ServiceIcon type={service.icon} />
-        </span>
-        <span className="ds-service-index">
-          0{index + 1} / 0{services.length}
         </span>
       </div>
 
@@ -97,10 +91,10 @@ export function ServiceCard({
             ? '/services/content-authenticity-digital-forensics'
             : service.path
         }
-        className="ds-service-link"
+        className="ds-service-link" data-public-cta="secondary"
         aria-label={`Explore ${service.title}`}
       >
-        Explore service <span aria-hidden="true"><UiIcon name="arrow" /></span>
+        Explore service
       </Link>
     </article>
   );

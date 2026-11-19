@@ -1,3 +1,4 @@
+import { HeroSignal } from '../components/HeroSignal';
 import { useState, type FormEvent } from 'react';
 import { brand } from '../content/brand';
 import { submitContactInquiry } from '../lib/contactInquiries';
@@ -65,7 +66,8 @@ export function ContactPage() {
     <main className="ds-contact-page ds-contact-v2">
       <div className="ds-contact-v2-glow" aria-hidden="true" />
 
-      <section className="ds-contact-v2-layout">
+      <section className="ds-contact-v2-layout" data-signal-hero="">
+        <HeroSignal />
         <div className="ds-contact-v2-intro">
           <p className="ds-contact-v2-eyebrow">
             DARK SYNAPSES / CONTACT
@@ -131,8 +133,7 @@ export function ContactPage() {
                 Complete the details below or contact us directly.
               </p>
             </div>
-            <span className="ds-contact-v2-panel-symbol"
-                  aria-hidden="true">↗</span>
+
           </div>
 
           <form onSubmit={submit} className="ds-contact-v2-form">
@@ -225,9 +226,8 @@ export function ContactPage() {
               Fields marked * are required.
             </p>
 
-            <button type="submit" className="ds-contact-v2-submit" disabled={submitting}>
+            <button type="submit" className="ds-contact-v2-submit" data-public-cta="primary" disabled={submitting}>
               {submitting ? 'Submitting...' : 'Submit inquiry'}
-              <span aria-hidden="true">↗</span>
             </button>
 
             <p className="ds-contact-v2-pending">
@@ -266,8 +266,7 @@ export function ContactPage() {
                   <strong>WhatsApp</strong>
                   <small>{brand.whatsapp}</small>
                 </span>
-                <span className="ds-contact-v2-link-arrow"
-                      aria-hidden="true">↗</span>
+
               </a>
 
               <a
@@ -287,8 +286,7 @@ export function ContactPage() {
                   <strong>Email us</strong>
                   <small>{brand.email}</small>
                 </span>
-                <span className="ds-contact-v2-link-arrow"
-                      aria-hidden="true">↗</span>
+
               </a>
             </div>
           </div>

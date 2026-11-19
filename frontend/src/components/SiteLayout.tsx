@@ -1,8 +1,8 @@
+import { BrandMark } from './BrandMark';
 import { siTiktok, siWhatsapp, siYoutube } from 'simple-icons';
-import { UiIcon } from './UiIcons';
 import { NotificationBell } from './NotificationBell';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Link,
   NavLink,
@@ -13,6 +13,8 @@ import {
 import type { User } from '../lib/auth';
 import { useAuth } from './auth/AuthProvider';
 import { brand } from '../content/brand';
+import { isPublicPath, reducedMotion, usePublicMotion } from './usePublicMotion';
+import { FooterNetwork } from './FooterNetwork';
 
 type SocialPlatform =
   | 'instagram'
@@ -188,14 +190,15 @@ function getPortalInfo(user: User | null): PortalInfo {
 
 export function SiteLayout() {
   const location = useLocation();
+  const mainRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const footerRef = useRef<HTMLElement>(null);
+  const publicPage = isPublicPath(location.pathname);
+  usePublicMotion(mainRef, headerRef, footerRef, location.pathname);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const { user: currentUser, status } = useAuth();
   const authLoading = status === 'loading';
-
-  const approachActive =
-    location.pathname === '/' &&
-    location.hash === '#approach';
 
   const portal = getPortalInfo(currentUser);
 
@@ -210,7 +213,7 @@ export function SiteLayout() {
 
       const frame = requestAnimationFrame(() => {
         document.getElementById(targetId)?.scrollIntoView({
-          behavior: 'smooth',
+          behavior: window.matchMedia?.(reducedMotion).matches ? 'instant' : 'smooth',
           block: 'start',
         });
       });
@@ -231,14 +234,15 @@ export function SiteLayout() {
       </a>
 
       {/* NAVBAR */}
-      <header className="header ds-nav-v3 ds-nav-v7">
+      <header ref={headerRef} className="header ds-nav-v3 ds-nav-v7" data-motion-shell={publicPage || undefined}>
+        {publicPage && <span className="ds-navigation-trace" aria-hidden="true" />}
         <Link
           to="/"
           className="ds-brand-v3"
           aria-label={`${brand.name} home`}
           onClick={() => setMenuOpen(false)}
         >
-          <img src="/images/logo.png" alt="" />
+          <BrandMark />
 
           <span className="ds-brand-name">
             Dark <strong>Synapses</strong>
@@ -271,6 +275,7 @@ export function SiteLayout() {
           }`}
           aria-label="Main navigation"
         >
+          {publicPage && <span className="ds-nav-highlight" aria-hidden="true" />}
           <NavLink
             to="/"
             end
@@ -293,18 +298,9 @@ export function SiteLayout() {
             Services
           </NavLink>
 
-          <Link
-            to="/projects"
-            className={
-              approachActive ? 'active' : undefined
-            }
-            aria-current={
-              approachActive ? 'location' : undefined
-            }
-            onClick={() => setMenuOpen(false)}
-          >
+          <NavLink to="/projects" onClick={() => setMenuOpen(false)}>
             Projects
-          </Link>
+          </NavLink>
 
           <NavLink
             to="/tech-news"
@@ -337,11 +333,11 @@ export function SiteLayout() {
             ))}
 
           <Link
-            className="ds-mobile-contact"
+            className="ds-mobile-contact" data-public-cta="primary"
             to="/contact"
             onClick={() => setMenuOpen(false)}
           >
-            Get in Touch <UiIcon name="arrow" />
+            Get in Touch
           </Link>
         </nav>
 
@@ -367,19 +363,20 @@ export function SiteLayout() {
             </span>
           ))}
 
-        <Link className="ds-nav-cta" to="/contact">
+        <Link className="ds-nav-cta" data-public-cta="primary" to="/contact">
           Get in Touch
-          <span aria-hidden="true"><UiIcon name="arrow" /></span>
         </Link>
       </header>
 
       {/* PAGE CONTENT */}
-      <main id="main">
+      <main id="main" ref={mainRef} data-motion-content={publicPage || undefined}>
+        {publicPage && <div className="ds-pointer-halo" aria-hidden="true" />}
         <Outlet />
       </main>
 
       {/* FOOTER */}
-      <footer className="footer ds-footer-v3 ds-footer-v7">
+      <footer ref={footerRef} className="footer ds-footer-v3 ds-footer-v7" data-motion-shell={publicPage || undefined}>
+        {publicPage && <FooterNetwork />}
         <div className="ds-footer-v7-main">
           {/* COMPANY IDENTITY */}
           <div className="ds-footer-v7-identity">
@@ -388,7 +385,7 @@ export function SiteLayout() {
               className="ds-brand-v3"
               aria-label={`${brand.name} home`}
             >
-              <img src="/images/logo.png" alt="" />
+              <BrandMark />
 
               <span className="ds-brand-name">
                 Dark <strong>Synapses</strong>

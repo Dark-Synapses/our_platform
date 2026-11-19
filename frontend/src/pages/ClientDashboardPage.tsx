@@ -37,7 +37,7 @@ export default function ClientDashboardPage() {
 
       {error && <p role="alert" className="auth-error">{error}</p>}
 
-      <Link to="/service-requests" className="portal-action">New service request →</Link>
+      <Link to="/service-requests" className="portal-action" data-public-cta="primary">New service request</Link>
 <div className="dashboard-grid">
         <article className="dashboard-card">
           <span>Account</span>

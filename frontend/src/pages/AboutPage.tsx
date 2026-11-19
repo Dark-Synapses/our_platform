@@ -1,3 +1,4 @@
+import { HeroSignal } from '../components/HeroSignal';
 import { UiIcon } from '../components/UiIcons';
 import { Link } from 'react-router-dom';
 import '../styles/about-premium.css';
@@ -16,7 +17,8 @@ const team = [
 export function AboutPage() {
   return (
     <main className="ds-about-premium">
-      <section className="ds-about-intro" aria-labelledby="ds-about-title">
+      <section className="ds-about-intro" data-signal-hero="" aria-labelledby="ds-about-title">
+        <HeroSignal />
         <div className="ds-about-wrap">
           <p className="ds-about-eyebrow">ABOUT DARK SYNAPSES</p>
           <h1 id="ds-about-title"> Engineered for intelligence.<span>Secured by architecture.</span></h1>
@@ -38,7 +40,7 @@ export function AboutPage() {
             <p className="ds-about-eyebrow">OUR TEAM</p>
             <h2 id="ds-team-heading">The minds behind <span>Dark Synapses.</span></h2>
             <p>AI software engineering and cybersecurity expertise, working together to develop practical AI services and security-focused solutions.</p>
-            <a className="ds-about-outline-button" href="#team-members">Meet Our Team <span aria-hidden="true"><UiIcon name="arrow" /></span></a>
+            <a className="ds-about-outline-button" data-public-cta="secondary" href="#team-members">Meet Our Team</a>
           </div>
           <div className="ds-about-team-grid" id="team-members">
             {team.map(person => (
@@ -47,7 +49,7 @@ export function AboutPage() {
                 <div className="ds-about-person-body">
                   <h3>{person.name}</h3><p className="ds-about-person-role">{person.role}</p>
                   <p>{person.description}</p>
-                  <a href={person.linkedin} target="_blank" rel="noopener noreferrer"><UiIcon name="linkedin" size={17} /><span>LinkedIn</span><UiIcon name="arrow" size={15} /></a>
+                  <a href={person.linkedin} target="_blank" rel="noopener noreferrer"><UiIcon name="linkedin" size={17} /><span>LinkedIn</span></a>
                 </div>
               </article>
             ))}
@@ -113,7 +115,7 @@ export function AboutPage() {
           <p className="ds-about-eyebrow">LET'S BUILD TOGETHER</p>
           <h2 id="ds-about-cta-title">Ready to build <span>AI-powered, secure solutions?</span></h2>
           <p>Let's discuss your project, your challenges, and how we can work together.</p>
-          <Link to="/contact" className="ds-about-outline-button">Get in Touch <span aria-hidden="true"><UiIcon name="arrow" /></span></Link>
+          <Link to="/contact" className="ds-about-outline-button" data-public-cta="secondary">Get in Touch</Link>
         </div>
       </section>
     </main>

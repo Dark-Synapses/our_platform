@@ -1,7 +1,6 @@
-import { UiIcon } from '../components/UiIcons';
-
 import { Link } from 'react-router-dom';
 
+import { HeroSignal } from '../components/HeroSignal';
 import { ServicesSection } from '../components/ServicesSection';
 import { deliverySteps } from '../content/site';
 
@@ -9,7 +8,8 @@ export function HomePage() {
   return (
     <div className="ds-home-v2">
       {/* HERO SECTION */}
-      <section className="ds-hero-v3">
+      <section className="ds-hero-v3" data-signal-hero="">
+        <HeroSignal />
         <div className="ds-hero-v3-inner">
           <div className="ds-hero-v3-copy">
             <p className="ds-eyebrow">
@@ -26,12 +26,12 @@ export function HomePage() {
             </p>
 
             <div className="ds-hero-actions">
-              <Link className="ds-button-primary" to="/contact">
-                Discuss Your Project <UiIcon name="arrow" />
+              <Link className="ds-button-primary" data-public-cta="primary" to="/contact">
+                Discuss Your Project
               </Link>
 
-              <Link className="ds-button-secondary" to="/services">
-                Explore Our Services <UiIcon name="arrow" />
+              <Link className="ds-button-secondary" data-public-cta="secondary" to="/services">
+                Explore Our Services
               </Link>
             </div>
 
@@ -108,9 +108,9 @@ export function HomePage() {
 
             <Link
               to="/about"
-              className="ds-button-secondary"
+              className="ds-button-secondary" data-public-cta="secondary"
             >
-              About Our Approach <UiIcon name="arrow" />
+              About Our Approach
             </Link>
           </div>
 
@@ -168,9 +168,9 @@ export function HomePage() {
 
           <Link
             to="/contact"
-            className="ds-button-primary"
+            className="ds-button-primary" data-public-cta="primary"
           >
-            Get in Touch <UiIcon name="arrow" />
+            Get in Touch
           </Link>
         </div>
       </section>
