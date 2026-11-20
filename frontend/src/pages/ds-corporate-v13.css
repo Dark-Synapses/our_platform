@@ -1,0 +1,32 @@
+/* V13 corporate editorial refinement: intentionally scoped to homepage. */
+.ds-v10-public.pixel-v4 .ds-v9-expertise .ds-content-intro{padding-block:clamp(64px,8vw,112px);gap:clamp(40px,7vw,120px)}
+.ds-v10-public.pixel-v4 .ds-v9-expertise .ds-content-intro h2{font-size:clamp(32px,3.3vw,52px);line-height:1.2}
+.ds-v10-public.pixel-v4 .ds-v9-expertise .ds-content-intro>p{font-size:clamp(15px,1.15vw,18px);line-height:1.85;max-width:52ch}
+.ds-v10-public.pixel-v4 .ds-v9-services{margin-bottom:clamp(70px,10vw,150px)!important}
+.ds-v10-public.pixel-v4 .ds-v9-service,
+.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(4),
+.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(5){background:transparent!important;border:0!important;border-top:1px solid var(--px4-line)!important;border-radius:0!important;box-shadow:none!important;grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr)!important;column-gap:clamp(44px,7vw,120px)!important;padding:clamp(65px,8vw,128px) 0!important;margin:0!important;align-items:center;transition:none!important}
+.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(even){grid-template-columns:minmax(0,1.16fr) minmax(0,.84fr)!important}
+.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(even) .ds-v9-info{grid-column:1;grid-row:1}
+.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(even) .ds-v9-visual{grid-column:2;grid-row:1}
+.ds-v10-public.pixel-v4 .ds-v9-visual{aspect-ratio:5/4!important;min-height:0!important;border:0!important;background:transparent!important;max-width:460px!important;width:100%!important;justify-self:center}
+.ds-v10-public.pixel-v4 .ds-v9-visual:after{background:none!important}
+.ds-v10-public.pixel-v4 .ds-v9-visual img{object-fit:contain!important}
+.ds-v10-public.pixel-v4 .ds-v9-info{padding:0!important;align-self:center!important;align-items:stretch!important}
+.ds-v10-public.pixel-v4 .ds-v9-category{font-size:clamp(11px,.85vw,13px)!important;margin-bottom:clamp(18px,2vw,28px)!important}
+.ds-v10-public.pixel-v4 .ds-v9-info h3{font-size:clamp(34px,3.4vw,54px)!important;line-height:1.16!important;letter-spacing:-.045em!important;margin-bottom:clamp(20px,2vw,32px)!important}
+.ds-v10-public.pixel-v4 .ds-v9-description{font-size:clamp(15px,1.15vw,18px)!important;line-height:1.85!important;max-width:62ch!important;margin-bottom:clamp(26px,3vw,42px)!important}
+.ds-v10-public.pixel-v4 .ds-v13-capabilities{list-style:none;margin:0 0 30px;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px;width:100%;max-width:700px}
+.ds-v10-public.pixel-v4 .ds-v13-capabilities li{font-size:clamp(13px,1vw,15px);line-height:1.55;color:#c4d4e2;padding:13px 0;border-top:1px solid #304454}
+.ds-v10-public.pixel-v4 .ds-v9-link{display:inline-flex!important;width:max-content!important;max-width:100%;padding:10px 0!important;border:0!important;border-bottom:1px solid #7daed3!important;font-size:14px!important;background:transparent!important;color:#b9dfff!important;justify-content:flex-start!important}
+.ds-v10-public.pixel-v4 .ds-v9-link:hover{color:#fff!important;border-color:#fff!important}
+.ds-v10-public.pixel-v4 .ds-content-intro p,.ds-v10-public.pixel-v4 .ds-content-principles p,.ds-v10-public.pixel-v4 .ds-content-phases p{font-size:clamp(14px,1vw,16px);line-height:1.8}
+@media(max-width:850px){
+ .ds-v10-public.pixel-v4 .ds-v9-service,.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(4),.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(5),.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(even){grid-template-columns:minmax(0,1fr)!important;gap:30px!important;padding:64px 0!important}
+ .ds-v10-public.pixel-v4 .ds-v9-service:nth-child(even) .ds-v9-info,.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(even) .ds-v9-visual{grid-column:1;grid-row:auto}
+ .ds-v10-public.pixel-v4 .ds-v9-service .ds-v9-info{grid-row:1!important;grid-column:1!important}
+ .ds-v10-public.pixel-v4 .ds-v9-service .ds-v9-visual{grid-row:2!important;grid-column:1!important;max-width:420px!important;justify-self:start}
+ .ds-v10-public.pixel-v4 .ds-v13-capabilities{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){.ds-v10-public.pixel-v4 .ds-v13-capabilities{grid-template-columns:1fr}.ds-v10-public.pixel-v4 .ds-v9-info h3{font-size:clamp(30px,9vw,40px)!important}}
+@media(prefers-reduced-motion:reduce){.ds-v10-public.pixel-v4 .ds-v9-service,.ds-v10-public.pixel-v4 .ds-v9-visual img{transition:none!important}}

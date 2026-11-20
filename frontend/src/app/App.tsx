@@ -1,3 +1,5 @@
+import { PixelV4Layout } from '../components/PixelV4Layout';
+import { PixelV4Home } from '../pages/PixelV4Home';
 import ContentAuthenticityPage from '../pages/ContentAuthenticityPage';
 import SecurityResearcherPage from '../pages/SecurityResearcherPage';
 import AIPoweredSecurityPage from '../pages/AIPoweredSecurityPage';
@@ -17,15 +19,14 @@ import { AboutPage } from '../pages/AboutPage';
 import { ContactPage } from '../pages/ContactPage';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { SiteLayout } from '../components/SiteLayout';
-import { HomePage } from '../pages/HomePage';
+import { HomePageRetro } from '../pages/HomePageRetro';
 import { ServicesPage } from '../pages/ServicesPage';
 import { SystemPage } from '../pages/SystemPage';
 import { ProjectsPage } from '../pages/ProjectsPage';
-import { TechNewsPage } from '../pages/TechNewsPage';
 
 export function App() {
-  return <Routes><Route element={<SiteLayout />}>
-    <Route index element={<HomePage />} />
+  return <Routes><Route element={<PixelV4Layout />}>
+    <Route index element={<PixelV4Home />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
         <Route element={<ProtectedRoute allowedRoles={['client']} />}>
@@ -46,7 +47,6 @@ export function App() {
     <Route path="services" element={<ServicesPage />} />
     <Route path="expertise" element={<Navigate to="/services" replace />} />
     <Route path="projects" element={<ProjectsPage />} />
-    <Route path="tech-news" element={<TechNewsPage />} />
     <Route element={<ProtectedRoute allowedRoles={['admin', 'team']} />}>
       <Route path="system" element={<SystemPage />} />
     </Route>

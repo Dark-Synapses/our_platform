@@ -1,0 +1,35 @@
+/* V17: ambient pixel signals across public pages; independent of hero imagery. */
+.pixel-v4.ds-v10-public .ds-global-pixels-v17 {
+  position: fixed; inset: 0; z-index: 3; overflow: hidden;
+  pointer-events: none; user-select: none; contain: layout paint;
+  mask-image: linear-gradient(90deg, #000 0%, #000 100%);
+}
+.pixel-v4.ds-v10-public .ds-global-pixels-v17 .ds-pixel {
+  position: absolute; display: block; width: var(--pixel-size, 3px); height: var(--pixel-size, 3px);
+  background: #79b8ed; border-radius: 0;
+  box-shadow: 0 0 9px 1px rgba(82,160,231,.48);
+  opacity: 0;
+  animation: ds-v17-signal-rise var(--pixel-duration, 17s) linear infinite;
+  animation-delay: var(--pixel-delay, 0s);
+  will-change: transform, opacity;
+}
+.pixel-v4.ds-v10-public .ds-global-pixels-v17 .ds-pixel:nth-child(4n) {
+  background: #a6d4f5; box-shadow: 0 0 6px rgba(143,196,238,.45);
+}
+.pixel-v4.ds-v10-public .ds-global-pixels-v17 .ds-pixel:nth-child(5n) {
+  width: 2px; height: 2px; box-shadow: none;
+}
+@keyframes ds-v17-signal-rise {
+  0% { transform: translate3d(0, 30vh, 0); opacity: 0; }
+  9% { opacity: var(--pixel-opacity, .5); }
+  48% { opacity: calc(var(--pixel-opacity, .5) * .7); }
+  88% { opacity: var(--pixel-opacity, .5); }
+  100% { transform: translate3d(var(--pixel-drift, 28px), -115vh, 0); opacity: 0; }
+}
+@media (max-width: 760px) {
+  .pixel-v4.ds-v10-public .ds-global-pixels-v17 .ds-pixel:nth-child(n+19) { display: none; }
+  .pixel-v4.ds-v10-public .ds-global-pixels-v17 .ds-pixel { box-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pixel-v4.ds-v10-public .ds-global-pixels-v17 { display: none !important; }
+}

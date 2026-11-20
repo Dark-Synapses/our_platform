@@ -1,0 +1,91 @@
+/* Dark Synapses — Reference Alignment */
+
+.ds-pixel-home {
+  --px-bg: #05090e;
+  --px-text: #edf3fb;
+  --px-blue: #b5d5fa;
+  --px-line: #52647a;
+  background: var(--px-bg);
+}
+
+.ds-pixel-home .pixel-container {
+  width: min(1380px, calc(100% - 100px));
+}
+
+.ds-pixel-home .pixel-hero {
+  min-height: 560px;
+}
+
+.ds-pixel-home .pixel-hero-grid {
+  min-height: 560px;
+  grid-template-columns: 51% 49%;
+  gap: 0;
+  padding-block: 60px 35px;
+}
+
+.ds-pixel-home .pixel-hero-copy {
+  z-index: 2;
+}
+
+.ds-pixel-home .pixel-title {
+  font-family: "Courier New", monospace;
+  font-size: clamp(56px, 6vw, 92px);
+  font-weight: 900;
+  line-height: .95;
+  letter-spacing: -.065em;
+}
+
+.ds-pixel-home .pixel-tagline {
+  margin: 24px 0;
+  font-size: clamp(24px, 2.4vw, 36px);
+  line-height: 1.25;
+}
+
+.ds-pixel-home .pixel-hero-art {
+  height: 470px;
+  overflow: hidden;
+}
+
+.ds-pixel-home .pixel-hero-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: none;
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+.ds-pixel-home .pixel-expertise {
+  padding-bottom: 35px;
+}
+
+.ds-pixel-home .pixel-expertise-card {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .ds-pixel-home .pixel-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ds-pixel-home .pixel-hero-art {
+    height: 350px;
+  }
+}
+
+@media (max-width: 600px) {
+  .ds-pixel-home .pixel-container {
+    width: calc(100% - 36px);
+  }
+
+  .ds-pixel-home .pixel-title {
+    font-size: clamp(39px, 10vw, 60px);
+  }
+
+  .ds-pixel-home .pixel-hero-art {
+    height: 270px;
+  }
+}

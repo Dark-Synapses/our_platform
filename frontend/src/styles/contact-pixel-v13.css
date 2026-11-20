@@ -1,0 +1,29 @@
+/* Contact pixel refresh — scoped to current public layout */
+.ds-v10-public .ds-contact-v2 {background:transparent;color:#e6f3ff;overflow:visible}
+.ds-v10-public .ds-contact-v2-glow {opacity:.22;pointer-events:none}
+.ds-v10-public .ds-contact-v2-layout {max-width:1380px;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(28px,5vw,72px);padding:clamp(44px,6vw,90px) clamp(18px,4vw,52px) 84px;align-items:start}
+.ds-v10-public .ds-contact-v2-intro {padding-top:8px}
+.ds-v10-public .ds-contact-v2-intro h1 {font-family:inherit;font-size:clamp(38px,5.2vw,72px);letter-spacing:-.045em;line-height:1.1;margin:22px 0}
+.ds-v10-public .ds-contact-v2-intro h1 span {display:inline;color:#8bcaff}
+.ds-v10-public .ds-contact-v2-lead {font-size:clamp(14px,1.4vw,17px);line-height:1.8;max-width:500px}
+.ds-v10-public .ds-contact-v2-panel {border:1px solid #4a7baa;background:linear-gradient(140deg,rgba(13,29,45,.96),rgba(5,13,23,.98));box-shadow:8px 8px 0 rgba(0,0,0,.3);border-radius:0;clip-path:polygon(0 10px,10px 10px,10px 0,calc(100% - 10px) 0,calc(100% - 10px) 10px,100% 10px,100% calc(100% - 10px),calc(100% - 10px) calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,10px calc(100% - 10px),0 calc(100% - 10px));padding:clamp(22px,3vw,40px)}
+.ds-v10-public .ds-contact-v2-panel-heading h2 {font-size:clamp(22px,2.5vw,32px)}
+.ds-v10-public .ds-contact-v2-form input,.ds-v10-public .ds-contact-v2-form textarea,.ds-v10-public .ds-contact-v2-form select {border-radius:0;transition:border-color .18s ease,box-shadow .18s ease;background:#081423}
+.ds-v10-public .ds-contact-v2-form input:focus-visible,.ds-v10-public .ds-contact-v2-form textarea:focus-visible,.ds-v10-public .ds-contact-v2-form select:focus-visible {outline:2px solid #83c8ff;outline-offset:2px}
+.ds-v10-public .ds-contact-v2-submit {border-radius:0;transition:background .18s ease,transform .18s ease,box-shadow .18s ease}
+.ds-v10-public .ds-contact-v2-submit:hover:not(:disabled) {transform:translateY(-2px);box-shadow:4px 4px 0 #204669}
+.ds-contact-pixel-art {height:230px;max-width:440px;position:relative;display:grid;place-items:center;margin:24px 0;background:repeating-linear-gradient(0deg,transparent 0 25px,rgba(91,159,220,.07) 26px 27px),repeating-linear-gradient(90deg,transparent 0 25px,rgba(91,159,220,.07) 26px 27px)}
+.ds-contact-pixel-monitor {width:min(75%,280px);height:170px;border:8px solid #477bb0;box-shadow:8px 8px 0 #122f4d,inset 0 0 0 5px #10273c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#07101b;color:#9bd9ff}
+.ds-contact-pixel-monitor>span {font-size:66px;line-height:1}.ds-contact-pixel-monitor small {font-size:10px;letter-spacing:.12em}
+.ds-contact-pixel-signal {position:absolute;right:0;top:12px;color:#77c2f7;font-size:16px}
+.ds-contact-pixel-info {display:grid;gap:10px;max-width:440px}
+.ds-contact-pixel-info>a,.ds-contact-pixel-info>div {display:flex;align-items:center;gap:17px;padding:14px 18px;border:1px solid #355b80;background:rgba(7,21,35,.8);color:#e4f3ff;text-decoration:none;min-width:0;transition:background .18s ease,border-color .18s ease}
+.ds-contact-pixel-info>a:hover {background:#132f4a;border-color:#91cfff}
+.ds-contact-pixel-info>a>span:first-child,.ds-contact-pixel-info>div>span:first-child {font-size:25px;color:#86c9ff;width:32px;text-align:center}
+.ds-contact-pixel-info strong,.ds-contact-pixel-info small {display:block;overflow-wrap:anywhere}.ds-contact-pixel-info strong {font-size:12px;letter-spacing:.1em}.ds-contact-pixel-info small {font-size:12px;margin-top:5px;color:#b4cee1}
+.ds-v6 .ds-v6-social a {width:42px;height:42px;clip-path:polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));background:#10273c;border:1px solid #4a7baa;color:#b9e5ff;transition:background .18s ease,color .18s ease,transform .18s ease}
+.ds-v6 .ds-v6-social a:hover {background:#7fc6ff;color:#061320;transform:translateY(-2px)}
+.ds-v6 .ds-v6-social a:focus-visible {outline:2px solid #9bd9ff;outline-offset:3px}
+@media(max-width:900px){.ds-v10-public .ds-contact-v2-layout{grid-template-columns:1fr;gap:30px}.ds-contact-pixel-art{height:190px}}
+@media(max-width:600px){.ds-v10-public .ds-contact-v2-layout{padding:35px 16px 60px}.ds-v10-public .ds-contact-v2-panel{padding:20px}.ds-contact-pixel-monitor{height:145px}}
+@media(prefers-reduced-motion:reduce){.ds-v6 .ds-v6-social a,.ds-v10-public .ds-contact-v2-submit{transition:none;transform:none!important}}

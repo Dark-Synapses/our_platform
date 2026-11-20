@@ -303,7 +303,7 @@ export function SiteLayout() {
           </NavLink>
 
           <NavLink
-            to="/tech-news"
+            to="/#tech-news"
             onClick={() => setMenuOpen(false)}
           >
             Tech News
@@ -423,7 +423,7 @@ export function SiteLayout() {
             <Link to="/about">About</Link>
             <Link to="/services">Services</Link>
             <Link to="/projects">Projects</Link>
-            <Link to="/tech-news">Tech News</Link>
+            <Link to="/#tech-news">Tech News</Link>
             <Link to="/contact">Contact</Link>
           </div>
 

@@ -149,8 +149,8 @@ describe('ClientDashboardPage logout integration', () => {
     await waitFor(() => {
       expect(screen.getByTestId('status'))
         .toHaveTextContent('unauthenticated');
+      expect(screen.getByTestId('location'))
+        .toHaveTextContent('/login');
     });
-
-    expect(screen.getByTestId('location')).toHaveTextContent('/login');
   });
 });

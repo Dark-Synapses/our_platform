@@ -1,0 +1,340 @@
+.ds-retro-home {
+  --r-bg: #0c1118;
+  --r-surface: #121b25;
+  --r-line: #2b3b4b;
+  --r-text: #e9edf2;
+  --r-muted: #a1b0bd;
+  --r-accent: #a9c8df;
+  background: var(--r-bg);
+  color: var(--r-text);
+}
+
+.ds-retro-home *,
+.ds-retro-home *::before,
+.ds-retro-home *::after {
+  box-sizing: border-box;
+}
+
+.ds-retro-container,
+.ds-retro-hero-inner {
+  width: min(1200px, calc(100% - 64px));
+  margin-inline: auto;
+}
+
+.ds-retro-hero {
+  min-height: 720px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--r-line);
+  background: var(--r-bg);
+}
+
+.ds-retro-hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: clamp(48px, 6vw, 96px);
+  padding-block: 110px;
+}
+
+.ds-retro-label {
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--r-accent);
+}
+
+.ds-retro-hero h1 {
+  max-width: 700px;
+  margin: 28px 0;
+  font-size: clamp(48px, 5.2vw, 78px);
+  font-weight: 500;
+  line-height: 1.09;
+  letter-spacing: -0.055em;
+  color: var(--r-text);
+}
+
+.ds-retro-hero h1 span {
+  display: block;
+  color: var(--r-accent);
+}
+
+.ds-retro-description {
+  max-width: 540px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--r-muted);
+}
+
+.ds-retro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.ds-retro-primary,
+.ds-retro-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 12px 22px;
+  border: 1px solid var(--r-accent);
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.ds-retro-primary {
+  background: var(--r-accent);
+  color: #0c1118;
+}
+
+.ds-retro-secondary {
+  background: transparent;
+  color: var(--r-accent);
+}
+
+.ds-retro-primary:hover {
+  background: transparent;
+  color: var(--r-text);
+}
+
+.ds-retro-secondary:hover {
+  background: var(--r-accent);
+  color: #0c1118;
+}
+
+.ds-retro-hero-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 65px;
+  padding-top: 22px;
+  border-top: 1px solid var(--r-line);
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--r-muted);
+}
+
+/* Architecture panel */
+
+.ds-retro-system {
+  border: 1px solid var(--r-line);
+  background: var(--r-surface);
+}
+
+.ds-retro-system-header,
+.ds-retro-system-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--r-muted);
+}
+
+.ds-retro-system-header {
+  border-bottom: 1px solid var(--r-line);
+}
+
+.ds-retro-system-body {
+  padding: 24px;
+}
+
+.ds-retro-system-intro {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 28px;
+}
+
+.ds-retro-system-symbol {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--r-accent);
+  color: var(--r-accent);
+  font-family: "Courier New", monospace;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.ds-retro-system-intro strong,
+.ds-retro-layer strong {
+  font-size: 14px;
+  color: var(--r-text);
+}
+
+.ds-retro-system-intro p,
+.ds-retro-layer p {
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--r-muted);
+}
+
+.ds-retro-system-layers {
+  border-top: 1px solid var(--r-line);
+}
+
+.ds-retro-layer {
+  display: grid;
+  grid-template-columns: 28px 1fr 16px;
+  gap: 14px;
+  align-items: center;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--r-line);
+}
+
+.ds-retro-layer > span {
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  color: var(--r-accent);
+}
+
+.ds-retro-system-footer {
+  padding: 24px 0 0;
+}
+
+/* Approach */
+
+.ds-retro-approach {
+  padding: 110px 0;
+  background: #101923;
+}
+
+.ds-retro-section-heading {
+  max-width: 650px;
+  margin-bottom: 50px;
+}
+
+.ds-retro-section-heading h2,
+.ds-retro-cta h2 {
+  margin: 18px 0;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  color: var(--r-text);
+}
+
+.ds-retro-section-heading > p:last-child {
+  color: var(--r-muted);
+  line-height: 1.8;
+}
+
+.ds-retro-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.ds-retro-step {
+  min-width: 0;
+  padding: 28px;
+  border: 1px solid var(--r-line);
+  background: #121c27;
+}
+
+.ds-retro-step > span {
+  font-family: "Courier New", monospace;
+  color: var(--r-accent);
+  font-size: 12px;
+}
+
+.ds-retro-step h3 {
+  margin: 36px 0 12px;
+  font-size: 19px;
+  color: var(--r-text);
+}
+
+.ds-retro-step p {
+  color: var(--r-muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* CTA */
+
+.ds-retro-cta {
+  padding: 90px 0;
+  border-top: 1px solid var(--r-line);
+}
+
+.ds-retro-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.ds-retro-cta h2 {
+  max-width: 760px;
+}
+
+/* Accessibility & responsive */
+
+.ds-retro-home a:focus-visible {
+  outline: 2px solid var(--r-accent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .ds-retro-hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .ds-retro-hero {
+    min-height: auto;
+  }
+
+  .ds-retro-system {
+    max-width: 680px;
+  }
+
+  .ds-retro-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .ds-retro-container,
+  .ds-retro-hero-inner {
+    width: min(100% - 36px, 1200px);
+  }
+
+  .ds-retro-hero-inner {
+    padding-block: 75px;
+  }
+
+  .ds-retro-hero h1 {
+    font-size: clamp(39px, 10vw, 54px);
+  }
+
+  .ds-retro-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .ds-retro-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ds-retro-approach {
+    padding-block: 70px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-retro-home a {
+    transition: none;
+  }
+}

@@ -1,0 +1,59 @@
+/* Dark Synapses: V10 home motion only. No footer or global layout changes. */
+.ds-v10-public.pixel-v4 .ds-v9-services {
+  display: block;
+  width: 100%;
+}
+.ds-v10-public.pixel-v4 .ds-v9-service,
+.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(4),
+.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(5) {
+  grid-column: auto;
+  min-width: 0;
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  opacity: 1 !important;
+  transform: none !important;
+  box-shadow: none;
+}
+.ds-v10-public.pixel-v4 .ds-v9-service .ds-v9-info,
+.ds-v10-public.pixel-v4 .ds-v9-service .ds-v9-visual {
+  min-width: 0;
+  max-width: 100%;
+}
+.ds-v10-public.pixel-v4 .ds-v9-service .ds-v9-info h3,
+.ds-v10-public.pixel-v4 .ds-v9-service .ds-v9-description {
+  overflow-wrap: anywhere;
+}
+/* Image moves within its clipped viewport; no transform on the section. */
+.ds-v10-public.pixel-v4 .ds-v9-service .ds-v9-visual {
+  overflow: hidden;
+  isolation: isolate;
+}
+.ds-v10-public.pixel-v4 .ds-v9-service .ds-v9-visual img,
+.ds-v10-public.pixel-v4 .ds-v9-service:hover .ds-v9-visual img {
+  transform: translate3d(0, var(--ds-parallax-y, 0px), 0) scale(1.045);
+  transition: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ds-v10-public.ds-v11-motion-ready .ds-v9-service .ds-v9-info.ds-v11-reveal:not(.ds-v11-visible) {
+    transform: translate3d(0, 20px, 0);
+  }
+  .ds-v10-public.ds-v11-motion-ready .ds-v9-service .ds-v9-visual.ds-v11-reveal:not(.ds-v11-visible) {
+    transform: translate3d(0, 12px, 0);
+  }
+  .ds-v10-public.ds-v11-motion-ready .ds-v9-service .ds-v9-info.ds-v11-reveal {
+    transition-delay: 110ms;
+  }
+}
+@media (max-width: 760px) {
+  .ds-v10-public.pixel-v4 .ds-v9-service,
+  .ds-v10-public.pixel-v4 .ds-v9-service:nth-child(even) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ds-v10-public.pixel-v4 .ds-v9-service .ds-v9-visual img {
+    transform: none !important;
+    transition: none !important;
+  }
+}

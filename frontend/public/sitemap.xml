@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.darksynapses.site/</loc></url>
-  <url><loc>https://www.darksynapses.site/about</loc></url>
-  <url><loc>https://www.darksynapses.site/services</loc></url>
-  <url><loc>https://www.darksynapses.site/services/ai</loc></url>
-  <url><loc>https://www.darksynapses.site/services/cybersecurity</loc></url>
-  <url><loc>https://www.darksynapses.site/services/ai-security</loc></url>
-  <url><loc>https://www.darksynapses.site/services/ai-powered-security</loc></url>
-  <url><loc>https://www.darksynapses.site/services/content-authenticity-digital-forensics</loc></url>
-  <url><loc>https://www.darksynapses.site/projects</loc></url>
-  <url><loc>https://www.darksynapses.site/tech-news</loc></url>
-  <url><loc>https://www.darksynapses.site/contact</loc></url>
-  <url><loc>https://www.darksynapses.site/security-researcher</loc></url>
+  <url><loc>https://www.darksynapses.org/</loc></url>
+  <url><loc>https://www.darksynapses.org/about</loc></url>
+  <url><loc>https://www.darksynapses.org/services</loc></url>
+  <url><loc>https://www.darksynapses.org/services/ai</loc></url>
+  <url><loc>https://www.darksynapses.org/services/cybersecurity</loc></url>
+  <url><loc>https://www.darksynapses.org/services/ai-security</loc></url>
+  <url><loc>https://www.darksynapses.org/services/ai-powered-security</loc></url>
+  <url><loc>https://www.darksynapses.org/services/content-authenticity-digital-forensics</loc></url>
+  <url><loc>https://www.darksynapses.org/projects</loc></url>
+  <url><loc>https://www.darksynapses.org/contact</loc></url>
+  <url><loc>https://www.darksynapses.org/security-researcher</loc></url>
 </urlset>
