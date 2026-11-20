@@ -1,4 +1,4 @@
-export const SITE = 'https://www.darksynapses.org';
+export const SITE = 'https://darksynapses.org';
 export const BRAND = 'Dark Synapses';
 export const DEFAULT_IMAGE = `${SITE}/images/hero-cyber.png`;
 
