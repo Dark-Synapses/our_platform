@@ -1,5 +1,5 @@
-import { HeroSignal } from '../components/HeroSignal';
-import { useState, type FormEvent } from 'react';
+import { useState, type FormEvent, type ReactNode } from 'react';
+import { PixelSocialIcon } from '../components/PixelSocialIcon';
 import { brand } from '../content/brand';
 import { submitContactInquiry } from '../lib/contactInquiries';
 
@@ -63,62 +63,39 @@ export function ContactPage() {
   };
 
   return (
-    <main className="ds-contact-page ds-contact-v2">
+    <main className="ds-contact-page ds-contact-v2 ds-contact-reference-v18">
       <div className="ds-contact-v2-glow" aria-hidden="true" />
 
       <section className="ds-contact-v2-layout" data-signal-hero="">
-        <HeroSignal />
         <div className="ds-contact-v2-intro">
           <p className="ds-contact-v2-eyebrow">
-            DARK SYNAPSES / CONTACT
+            [ DARK SYNAPSES / CONTACT ]
           </p>
 
           <h1>
-            Let's build something
-            <span> extraordinary.</span>
+            Contact <span>Us_</span>
           </h1>
 
           <p className="ds-contact-v2-lead">
-            Every great solution starts with a conversation.
-            Tell us about your goals, challenges, and ideas.
-            Our team is here to explore what's possible.
+            Let's build a more secure and intelligent digital world together. Tell us what you're building.
           </p>
 
-          <div className="ds-contact-v2-highlights">
-            <div>
-              <span className="ds-contact-v2-highlight-icon">01</span>
-              <div>
-                <strong>Share your vision</strong>
-                <p>Tell us what you're looking to build or solve.</p>
-              </div>
-            </div>
-
-            <div>
-              <span className="ds-contact-v2-highlight-icon">02</span>
-              <div>
-                <strong>Explore the possibilities</strong>
-                <p>We'll discuss an approach suited to your needs.</p>
-              </div>
-            </div>
-
-            <div>
-              <span className="ds-contact-v2-highlight-icon">03</span>
-              <div>
-                <strong>Build with confidence</strong>
-                <p>AI engineering with security at its core.</p>
-              </div>
-            </div>
+          <div className="ds-contact-pixel-art" aria-hidden="true">
+            <div className="ds-contact-pixel-monitor"><span>✉</span><small>TRANSMISSION READY_</small></div>
+            <div className="ds-contact-pixel-signal">▣ &nbsp; ◇ &nbsp; ▣</div>
           </div>
-
-          <div className="ds-contact-v2-visual" aria-hidden="true">
-            <div className="ds-contact-v2-orbit orbit-one" />
-            <div className="ds-contact-v2-orbit orbit-two" />
-            <div className="ds-contact-v2-core">
-              <span>DS</span>
-            </div>
-            <span className="ds-contact-v2-visual-caption">
-              WHERE INTELLIGENCE MEETS THREATS
-            </span>
+          <div className="ds-contact-pixel-info">
+            <a href={`mailto:${brand.email}`}><span className="ds-contact-icon"><Icon name="mail" /></span><span><strong>EMAIL</strong><small>{brand.email}</small></span></a>
+            <a href={brand.whatsappUrl} target="_blank" rel="noopener noreferrer"><span className="ds-contact-icon"><Icon name="whatsapp" /></span><span><strong>WHATSAPP</strong><small>{brand.whatsapp}</small></span></a>
+            <div><span className="ds-contact-icon"><Icon name="pin" /></span><span><strong>LOCATION</strong><small>Egypt · Remote worldwide</small></span></div>
+          </div>
+          <div className="ds-contact-social">
+            <p>[ CONNECT ]</p>
+            <div>{Object.entries(brand.social).map(([name, url]) => (
+              <a key={name} href={url} target="_blank" rel="noopener noreferrer" aria-label={name}>
+                <PixelSocialIcon name={name} />
+              </a>
+            ))}</div>
           </div>
         </div>
 
@@ -126,9 +103,9 @@ export function ContactPage() {
           <div className="ds-contact-v2-panel-heading">
             <div>
               <p className="ds-contact-v2-eyebrow">
-                START A CONVERSATION
+                [ START A CONVERSATION ]
               </p>
-              <h2>Tell us about your project.</h2>
+              <h2>Start a conversation.</h2>
               <p>
                 Complete the details below or contact us directly.
               </p>
@@ -153,7 +130,7 @@ export function ContactPage() {
               />
             </div>
             <div className="ds-contact-v2-field-row">
-              <label>
+              <label className="ds-field-name">
                 <span className="ds-contact-v2-label-text">Full name <em>*</em></span>
                 <input
                   required
@@ -166,7 +143,7 @@ export function ContactPage() {
                 />
               </label>
 
-              <label>
+              <label className="ds-field-email">
                 <span className="ds-contact-v2-label-text">Email address <em>*</em></span>
                 <input
                   required
@@ -180,7 +157,7 @@ export function ContactPage() {
               </label>
             </div>
 
-            <label>
+            <label className="ds-field-company">
               Company / Organization
               <input
                 maxLength={150}
@@ -191,7 +168,7 @@ export function ContactPage() {
               />
             </label>
 
-            <label>
+            <label className="ds-field-service">
               <span className="ds-contact-v2-label-text">Service of interest <em>*</em></span>
               <select
                 required
@@ -209,7 +186,7 @@ export function ContactPage() {
               </select>
             </label>
 
-            <label>
+            <label className="ds-field-message">
               <span className="ds-contact-v2-label-text">Project details <em>*</em></span>
               <textarea
                 required
@@ -226,8 +203,8 @@ export function ContactPage() {
               Fields marked * are required.
             </p>
 
-            <button type="submit" className="ds-contact-v2-submit" data-public-cta="primary" disabled={submitting}>
-              {submitting ? 'Submitting...' : 'Submit inquiry'}
+            <button type="submit" className="ds-contact-v2-submit" disabled={submitting}>
+              <Icon name="send" /> {submitting ? 'SENDING...' : 'SUBMIT INQUIRY'}
             </button>
 
             <p className="ds-contact-v2-pending">
@@ -241,55 +218,7 @@ export function ContactPage() {
             )}
           </form>
 
-          <div className="ds-contact-v2-direct">
-            <div className="ds-contact-v2-divider">
-              <span>OR REACH US DIRECTLY</span>
-            </div>
 
-            <div className="ds-contact-v2-direct-links">
-              <a
-                href={brand.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ds-contact-v2-direct-link"
-              >
-                <span className="ds-contact-v2-direct-icon"
-                      aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none"
-                       stroke="currentColor" strokeWidth="1.8"
-                       strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5Z"/>
-                    <path d="M9 8.5c.3 2.8 2.7 5.2 5.5 5.5l1.4-1.4 1.5 1c-.3 1.7-1.5 2.4-3 2.2-4.5-.5-7.2-3.3-7.7-7.7-.2-1.5.5-2.7 2.2-3l1 1.5Z"/>
-                  </svg>
-                </span>
-                <span>
-                  <strong>WhatsApp</strong>
-                  <small>{brand.whatsapp}</small>
-                </span>
-
-              </a>
-
-              <a
-                href={`mailto:${brand.email}?subject=${encodeURIComponent('Project Inquiry - Dark Synapses')}`}
-                className="ds-contact-v2-direct-link"
-              >
-                <span className="ds-contact-v2-direct-icon"
-                      aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none"
-                       stroke="currentColor" strokeWidth="1.8"
-                       strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="5" width="18" height="14" rx="2"/>
-                    <path d="m3 7 9 6 9-6"/>
-                  </svg>
-                </span>
-                <span>
-                  <strong>Email us</strong>
-                  <small>{brand.email}</small>
-                </span>
-
-              </a>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -301,4 +230,14 @@ export function ContactPage() {
       </section>
     </main>
   );
+}
+
+function Icon({name}: {name: 'mail'|'whatsapp'|'pin'|'send'}) {
+  const paths: Record<typeof name, ReactNode> = {
+    mail: <><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 7 9-7"/></>,
+    whatsapp: <><path d="M20.5 11.5a8.5 8.5 0 0 1-12.7 7.4L3 20l1.2-4.5A8.5 8.5 0 1 1 20.5 11.5Z"/><path d="M8 9c.5 3 3 5.5 6 6l2-1.5"/></>,
+    pin: <><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.4"/></>,
+    send: <><path d="m21 3-7 18-3.5-7.5L3 10Z"/><path d="M21 3 10.5 13.5"/></>,
+  };
+  return <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>;
 }

@@ -1,0 +1,135 @@
+
+/* DARK SYNAPSES — UNIFIED PIXEL BUTTON SYSTEM */
+
+:root {
+  --ds-btn-blue: #9bc8f4;
+  --ds-btn-blue-light: #d1eaff;
+  --ds-btn-dark: #07111d;
+  --ds-btn-shadow: #244f78;
+}
+
+/* Shared button appearance */
+.pixel-v4 :is(
+  .px4-btn,
+  .ds-home-news-cta,
+  .btn,
+  .button,
+  .ds-btn,
+  button[type="submit"]
+) {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 22px;
+
+  border: 1px solid var(--ds-btn-blue);
+  border-radius: 0;
+
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .035em;
+  line-height: 1.3;
+  text-decoration: none;
+
+  box-shadow: 4px 4px 0 var(--ds-btn-shadow);
+  cursor: pointer;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    box-shadow .2s ease,
+    transform .2s ease;
+}
+
+/* Primary buttons */
+.pixel-v4 :is(
+  .px4-btn.primary,
+  .ds-home-news-cta,
+  .btn-primary,
+  .ds-btn-primary
+) {
+  background: var(--ds-btn-blue);
+  color: var(--ds-btn-dark);
+}
+
+/* Secondary buttons */
+.pixel-v4 :is(
+  .px4-btn:not(.primary),
+  .btn-secondary,
+  .ds-btn-secondary
+) {
+  background: transparent;
+  color: var(--ds-btn-blue-light);
+}
+
+/* Hover effect */
+@media (hover: hover) {
+  .pixel-v4 :is(
+    .px4-btn,
+    .ds-home-news-cta,
+    .btn,
+    .button,
+    .ds-btn,
+    button[type="submit"]
+  ):not(:disabled):hover {
+    background: var(--ds-btn-blue-light);
+    color: var(--ds-btn-dark);
+    box-shadow:
+      4px 4px 0 var(--ds-btn-shadow),
+      0 0 20px rgba(116, 189, 255, .4);
+    transform: translateY(-2px);
+  }
+}
+
+/* Physical pixel press */
+.pixel-v4 :is(
+  .px4-btn,
+  .ds-home-news-cta,
+  .btn,
+  .button,
+  .ds-btn,
+  button[type="submit"]
+):not(:disabled):active {
+  background: #6da9e6;
+  color: var(--ds-btn-dark);
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--ds-btn-shadow);
+}
+
+/* Keyboard accessibility */
+.pixel-v4 :is(
+  .px4-btn,
+  .ds-home-news-cta,
+  .btn,
+  .button,
+  .ds-btn,
+  button[type="submit"]
+):focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}
+
+/* Disabled state */
+.pixel-v4 button:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+  box-shadow: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pixel-v4 :is(
+    .px4-btn,
+    .ds-home-news-cta,
+    .btn,
+    .button,
+    .ds-btn,
+    button[type="submit"]
+  ) {
+    transition: none;
+  }
+}

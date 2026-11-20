@@ -1,7 +1,7 @@
 export const brand = {
   name: 'Dark Synapses',
   slogan: 'Where Intelligence Meets Threats',
-  email: 'darksynapses@darksynapses.site',
+  email: 'darksynapses@darksynapses.org',
   whatsapp: '+201014579056',
   whatsappUrl: 'https://wa.me/201014579056',
   social: {

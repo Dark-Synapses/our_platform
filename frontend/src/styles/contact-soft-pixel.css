@@ -1,0 +1,14 @@
+/* Dark Synapses — Soft Pixel Enterprise form refinement; scoped to Contact only. */
+.ds-v6 .ds-contact-v2-panel{background:#0a1017;border:1px solid rgba(169,201,242,.23);box-shadow:0 12px 36px rgba(0,0,0,.12);clip-path:polygon(0 4px,4px 4px,4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 4px),0 calc(100% - 4px));padding:clamp(24px,3.1vw,42px)}
+.ds-v6 .ds-contact-v2-panel-heading{margin-bottom:clamp(22px,2.5vw,32px)}
+.ds-v6 .ds-contact-v2-form{gap:18px}
+.ds-v6 .ds-contact-v2-form label{gap:9px}
+.ds-v6 .ds-contact-v2-form input,.ds-v6 .ds-contact-v2-form select,.ds-v6 .ds-contact-v2-form textarea{background:#080e15;border:1px solid rgba(169,201,242,.22);border-radius:0;clip-path:polygon(0 3px,3px 3px,3px 0,calc(100% - 3px) 0,calc(100% - 3px) 3px,100% 3px,100% calc(100% - 3px),calc(100% - 3px) calc(100% - 3px),calc(100% - 3px) 100%,3px 100%,3px calc(100% - 3px),0 calc(100% - 3px));box-shadow:none;min-height:48px;transition:border-color .2s ease,background-color .2s ease}
+.ds-v6 .ds-contact-v2-form textarea{min-height:136px;resize:vertical}
+.ds-v6 .ds-contact-v2-form input:hover,.ds-v6 .ds-contact-v2-form select:hover,.ds-v6 .ds-contact-v2-form textarea:hover{border-color:rgba(169,201,242,.42)}
+.ds-v6 .ds-contact-v2-form input:focus,.ds-v6 .ds-contact-v2-form select:focus,.ds-v6 .ds-contact-v2-form textarea:focus{border-color:var(--px4-ice,#a9c9f2);background:#0b141e;outline:1px solid rgba(169,201,242,.24);outline-offset:2px;box-shadow:none}
+.ds-v6 .ds-contact-v2-label-text{letter-spacing:.025em}
+.ds-v6 .ds-contact-v2-submit{min-height:50px;clip-path:polygon(0 4px,4px 4px,4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 4px),0 calc(100% - 4px));box-shadow:none;transition:background-color .18s ease,color .18s ease,transform .18s ease}
+.ds-v6 .ds-contact-v2-submit:hover:not(:disabled){transform:translateY(-1px)}
+@media(max-width:600px){.ds-v6 .ds-contact-v2-panel{padding:22px 18px}.ds-v6 .ds-contact-v2-form{gap:16px}}
+@media(prefers-reduced-motion:reduce){.ds-v6 .ds-contact-v2-form input,.ds-v6 .ds-contact-v2-form select,.ds-v6 .ds-contact-v2-form textarea,.ds-v6 .ds-contact-v2-submit{transition:none!important;transform:none!important}}

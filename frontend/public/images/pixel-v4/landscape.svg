@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" shape-rendering="crispEdges">
+<defs><pattern id="dots" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="2" height="2" fill="#b9d8f8"/></pattern><pattern id="dim" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="2" height="2" fill="#6085ac"/></pattern><clipPath id="moon"><circle cx="535" cy="220" r="134"/></clipPath></defs>
+<circle cx="535" cy="220" r="134" fill="url(#dots)" opacity=".85"/><g clip-path="url(#moon)"><path d="M420 95 Q530 120 548 205 T690 335 L700 70Z" fill="#050a10"/><path d="M415 220 L700 150 700 360 400 360Z" fill="url(#dim)" opacity=".5"/></g>
+<g fill="none" stroke="#91b8e3" stroke-width="2" opacity=".75"><path d="M50 420 L175 330 280 405 440 255 525 350 615 290 850 480"/><path d="M180 510 L320 360 400 435 540 305 680 450 790 380 900 490"/></g>
+<path d="M0 505 L130 430 180 470 305 365 360 420 490 295 590 410 695 370 900 485 900 580 0 580Z" fill="url(#dots)" opacity=".85"/>
+<path d="M0 560 L160 475 270 520 410 405 530 500 680 430 900 535 900 620 0 620Z" fill="url(#dim)" opacity=".65"/>
+<g stroke="#6588b2" stroke-width="1" opacity=".65"><path d="M0 550 H900 M0 565 H900 M0 585 H900 M0 615 H900 M0 650 H900"/><path d="M450 550 L0 650 M450 550 L125 650 M450 550 L260 650 M450 550 L360 650 M450 550 L540 650 M450 550 L640 650 M450 550 L775 650 M450 550 L900 650"/></g>
+<g stroke="#b5d5fa" stroke-width="2" opacity=".85"><path d="M125 210 h32 m-16 -16 v32 M765 250 h22 m-11 -11 v22"/></g><g fill="#b5d5fa"><circle cx="815" cy="150" r="2"/><circle cx="790" cy="176" r="2"/><circle cx="840" cy="192" r="2"/></g></svg>

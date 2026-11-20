@@ -1,0 +1,42 @@
+/* V16: scoped atmospheric motion behind the EXISTING pixel landscape. */
+.pixel-v4 .px4-hero .px4-art { isolation:isolate; }
+.pixel-v4 .px4-hero .ds-hero-signal {
+  position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  background:url('/images/hero-signal.svg') center / cover no-repeat;
+  opacity:.88;
+  animation:ds-v16-signal-breathe 9s ease-in-out infinite alternate;
+}
+.pixel-v4 .px4-hero .ds-hero-signal::before,
+.pixel-v4 .px4-hero .ds-hero-signal::after {
+  content:'';position:absolute;inset:-20% 0 0;pointer-events:none;
+  background-image:
+    linear-gradient(#83c3f0,#83c3f0),linear-gradient(#72a9d6,#72a9d6),
+    linear-gradient(#b4dfff,#b4dfff),linear-gradient(#5689b3,#5689b3),
+    linear-gradient(#83c3f0,#83c3f0),linear-gradient(#72a9d6,#72a9d6),
+    linear-gradient(#b4dfff,#b4dfff),linear-gradient(#5689b3,#5689b3);
+  background-size:4px 4px,3px 3px,5px 5px,3px 3px,4px 4px,3px 3px,5px 5px,3px 3px;
+  background-position:10% 84%,23% 53%,39% 91%,54% 60%,66% 85%,78% 47%,88% 76%,96% 56%;
+  background-repeat:no-repeat;
+  opacity:.65;
+  animation:ds-v16-pixel-rise 11s linear infinite;
+}
+.pixel-v4 .px4-hero .ds-hero-signal::after {
+  opacity:.4;filter:drop-shadow(0 0 5px #79b8e8);
+  transform:translateY(25%);
+  animation-duration:15s;animation-delay:-6s;
+}
+.pixel-v4 .px4-hero .px4-art > img {position:relative;z-index:1;}
+.pixel-v4 .px4-hero .px4-corner {z-index:3;}
+@keyframes ds-v16-pixel-rise {
+  0% { transform:translate3d(0,28%,0);opacity:0; }
+  12% { opacity:.65; }
+  80% { opacity:.65; }
+  100% { transform:translate3d(10px,-30%,0);opacity:0; }
+}
+@keyframes ds-v16-signal-breathe {from{opacity:.62}to{opacity:.95}}
+@media(max-width:760px){.pixel-v4 .px4-hero .ds-hero-signal{opacity:.65}}
+@media(prefers-reduced-motion:reduce){
+ .pixel-v4 .px4-hero .ds-hero-signal,
+ .pixel-v4 .px4-hero .ds-hero-signal::before,
+ .pixel-v4 .px4-hero .ds-hero-signal::after {animation:none!important;}
+}

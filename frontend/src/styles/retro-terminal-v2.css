@@ -1,0 +1,258 @@
+/*
+ * Dark Synapses V2
+ * Minimal Retro-Terminal Design Foundation
+ */
+
+:root {
+  --retro-bg: #0b1018;
+  --retro-surface: #111a25;
+  --retro-surface-alt: #172231;
+
+  --retro-text: #e7edf4;
+  --retro-muted: #9baebe;
+  --retro-accent: #94b8d4;
+  --retro-border: #2a3b4d;
+
+  --retro-radius: 3px;
+  --retro-transition: 180ms ease;
+}
+
+/* Shared foundation */
+body {
+  background: var(--retro-bg);
+  color: var(--retro-text);
+}
+
+/* Typography */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+.eyebrow {
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.13em;
+  color: var(--retro-accent);
+}
+
+/* Buttons */
+.button {
+  border-radius: var(--retro-radius);
+  background: var(--retro-accent);
+  border: 1px solid var(--retro-accent);
+  color: #0b1520;
+  box-shadow: none;
+  transition:
+    background var(--retro-transition),
+    color var(--retro-transition),
+    border-color var(--retro-transition);
+}
+
+.button:hover {
+  background: transparent;
+  color: var(--retro-text);
+  border-color: var(--retro-accent);
+}
+
+/* Navigation */
+.header {
+  background: var(--retro-bg);
+  border-bottom: 1px solid var(--retro-border);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--retro-border);
+}
+
+/* Accessible keyboard focus */
+.button:focus-visible {
+  outline: 2px solid var(--retro-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}
+
+/* ==========================================
+   DARK SYNAPSES V2 — NAVIGATION
+========================================== */
+
+.header.ds-nav-v3.ds-nav-v7 {
+  background: #0b1018;
+  border-bottom: 1px solid #283746;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.ds-nav-v7 .ds-nav-links > a {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.035em;
+}
+
+.ds-nav-v7 .ds-nav-links > a:hover,
+.ds-nav-v7 .ds-nav-links > a.active {
+  color: #a9c5dc;
+}
+
+.ds-nav-v7 .ds-nav-cta,
+.ds-nav-v7 .ds-portal-link {
+  border-radius: 3px;
+  box-shadow: none;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+/* ==========================================
+   DARK SYNAPSES V2 — HOMEPAGE
+========================================== */
+
+.ds-home-v2 {
+  background: #0b1018;
+  color: #e7edf4;
+}
+
+.ds-home-v2 .ds-hero-v3 {
+  background: #0b1018;
+  overflow: hidden;
+}
+
+/* Remove old visual effects */
+.ds-home-v2 .ds-hero-v3-visual,
+.ds-home-v2 .ds-globe-halo,
+.ds-home-v2 .ds-tech-panel,
+.ds-home-v2 .ds-pointer-halo {
+  display: none;
+}
+
+.ds-home-v2 .ds-hero-v3-inner {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: min(760px, 85vh);
+  padding: 100px 5%;
+}
+
+.ds-home-v2 .ds-hero-v3-copy {
+  width: 100%;
+  max-width: 850px;
+}
+
+.ds-home-v2 .ds-hero-v3-copy h1 {
+  font-size: clamp(44px, 6vw, 84px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+  color: #e7edf4;
+  text-shadow: none;
+}
+
+.ds-home-v2 .ds-hero-v3-copy h1 span {
+  color: #a9c5dc;
+}
+
+.ds-home-v2 .ds-eyebrow {
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #94b8d4;
+}
+
+.ds-home-v2 .ds-hero-description {
+  max-width: 620px;
+  color: #a6b6c4;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.8;
+}
+
+/* Buttons */
+.ds-home-v2 .ds-button-primary,
+.ds-home-v2 .ds-button-secondary {
+  border-radius: 3px;
+  box-shadow: none;
+  transform: none;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.ds-home-v2 .ds-button-primary:hover,
+.ds-home-v2 .ds-button-secondary:hover {
+  transform: none;
+}
+
+/* Capabilities */
+.ds-home-v2 .ds-hero-v3-capabilities {
+  border-top: 1px solid #283746;
+  padding-top: 24px;
+}
+
+.ds-home-v2 .ds-hero-v3-capabilities span {
+  font-family: "Courier New", monospace;
+  color: #9baebe;
+  font-size: 11px;
+}
+
+/* Approach */
+.ds-home-v2 .ds-approach-v2 {
+  background: #111a25;
+}
+
+.ds-home-v2 .ds-step-card {
+  background: transparent;
+  border: 1px solid #2a3b4d;
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+.ds-home-v2 .ds-step-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Final CTA */
+.ds-home-v2 .ds-final-cta {
+  background: #0b1018;
+  border-top: 1px solid #2a3b4d;
+}
+
+/* Footer */
+.footer.ds-footer-v3.ds-footer-v7 {
+  background: #0b1018;
+  box-shadow: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ds-home-v2 *,
+  .ds-nav-v7 * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .ds-home-v2 .ds-hero-v3-inner {
+    min-height: auto;
+    padding: 100px 6% 70px;
+  }
+
+  .ds-home-v2 .ds-hero-v3-copy h1 {
+    font-size: clamp(38px, 10vw, 56px);
+  }
+}
+
+/* Decorative effects disabled in V2 */
+.ds-home-v2 [data-signal-hero] canvas,
+.ds-home-v2 .ds-globe,
+.ds-home-v2 .ds-globe-halo,
+.ds-home-v2 .ds-panel-bars,
+.ds-navigation-trace,
+.ds-pointer-halo,
+.ds-footer-v7 .ds-footer-network {
+  display: none !important;
+}

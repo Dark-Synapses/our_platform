@@ -1,0 +1,21 @@
+/* V10 motion: entrance animation is controlled by Web Animations API in PixelV4Layout. */
+.ds-v10-public.pixel-v4 .ds-v9-service,
+.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(4),
+.ds-v10-public.pixel-v4 .ds-v9-service:nth-child(5) {
+  width:100%; min-width:0; position:relative; overflow:visible;
+  opacity:1; transform:none; box-shadow:none;
+}
+.ds-v10-public.pixel-v4 .ds-v9-service .ds-v9-visual,
+.ds-v10-public.pixel-v4 .ds-v9-service .ds-v9-info { min-width:0; max-width:100%; }
+.ds-v10-public.pixel-v4 .ds-v9-info h3,
+.ds-v10-public.pixel-v4 .ds-v9-description { overflow-wrap:anywhere; }
+.ds-v10-public.pixel-v4 .ds-v9-visual { overflow:hidden; isolation:isolate; }
+.ds-v10-public.pixel-v4 .ds-v9-visual img { display:block; width:100%; height:100%; object-fit:cover; }
+@media (max-width:760px) {
+  .ds-v10-public.pixel-v4 .ds-v9-service,
+  .ds-v10-public.pixel-v4 .ds-v9-service:nth-child(even) { grid-template-columns:minmax(0,1fr); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .ds-v10-public.pixel-v4 .ds-v9-visual img,
+  .ds-v10-public.pixel-v4 .px4-art img { transform:none!important; }
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+ <defs>
+  <radialGradient id="halo"><stop stop-color="#4a7baa" stop-opacity=".24"/><stop offset=".62" stop-color="#4a7baa" stop-opacity=".06"/><stop offset="1" stop-color="#4a7baa" stop-opacity="0"/></radialGradient>
+  <linearGradient id="trace" x1="0" y1="1" x2="0" y2="0"><stop stop-color="#7bb9e6" stop-opacity="0"/><stop offset=".52" stop-color="#7bb9e6" stop-opacity=".45"/><stop offset="1" stop-color="#b6e1ff" stop-opacity="0"/></linearGradient>
+ </defs>
+ <ellipse cx="325" cy="292" rx="295" ry="210" fill="url(#halo)"/>
+ <g fill="none" stroke="#6ca7d1" stroke-width="1" opacity=".17">
+  <path d="M55 360H585M100 275H560M145 190H525" stroke-dasharray="2 19"/>
+  <path d="M125 85V405M250 50V420M390 50V420M520 85V405" stroke-dasharray="1 24"/>
+ </g>
+ <g fill="url(#trace)" opacity=".55"><rect x="150" y="170" width="1" height="90"/><rect x="480" y="120" width="1" height="65"/><rect x="335" y="85" width="1" height="75"/></g>
+ <g fill="#8ac6ef">
+  <rect x="83" y="375" width="5" height="5" opacity=".45"/><rect x="162" y="315" width="4" height="4" opacity=".7"/><rect x="255" y="390" width="3" height="3" opacity=".65"/>
+  <rect x="325" y="305" width="6" height="6" opacity=".5"/><rect x="425" y="355" width="4" height="4" opacity=".8"/><rect x="535" y="280" width="5" height="5" opacity=".55"/>
+  <rect x="205" y="230" width="3" height="3" opacity=".8"/><rect x="370" y="175" width="4" height="4" opacity=".6"/><rect x="565" y="395" width="3" height="3" opacity=".6"/>
+ </g>
+</svg>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.darksynapses.site/sitemap.xml
+Sitemap: https://www.darksynapses.org/sitemap.xml

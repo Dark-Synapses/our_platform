@@ -1,121 +1,130 @@
-import { HeroSignal } from '../components/HeroSignal';
-import { UiIcon } from '../components/UiIcons';
 import { Link } from 'react-router-dom';
+import { HeroSignal } from '../components/HeroSignal';
 import '../styles/about-premium.css';
 
-const values = [
-  { number: '01', icon: 'engineering', title: 'Engineering Excellence', description: 'We prioritize reliable architectures, maintainable systems, and thoughtful technical execution.' },
-  { number: '02', icon: 'security', title: 'Security First', description: 'Security is considered throughout the design, development, and deployment lifecycle.' },
-  { number: '03', icon: 'innovation', title: 'Practical Innovation', description: 'We focus on solutions that address real business challenges and create measurable value.' },
+const principles = [
+  { title: 'Architecture before acceleration.', body: 'Speed matters, but speed without structure creates complexity that eventually slows everything down. We favor clear system boundaries, deliberate technology choices, maintainable components, and architectures that reflect the real requirements of the problem.' },
+  { title: 'Security is a design decision.', body: 'Security should not arrive as a final checklist. It influences how systems authenticate users, manage permissions, process information, communicate between components, and respond to failure. We consider these questions throughout the engineering lifecycle.' },
+  { title: 'Intelligence requires evaluation.', body: 'An AI demonstration is not the same as a dependable AI system. Models and agents must be evaluated against their intended use, including accuracy, limitations, latency, failure behavior, and the surrounding software infrastructure.' },
+  { title: 'Complexity should become clarity.', body: 'Sophisticated technology does not need to produce complicated experiences. We aim to translate difficult technical requirements into understandable systems, clear decisions, and practical outcomes.' },
 ];
 
-const team = [
-  { name: 'Youanes Zaki', role: 'Cybersecurity', image: '/images/team-youanes.jpg', linkedin: 'https://www.linkedin.com/in/youanesssafwat', description: 'Offensive Security | Bug Bounty Hunter | CTF Player | Building@CyberSharks | OSINT Practitioner |AI Security.' },
-  { name: 'Mirna Botros', role: 'AI Software Engineering', image: '/images/team-mirna.jpg', linkedin: 'https://www.linkedin.com/in/mirna-nageh-botros', description: 'AI Software Engineer | Building Intelligent Solutions with ML, Computer Vision, NLP & Generative AI | AI Agents & Data Science |AI Security' },
+const approach = [
+  { phase: 'Understand', title: 'Define the problem before selecting the technology.', body: 'Clarify objectives, users, operating conditions, constraints, and risks.' },
+  { phase: 'Design', title: 'Make architecture and security part of the same decision.', body: 'Establish components, integrations, data flows, interfaces, and validation criteria.' },
+  { phase: 'Engineer', title: 'Build deliberately, test continuously, and make progress visible.', body: 'Develop the system through iterative implementation, integration, technical reviews, and feedback.' },
+  { phase: 'Validate & evolve', title: 'Treat deployment as a transition into real-world responsibility.', body: 'Assess the solution against agreed requirements, document its operation, and identify opportunities for improvement.' },
 ];
 
 export function AboutPage() {
   return (
-    <main className="ds-about-premium">
-      <section className="ds-about-intro" data-signal-hero="" aria-labelledby="ds-about-title">
+    <main className="ds-about-v3" id="about-top">
+      <section className="ds-a-hero" data-signal-hero="" aria-labelledby="ds-about-title">
         <HeroSignal />
-        <div className="ds-about-wrap">
-          <p className="ds-about-eyebrow">ABOUT DARK SYNAPSES</p>
-          <h1 id="ds-about-title"> Engineered for intelligence.<span>Secured by architecture.</span></h1>
-          <p className="ds-about-lead">Dark Synapses specializes in AI software solutions, cybersecurity services, and AI-powered security systems. We combine AI engineering with security-focused development to help businesses automate workflows, protect digital assets, and deliver reliable technology.</p>
-          <div className="ds-about-values">
-            {values.map(value => (
-              <article className="ds-about-value" key={value.number}>
-                <div className="ds-about-value-top"><span>{value.number}</span><span className="ds-about-value-icon" aria-hidden="true"><UiIcon name={value.icon as 'engineering' | 'security' | 'innovation'} size={27} /></span></div>
-                <h2>{value.title}</h2><p>{value.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="ds-about-team" id="team" aria-labelledby="ds-team-heading">
-        <div className="ds-about-wrap ds-about-team-layout">
-          <div className="ds-about-team-copy">
-            <p className="ds-about-eyebrow">OUR TEAM</p>
-            <h2 id="ds-team-heading">The minds behind <span>Dark Synapses.</span></h2>
-            <p>AI software engineering and cybersecurity expertise, working together to develop practical AI services and security-focused solutions.</p>
-            <a className="ds-about-outline-button" data-public-cta="secondary" href="#team-members">Meet Our Team</a>
-          </div>
-          <div className="ds-about-team-grid" id="team-members">
-            {team.map(person => (
-              <article className="ds-about-person" key={person.name}>
-                <div className="ds-about-person-image"><img src={person.image} alt={person.name} loading="lazy" /></div>
-                <div className="ds-about-person-body">
-                  <h3>{person.name}</h3><p className="ds-about-person-role">{person.role}</p>
-                  <p>{person.description}</p>
-                  <a href={person.linkedin} target="_blank" rel="noopener noreferrer"><UiIcon name="linkedin" size={17} /><span>LinkedIn</span></a>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="ds-about-focus" aria-labelledby="ds-focus-heading">
-        <div className="ds-about-wrap">
-          <p className="ds-about-eyebrow">WHAT DRIVES US</p>
-          <h2 id="ds-focus-heading">Turning complex challenges <span>into real-world solutions.</span></h2>
-          <div className="ds-about-focus-grid">
-            <div><strong>AI Engineering</strong><p>AI software development, AI services, and automation</p></div>
-            <div><strong>Cybersecurity</strong><p>Security-focused thinking and implementation</p></div>
-            <div><strong>AI Security</strong><p>Secure AI solutions</p></div>
-            <div><strong>Collaboration</strong><p>Clear communication and iterative delivery</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="ds-about-collaboration" id="collaboration" aria-labelledby="ds-collaboration-title">
-        <div className="ds-about-wrap">
-          <p className="ds-about-eyebrow">HOW WE COLLABORATE</p>
-          <h2 id="ds-collaboration-title">Built together. <span>Delivered with clarity.</span></h2>
-          <p className="ds-about-collaboration-lead">We work in clear, iterative stages, combining Agile principles, sprint-based delivery, and regular feedback to keep your project aligned with its goals.</p>
-          <div className="ds-about-collaboration-grid">
-            {[
-              { number: '01', title: 'Discover', description: 'Understand your goals, requirements, constraints, and security needs.' },
-              { number: '02', title: 'Plan the Sprints', description: 'Agree on scope, priorities, milestones, and review checkpoints.' },
-              { number: '03', title: 'Build & Review', description: 'Develop, test, demonstrate progress, and refine through feedback.' },
-              { number: '04', title: 'Deliver & Support', description: 'Handover the agreed solution with documentation and post-launch support.' },
-            ].map(step => (
-              <article className="ds-about-collaboration-step" key={step.number}>
-                <span className="ds-about-collaboration-index">{step.number}</span>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="ds-about-maintenance" aria-labelledby="ds-maintenance-title">
-        <div className="ds-about-wrap">
-          <div className="ds-about-maintenance-card">
-            <div className="ds-about-maintenance-copy">
-              <p className="ds-about-eyebrow">POST-LAUNCH SUPPORT</p>
-              <h2 id="ds-maintenance-title">Your launch is <span>just the beginning.</span></h2>
-              <p>Eligible software development projects include one month of complimentary maintenance after handover, helping you address issues as your solution moves into real-world use.</p>
-              <p className="ds-about-maintenance-note">Includes agreed bug fixes and technical support within the delivered scope. New features, third-party fees, hosting, and work outside the agreed scope are excluded unless specified in your project agreement.</p>
+        <div className="ds-a-container ds-a-hero-content">
+          <p className="ds-a-kicker">ABOUT DARK SYNAPSES <span aria-hidden="true">/</span> OUR PERSPECTIVE</p>
+          <h1 id="ds-about-title">Intelligence changes <em>what's possible.</em><br /><span>Security determines what lasts.</span></h1>
+          <div className="ds-a-hero-bottom">
+            <div className="ds-a-hero-copy">
+              <p>Dark Synapses is a technology engineering company working at the intersection of artificial intelligence, cybersecurity, and modern software systems.</p>
+              <p>We approach intelligent technology and digital security as connected engineering challenges — designing systems that are not only capable of doing more, but built with the discipline to operate responsibly in the real world.</p>
             </div>
-            <div className="ds-about-maintenance-highlight" aria-label="30 days complimentary maintenance">
-              <strong>30</strong>
-              <span>DAYS</span>
-              <p>Complimentary<br />Maintenance</p>
+            <a href="#our-perspective" className="ds-a-button" data-public-cta="secondary">Explore our thinking</a>
+          </div>
+          <div className="ds-a-scroll-cue" aria-hidden="true"><span /> SCROLL TO DISCOVER</div>
+        </div>
+      </section>
+
+      <section className="ds-a-section ds-a-perspective" id="our-perspective" aria-labelledby="ds-a-perspective-title">
+        <div className="ds-a-container ds-a-split">
+          <div className="ds-a-section-aside"><span className="ds-a-label">OUR PERSPECTIVE</span><span className="ds-a-aside-rule" /></div>
+          <div className="ds-a-section-body">
+            <h2 id="ds-a-perspective-title">Technology is becoming more intelligent. <span>The responsibility to engineer it well is becoming greater.</span></h2>
+            <div className="ds-a-reading">
+              <p>Artificial intelligence is changing how software understands information, makes decisions, and interacts with the world. At the same time, increasingly connected systems introduce new security challenges, operational dependencies, and forms of risk.</p>
+              <p>These developments cannot be addressed independently.</p>
+              <p>An intelligent system without security can become a liability. A secure system without thoughtful engineering can become difficult to maintain, adapt, or scale. And technology built without understanding its operational context may never deliver its intended value.</p>
+              <p className="ds-a-emphasis">Dark Synapses was formed around a conviction: intelligence, engineering, and security belong in the same conversation from the beginning.</p>
+              <p>That conviction shapes how we approach technology, how we evaluate problems, and what we believe responsible innovation should look like.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="ds-about-cta" aria-labelledby="ds-about-cta-title">
-        <div className="ds-about-wrap">
-          <p className="ds-about-eyebrow">LET'S BUILD TOGETHER</p>
-          <h2 id="ds-about-cta-title">Ready to build <span>AI-powered, secure solutions?</span></h2>
-          <p>Let's discuss your project, your challenges, and how we can work together.</p>
-          <Link to="/contact" className="ds-about-outline-button" data-public-cta="secondary">Get in Touch</Link>
+      <section className="ds-a-statement" aria-labelledby="ds-a-statement-title">
+        <div className="ds-a-container">
+          <p className="ds-a-label">OUR FOUNDATIONAL BELIEF</p>
+          <h2 id="ds-a-statement-title">The most valuable technology is not simply the most advanced. <span>It is the technology people can depend on.</span></h2>
+          <p>Capability creates opportunity. Architecture creates stability. Security creates confidence. Together, they turn technical potential into systems designed for sustained use.</p>
+        </div>
+      </section>
+
+      <section className="ds-a-section ds-a-principles" aria-labelledby="ds-a-principles-title">
+        <div className="ds-a-container">
+          <div className="ds-a-heading-line"><p className="ds-a-label">OUR ENGINEERING PHILOSOPHY</p><h2 id="ds-a-principles-title">How we think <span>about engineering.</span></h2></div>
+          <div className="ds-a-principles-list">
+            {principles.map((item) => (
+              <article className="ds-a-principle" key={item.title}>
+                <h3>{item.title}</h3><p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="ds-a-section ds-a-approach" aria-labelledby="ds-a-approach-title">
+        <div className="ds-a-container ds-a-split">
+          <div className="ds-a-section-aside"><span className="ds-a-label">HOW WE APPROACH THE WORK</span><span className="ds-a-aside-rule" /></div>
+          <div className="ds-a-section-body">
+            <h2 id="ds-a-approach-title">From complex questions <span>to engineered systems.</span></h2>
+            <div className="ds-a-reading ds-a-approach-intro">
+              <p>Every meaningful technology initiative begins with questions, not tools.</p>
+              <p>What problem are we solving? What must the system accomplish? Where could it fail? What constraints will shape its architecture? And how will we know whether the result is ready for real-world use?</p>
+              <p>Our approach connects these questions across the project lifecycle.</p>
+            </div>
+            <div className="ds-a-phases">
+              {approach.map((item) => (
+                <article className="ds-a-phase" key={item.phase}>
+                  <p className="ds-a-phase-name">{item.phase}</p>
+                  <div><h3>{item.title}</h3><p>{item.body}</p></div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="ds-a-section ds-a-responsibility" aria-labelledby="ds-a-responsibility-title">
+        <div className="ds-a-container ds-a-split">
+          <div className="ds-a-section-aside"><span className="ds-a-label">TRUST & RESPONSIBILITY</span><span className="ds-a-aside-rule" /></div>
+          <div className="ds-a-section-body">
+            <h2 id="ds-a-responsibility-title">Trust is earned through <span>engineering decisions.</span></h2>
+            <div className="ds-a-reading">
+              <p>As intelligent systems become more capable, the consequences of poor technical decisions become more significant.</p>
+              <p>Reliability, access control, data handling, model behavior, observability, and recovery are not isolated concerns. They are interconnected aspects of a system's ability to operate safely and predictably.</p>
+              <p>At Dark Synapses, we believe responsible engineering requires acknowledging limitations, communicating trade-offs, validating assumptions, and treating security and quality as ongoing considerations.</p>
+              <p className="ds-a-emphasis">We do not view trust as a feature that can simply be added. It is an outcome of how a system is conceived, built, evaluated, and maintained.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="ds-a-future" aria-labelledby="ds-a-future-title">
+        <div className="ds-a-container">
+          <p className="ds-a-label">OUR DIRECTION</p>
+          <h2 id="ds-a-future-title">Building toward a future where <span>intelligence and security advance together.</span></h2>
+          <div className="ds-a-future-copy">
+            <p>Our ambition is to contribute to a generation of digital systems in which advanced intelligence, sound engineering, and cybersecurity reinforce one another rather than compete for priority.</p>
+            <p>We see opportunities to bring this thinking into increasingly autonomous software, AI-driven workflows, security engineering, and the infrastructure that connects them.</p>
+            <p>As Dark Synapses grows, our direction remains centered on a simple idea: progress should expand what technology can achieve without compromising the foundations that make it dependable.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="ds-a-cta" aria-labelledby="ds-a-cta-title">
+        <div className="ds-a-container ds-a-cta-layout">
+          <div><p className="ds-a-label">START A CONVERSATION</p><h2 id="ds-a-cta-title">Complex challenges deserve <span>thoughtful engineering.</span></h2><p>Whether you're exploring an intelligent software initiative, rethinking an existing system, or addressing a security challenge, meaningful progress begins with understanding the problem.</p></div>
+          <Link to="/contact" className="ds-a-button ds-a-button-primary" data-public-cta="primary">Discuss a Project</Link>
         </div>
       </section>
     </main>
