@@ -22,7 +22,8 @@ import { SiteLayout } from '../components/SiteLayout';
 import { HomePageRetro } from '../pages/HomePageRetro';
 import { ServicesPage } from '../pages/ServicesPage';
 import { SystemPage } from '../pages/SystemPage';
-import { ProjectsPage } from '../pages/ProjectsPage';
+import { ProjectsPage, ProjectDetailPage } from '../pages/ProjectsPage';
+import AdminProjectsPage from '../pages/AdminProjectsPage';
 
 export function App() {
   return <Routes><Route element={<PixelV4Layout />}>
@@ -38,6 +39,7 @@ export function App() {
         </Route>
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
           <Route path="admin" element={<AdminDashboardPage />} />
+          <Route path="admin/projects" element={<AdminProjectsPage />} />
           <Route path="admin/contact-inquiries" element={<AdminContactInquiriesPage />} />
           <Route path="admin/requests/:requestId" element={<AdminRequestDetailsPage />} />
         </Route>
@@ -47,6 +49,7 @@ export function App() {
     <Route path="services" element={<ServicesPage />} />
     <Route path="expertise" element={<Navigate to="/services" replace />} />
     <Route path="projects" element={<ProjectsPage />} />
+    <Route path="projects/:slug" element={<ProjectDetailPage />} />
     <Route element={<ProtectedRoute allowedRoles={['admin', 'team']} />}>
       <Route path="system" element={<SystemPage />} />
     </Route>

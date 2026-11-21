@@ -1,67 +1,55 @@
-import { HeroSignal } from '../components/HeroSignal';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './AIServicePage.css';
 
-const base = '/images/ai-service-v2/';
-const challenges = [
-  { title: 'Automate operations', image: 'challenge-automate.webp' },
-  { title: 'Unlock insights', image: 'challenge-insights.webp' },
-  { title: 'Create new possibilities', image: 'challenge-possibilities.webp' },
+const foundations = [
+  {title:'Classical Machine Learning',desc:'Predictive models for structured data, including classification, regression, forecasting, anomaly detection, and decision support.',tags:'scikit-learn · XGBoost · Feature engineering'},
+  {title:'Deep Learning',desc:'Custom neural architectures, transfer learning, representation learning, and model evaluation for complex data.',tags:'PyTorch · TensorFlow · Optimization'},
+  {title:'Predictive Analytics & Recommendations',desc:'Demand forecasting, risk scoring, ranking, personalization, and data-driven decision systems.',tags:'Time series · Ranking · Experimentation'},
 ];
-const capabilities = [
-  { title: 'AI Agents & Assistants', icon: 'robot', description: 'Purpose-built AI agents, conversational assistants, and task orchestration.' },
-  { title: 'RAG & Knowledge Systems', icon: 'database', description: 'Reliable search and retrieval across your business knowledge.' },
-  { title: 'Computer Vision Solutions', icon: 'eye', description: 'Visual understanding, detection, inspection, and image intelligence.' },
-  { title: 'Generative AI Applications', icon: 'brain', description: 'Generative experiences and multimodal applications for real workflows.' },
-] as const;
-const projects = [
-  { title: 'Computer Vision Solutions', image: 'project-vision.webp' },
-  { title: 'AI-Powered Assistant', image: 'project-assistant.webp' },
-  { title: 'Intelligent Automation', image: 'project-automation.webp' },
+const perception = [
+  {title:'Computer Vision',desc:'Object detection, segmentation, pose estimation, keypoint tracking, visual inspection, and real-time video understanding.',tags:'OpenCV · ONNX · Real-time inference'},
+  {title:'NLP & Speech AI',desc:'Document understanding, multilingual text pipelines, speech recognition, alignment, voice interfaces, and semantic search.',tags:'ASR · Text intelligence · Voice'},
+  {title:'Generative & Multimodal AI',desc:'LLM applications, controlled content generation, image-and-text experiences, and evaluation-driven prompt systems.',tags:'LLMs · Multimodal · Guardrails'},
 ];
-function CapabilityIcon({ name }: { name: typeof capabilities[number]['icon'] }) {
-  const common = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
-  return <svg viewBox="0 0 48 48" aria-hidden="true" {...common}>
-    {name === 'robot' && <><rect x="10" y="13" width="28" height="25" rx="7"/><path d="M24 7v6M20 7h8M10 23H6m36 0h-4M17 32h14"/><circle cx="18" cy="24" r="2"/><circle cx="30" cy="24" r="2"/></>}
-    {name === 'database' && <><ellipse cx="24" cy="12" rx="13" ry="6"/><path d="M11 12v23c0 8 26 8 26 0V12M11 23c0 8 26 8 26 0"/><path d="M19 31h10"/></>}
-    {name === 'eye' && <><path d="M4 24s8-12 20-12 20 12 20 12-8 12-20 12S4 24 4 24Z"/><circle cx="24" cy="24" r="7"/><circle cx="24" cy="24" r="2"/></>}
-    {name === 'brain' && <><path d="M24 10c-6-7-16-2-15 6-7 4-5 13 1 15-1 8 9 12 14 6 5 6 15 2 14-6 6-2 8-11 1-15 1-8-9-13-15-6Z"/><path d="M24 10v27M16 17l4 4-4 5m16-9-4 4 4 5M17 32l7-4 7 4"/></>}
-  </svg>;
+const production = [
+  {title:'AI Agents & Orchestration',desc:'Tool-using agents, multi-step reasoning workflows, human approval points, and observable task execution.',tags:'LangGraph · Tool calling · Human oversight'},
+  {title:'RAG & Knowledge Systems',desc:'Retrieval pipelines that connect assistants to approved company information, with access boundaries and answer evaluation.',tags:'Vector search · Retrieval · Evaluation'},
+  {title:'Automation, MLOps & Deployment',desc:'Business process automation, model serving, APIs, monitoring, containerization, and production integration.',tags:'FastAPI · Docker · CI/CD'},
+];
+const solutions=[
+ {eyebrow:'PERCEPTION',title:'Real-time visual intelligence',text:'Build video and image pipelines that detect, track, inspect, and interpret the physical world.'},
+ {eyebrow:'KNOWLEDGE',title:'Enterprise knowledge assistants',text:'Turn approved documents and data into searchable, grounded answers and useful workflows.'},
+ {eyebrow:'OPERATIONS',title:'Agentic business automation',text:'Connect models to tools, systems, and human checkpoints to move operational work forward.'},
+ {eyebrow:'DECISIONS',title:'Predictive & analytical systems',text:'Translate historical and live data into forecasts, rankings, and decision support.'},
+];
+const stages=[
+ {title:'Discover',text:'Define the problem, stakeholders, available data, constraints, and measurable success criteria.'},
+ {title:'Plan sprints',text:'Choose an architecture, prioritize milestones, and establish evaluation and security requirements.'},
+ {title:'Build & review',text:'Develop, integrate, test, measure, and iterate with transparent checkpoints.'},
+ {title:'Deliver & support',text:'Deploy, document, hand over, and provide 30 days of post-delivery support.'},
+];
+function AiLandscape(){
+ return <div className="ds-ai-v3-art" role="img" aria-label="Pixel-art AI compute infrastructure with server towers, flowing data, and a voxel neural core">
+   <div className="ds-ai-v3-art-scene" />
+   <div className="ds-ai-v3-art-scan" aria-hidden="true" />
+   <div className="ds-ai-v3-art-caption" aria-hidden="true"><span>AI / COMPUTE ENVIRONMENT</span><span>DATA → INTELLIGENCE</span></div>
+ </div>;
 }
-function ImageCard({ title, image, href }: { title: string; image: string; href: string }) {
-  return <a className="ds-ai-v2-card" href={href} aria-label={title}>
-    <img src={base + image} alt="" loading="lazy" />
-    <span className="ds-ai-v2-card-content"><strong>{title}</strong></span>
-  </a>;
-}
-export function AIServicePage() {
-  return <main className="ds-ai-v2">
-    <section className="ds-ai-v2-hero" data-signal-hero="">
-        <HeroSignal />
-      <div className="ds-ai-v2-hero-art" aria-hidden="true" />
-      <div className="ds-ai-v2-container ds-ai-v2-hero-inner">
-        <nav className="ds-ai-v2-crumb" aria-label="Breadcrumb"><Link to="/services">Services</Link><span>/</span><span>AI Services</span></nav>
-        <div className="ds-ai-v2-hero-copy">
-          <h1>AI Services</h1>
-          <h2>From complex challenges<br/>to intelligent solutions.</h2>
-          <p>We help organizations leverage AI to automate processes, uncover insights, and build innovative products — combining domain expertise with secure, scalable, and production-ready systems.</p>
-          <div className="ds-ai-v2-actions"><Link className="ds-ai-v2-btn ds-ai-v2-primary" data-public-cta="primary" to="/contact?service=ai">Request this service</Link><a className="ds-ai-v2-btn ds-ai-v2-secondary" data-public-cta="secondary" href="#ai-capabilities">Explore capabilities</a></div>
-        </div>
-        <div className="ds-ai-v2-hero-words" aria-hidden="true">Ideas<br/>Intelligence<br/>Impact</div>
-      </div>
-    </section>
-    <section className="ds-ai-v2-section ds-ai-v2-container" aria-labelledby="ai-challenge-title">
-      <div className="ds-ai-v2-section-head"><div><p className="ds-ai-v2-kicker">CHALLENGE</p><h2 id="ai-challenge-title">Complex problems.<br/>Greater possibilities.</h2></div><p>From data overload to manual processes, we help you turn challenges into opportunities with intelligent AI solutions.</p></div>
-      <div className="ds-ai-v2-three">{challenges.map(c => <ImageCard key={c.title} {...c} href="#ai-capabilities" />)}</div>
-    </section>
-    <section className="ds-ai-v2-section ds-ai-v2-container ds-ai-v2-solutions" id="ai-capabilities" aria-labelledby="ai-capabilities-title">
-      <p className="ds-ai-v2-kicker">OUR SOLUTIONS</p><h2 id="ai-capabilities-title">Powerful AI capabilities.<br/>Real business value.</h2>
-      <div className="ds-ai-v2-four">{capabilities.map(c => <details className="ds-ai-v2-capability" key={c.title}><summary><span className="ds-ai-v2-icon"><CapabilityIcon name={c.icon}/></span><span className="ds-ai-v2-cap-title">{c.title}</span></summary><p>{c.description}</p></details>)}</div>
-    </section>
-    <section className="ds-ai-v2-section ds-ai-v2-container" aria-labelledby="ai-impact-title">
-      <div className="ds-ai-v2-section-head ds-ai-v2-impact-head"><div><p className="ds-ai-v2-kicker">REAL-WORLD IMPACT</p><h2 id="ai-impact-title">Turning AI into results.</h2></div><Link to="/projects">View all projects →</Link></div>
-      <div className="ds-ai-v2-three ds-ai-v2-projects">{projects.map(p => <ImageCard key={p.title} {...p} href="/projects" />)}</div>
-    </section>
-    <section className="ds-ai-v2-container ds-ai-v2-cta-wrap"><div className="ds-ai-v2-cta"><div><p className="ds-ai-v2-kicker">LET'S BUILD TOGETHER</p><h2>Have a project<br/>in mind?</h2></div><div><p>Tell us about your goals, and we'll help you design the right AI solution.</p><Link className="ds-ai-v2-btn ds-ai-v2-primary" data-public-cta="primary" to="/contact?service=ai">Get in touch</Link></div></div></section>
-  </main>;
+function CapabilityGroup({id,kicker,title,intro,items}:{id:string;kicker:string;title:string;intro:string;items:typeof foundations}){return <section className="ds-ai-v2-capgroup ds-ai-v2-reveal" id={id}><div className="ds-ai-v2-group-head"><div><p className="ds-ai-terminal-kicker">// {kicker}</p><h3>{title}</h3></div><p>{intro}</p></div><div className="ds-ai-v2-caplist">{items.map((item)=><article className="ds-ai-v2-capitem" key={item.title}><h4>{item.title}</h4><p>{item.desc}</p><span>{item.tags}</span></article>)}</div></section>}
+export function AIServicePage(){
+ const root=useRef<HTMLElement>(null);
+ useEffect(()=>{const host=root.current;if(!host)return;const els=host.querySelectorAll('.ds-ai-v2-reveal');if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(el=>el.classList.add('is-visible'));return;}const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');observer.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -30px 0px'});els.forEach(el=>observer.observe(el));return()=>observer.disconnect()},[]);
+ return <main ref={root} className="ds-ai-terminal ds-ai-v2" id="main-content"><div className="ds-ai-terminal-inner"><nav className="ds-ai-terminal-breadcrumb" aria-label="Breadcrumb"><Link to="/services">EXPERTISE</Link><span>/</span><span>AI SERVICES</span></nav>
+ <section className="ds-ai-v2-hero" aria-labelledby="ds-ai-title"><div className="ds-ai-v2-hero-copy"><p className="ds-ai-terminal-kicker">DARK SYNAPSES / AI ENGINEERING</p><h1 id="ds-ai-title">AI SERVICES<span className="ds-ai-terminal-cursor" aria-hidden="true">_</span></h1><h2>From data to intelligent systems.<br/><em>Built for the real world.</em></h2><p className="ds-ai-terminal-lead">We design, develop, and deploy AI solutions across machine learning, deep learning, computer vision, natural language processing, speech, generative AI, intelligent agents, and automation. Our work connects research-grade techniques to reliable software and measurable business needs.</p><div className="ds-ai-terminal-actions"><Link className="ds-ai-terminal-button ds-ai-terminal-button-primary" to="/contact?service=ai">Discuss your project</Link><a className="ds-ai-terminal-button ds-ai-terminal-button-outline" href="#ai-capabilities">Explore capabilities</a></div></div><AiLandscape/></section>
+ <div className="ds-ai-terminal-rule"><span>ENGINEERING-FIRST APPROACH</span><span>FROM PROTOTYPE TO PRODUCTION</span></div>
+ <section className="ds-ai-v2-intro ds-ai-v2-reveal" aria-labelledby="ds-ai-v2-intro-title"><p className="ds-ai-terminal-kicker">// WHAT AI MEANS HERE</p><h2 id="ds-ai-v2-intro-title">More than a model.<br/><em>An end-to-end system.</em></h2><div><p>Successful AI begins with the right problem definition and ends with a system people can actually use. We work across data preparation, experimentation, model training, evaluation, inference optimization, product integration, and ongoing improvement.</p><p>Whether your challenge calls for a classical predictive model, a real-time vision pipeline, or an agent connected to business tools, we choose the approach that fits the constraints—not the trend.</p></div></section>
+ <section className="ds-ai-v2-capabilities" id="ai-capabilities" aria-labelledby="ds-ai-cap-title"><div className="ds-ai-v2-section-head ds-ai-v2-reveal"><p className="ds-ai-terminal-kicker">// ENGINEERING CAPABILITIES</p><h2 id="ds-ai-cap-title">The full spectrum<br/>of applied intelligence.</h2><p>Three connected disciplines, from foundational models to systems operating in the real world.</p></div><CapabilityGroup id="ai-foundations" kicker="FOUNDATIONS" title="Learning from data." intro="Predict, classify, forecast, and uncover patterns with models matched to the data and the decision." items={foundations}/><CapabilityGroup id="ai-perception" kicker="PERCEPTION & GENERATION" title="Understanding complex inputs." intro="Turn images, video, language, and speech into meaningful signals and useful experiences." items={perception}/><CapabilityGroup id="ai-systems" kicker="INTELLIGENT SYSTEMS" title="Making intelligence useful." intro="Connect models to knowledge, tools, workflows, and production infrastructure." items={production}/></section>
+ <section className="ds-ai-v2-solutions ds-ai-v2-reveal" aria-labelledby="ds-ai-solutions-title"><div className="ds-ai-v2-section-head"><p className="ds-ai-terminal-kicker">// SOLUTIONS WE ENGINEER</p><h2 id="ds-ai-solutions-title">Built around your use case.</h2><p>These are examples of solution types—not claims about specific client deployments.</p></div><div className="ds-ai-v2-solutions-grid">{solutions.map(s=><article key={s.title}><span>{s.eyebrow}</span><h3>{s.title}</h3><p>{s.text}</p></article>)}</div></section>
+ <section className="ds-ai-v2-lifecycle ds-ai-v2-reveal" aria-labelledby="ds-ai-lifecycle-title"><div className="ds-ai-v2-section-head"><p className="ds-ai-terminal-kicker">// HOW WE WORK</p><h2 id="ds-ai-lifecycle-title">From discovery to delivery.</h2><p>Every stage includes technical review, practical evaluation, and security considerations.</p></div><div className="ds-ai-v2-stage-list">{stages.map((s,i)=><article key={s.title}><span className="ds-ai-v2-stage-mark" aria-hidden="true"/><div><span className="ds-ai-v2-stage-label">PHASE 0{i+1}</span><h3>{s.title}</h3></div><p>{s.text}</p></article>)}</div></section>
+ <section className="ds-ai-v2-stack ds-ai-v2-reveal" aria-labelledby="ds-ai-stack-title"><p className="ds-ai-terminal-kicker">// ENGINEERING TOOLKIT</p><h2 id="ds-ai-stack-title">Technology selected for the task.</h2><p>Our engineering toolkit spans model development, orchestration, data systems, APIs, and deployment. Specific tools depend on project requirements.</p><div className="ds-ai-v2-stack-groups"><div><h3>Models & Data</h3><p>Python · scikit-learn · PyTorch · TensorFlow · OpenCV · ONNX</p></div><div><h3>Agents & Knowledge</h3><p>LangGraph · RAG · Vector search · NLP · Speech pipelines</p></div><div><h3>Production Systems</h3><p>FastAPI · PostgreSQL · MongoDB · Redis · Docker · CI/CD</p></div></div></section>
+ <section className="ds-ai-v2-scenarios ds-ai-v2-reveal" aria-labelledby="ds-ai-scenarios-title"><div className="ds-ai-v2-section-head"><p className="ds-ai-terminal-kicker">// APPLIED SCENARIOS</p><h2 id="ds-ai-scenarios-title">Problems worth engineering for.</h2><p>Illustrative scenarios showing how different AI disciplines can work together.</p></div><div className="ds-ai-v2-scenario-list"><article><span>VISION / REAL-TIME</span><h3>Wrist tracking & virtual try-on</h3><p>Detect keypoints, track movement, and optimize low-latency inference for interactive accessory experiences.</p></article><article><span>SPEECH / LEARNING</span><h3>Speech-aligned learning experiences</h3><p>Combine speech recognition, word-level timing, and structured feedback to support guided learning workflows.</p></article><article><span>ANALYTICS / HEALTHCARE</span><h3>Medical image decision support</h3><p>Explore image classification and structured reporting pipelines with careful evaluation and human review.</p></article></div><p className="ds-ai-v2-scenario-note">Illustrative technical applications; not presented as Dark Synapses client case studies.</p></section>
+ <section className="ds-ai-v2-security ds-ai-v2-reveal" aria-labelledby="ds-ai-security-title"><div><p className="ds-ai-terminal-kicker">// SECURITY BY DESIGN</p><h2 id="ds-ai-security-title">Intelligent systems need trustworthy foundations.</h2></div><p>We account for access control, data handling, evaluation, observability, reliability, and human oversight as part of the engineering process—not as an afterthought.</p></section>
+ <section className="ds-ai-terminal-cta ds-ai-v2-reveal" aria-labelledby="ds-ai-cta-title"><div><p className="ds-ai-terminal-kicker">// LET'S BUILD TOGETHER</p><h2 id="ds-ai-cta-title">Have an AI challenge<br/>worth solving?</h2><p>Tell us about your use case. We'll explore a practical engineering approach.</p></div><Link className="ds-ai-terminal-button ds-ai-terminal-button-primary" to="/contact?service=ai">Request AI Services</Link></section>
+ </div></main>
 }

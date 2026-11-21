@@ -1,1 +1,49 @@
-.karen-widget{position:fixed;right:24px;bottom:24px;z-index:9999;font-family:Inter,system-ui,sans-serif;color:#f2f7ff}.karen-widget *{box-sizing:border-box}.karen-launcher{position:relative;width:72px;height:72px;border-radius:50%;padding:4px;background:#07152c;border:2px solid #5b95ff;box-shadow:0 0 27px #2867ff77;cursor:pointer;transition:transform .2s}.karen-launcher:hover{transform:scale(1.07)}.karen-launcher img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 35%}.karen-dot{position:absolute;right:2px;bottom:2px;width:14px;height:14px;border-radius:50%;background:#36dca0;border:2px solid #08162b}.karen-panel{position:absolute;right:0;bottom:88px;width:390px;height:min(610px,calc(100dvh - 130px));display:flex;flex-direction:column;overflow:hidden;background:#08162b;border:1px solid #436ca8;border-radius:20px;box-shadow:0 18px 65px #0009,0 0 30px #2768ff33}.karen-header{display:flex;gap:12px;align-items:center;padding:16px;background:#10213d;border-bottom:1px solid #ffffff20}.karen-header-avatar{width:52px;height:52px;border:2px solid #5a9cff;border-radius:50%;object-fit:cover}.karen-heading{flex:1;display:flex;flex-direction:column;gap:3px}.karen-heading strong{font-size:17px}.karen-heading span{font-size:12px;color:#b7c8e5}.karen-heading small{font-size:11px;color:#6dd8a9}.karen-close{border:0;background:transparent;color:#e6eeff;font-size:27px;cursor:pointer}.karen-scroll{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:15px;padding:16px 13px}.karen-message{display:flex;align-items:flex-end;gap:8px}.karen-message.visitor{justify-content:flex-end}.karen-inline-avatar{width:31px;height:31px;border-radius:50%;object-fit:cover;flex-shrink:0}.karen-bubble{max-width:85%;padding:12px 14px;border-radius:15px;background:#192d4d;font-size:13px;line-height:1.65;white-space:pre-line;overflow-wrap:anywhere}.karen-message.visitor .karen-bubble{background:#2859ec;border-bottom-right-radius:4px}.karen-topics{display:flex;flex-wrap:wrap;gap:7px;padding-left:39px}.karen-topics button{padding:8px 10px;border-radius:18px;border:1px solid #426ba6;background:#132b4e;color:#dceaff;font-size:11px;cursor:pointer}.karen-topics button:hover{background:#24549b}.karen-form{display:flex;gap:9px;padding:12px;border-top:1px solid #ffffff1b}.karen-form input{flex:1;min-width:0;padding:12px;border-radius:10px;background:#102441;border:1px solid #3a5680;color:white;outline:none}.karen-form input:focus{border-color:#74a4ff}.karen-form button{width:43px;border:0;border-radius:10px;background:#315cf4;color:white;cursor:pointer}.karen-form button:disabled{opacity:.45;cursor:not-allowed}.karen-footnote{text-align:center;color:#8ba0c2;font-size:10px;padding-bottom:9px}@media(max-width:480px){.karen-widget{right:14px;bottom:14px}.karen-panel{position:fixed;left:12px;right:12px;bottom:94px;width:auto;height:min(590px,calc(100dvh - 110px))}.karen-launcher{width:62px;height:62px}}
+/* Karen V8: target-inspired, scoped terminal chat UI. */
+.karen-widget{--k-bg:#080f16;--k-surface:#13212c;--k-line:#57798f;--k-accent:#79c6dc;position:fixed;right:24px;bottom:20px;z-index:9999;color:#e8f0f5;font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}
+.karen-widget,.karen-widget *{box-sizing:border-box}
+.karen-widget button,.karen-widget input{font:inherit}
+.karen-widget .karen-panel{position:absolute;right:0;bottom:78px;width:min(440px,calc(100vw - 24px));height:min(550px,calc(100dvh - 110px));display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--k-line);background:var(--k-bg);box-shadow:0 22px 65px #000a;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0 calc(100% - 10px),0 10px);animation:karen-v8-in .18s ease-out}
+@keyframes karen-v8-in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.karen-widget .karen-panel-welcome{height:auto;max-height:min(550px,calc(100dvh - 110px))}
+.karen-widget .karen-header{display:flex;align-items:center;gap:12px;padding:13px 15px;border-bottom:1px solid #466578;background:#0e1923;flex-shrink:0}
+.karen-widget .karen-header-avatar{width:58px;height:58px;object-fit:cover;object-position:center 43%;border-radius:3px}
+.karen-widget .karen-heading{flex:1;display:flex;flex-direction:column;gap:5px;min-width:0}
+.karen-widget .karen-heading strong{font:700 19px/1.1 ui-monospace,Consolas,monospace;letter-spacing:.045em}
+.karen-widget .karen-heading em{color:var(--k-accent);font-style:normal}
+.karen-widget .karen-heading span{font-size:12px;color:#a9c0cd}
+.karen-widget .karen-close,.karen-widget .karen-minimize{width:30px;height:34px;border:0;background:transparent;color:#dce9ee;font-size:24px;cursor:pointer}
+.karen-widget .karen-close:hover,.karen-widget .karen-minimize:hover{background:#223747}
+.karen-widget .karen-scroll{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:22px;padding:24px 17px 22px;scrollbar-width:thin;scrollbar-color:#45687a transparent}
+.karen-widget .karen-panel-welcome .karen-scroll{flex:0 1 auto;gap:18px}
+.karen-widget .karen-message{display:flex;align-items:flex-start;gap:10px;flex-shrink:0}
+.karen-widget .karen-message.visitor{justify-content:flex-end}
+.karen-widget .karen-inline-avatar{width:35px;height:35px;object-fit:cover;border-radius:3px;margin-top:14px;flex-shrink:0}
+.karen-widget .karen-message-body{display:flex;flex-direction:column;align-items:flex-start;gap:7px;max-width:calc(100% - 45px);min-width:0}
+.karen-widget .karen-message.visitor .karen-message-body{align-items:flex-end}
+.karen-widget .karen-message-meta{display:flex;align-items:center;gap:10px;font-size:11px;color:#99adbb}
+.karen-widget .karen-message-meta span{color:var(--k-accent);font-weight:700;letter-spacing:.045em}
+.karen-widget .karen-bubble{max-width:100%;padding:12px 14px;background:#14212c;border:1px solid #5c7b8e;color:#eaf0f4;font-size:13px;line-height:1.6;white-space:pre-line;overflow-wrap:anywhere;clip-path:polygon(0 0,calc(100% - 7px) 0,100% 7px,100% 100%,7px 100%,0 calc(100% - 7px))}
+.karen-widget .karen-message.visitor .karen-bubble{background:#1b3445;border-color:#7ab5cd;clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px)}
+.karen-widget .karen-typing{font-size:12px;color:#a8c7d5;padding-left:45px}
+.karen-widget .karen-suggestions{margin-left:45px;display:flex;flex-direction:column;gap:10px}
+.karen-widget .karen-suggestions-label{font-size:10px;letter-spacing:.09em;color:#8ca8b8}
+.karen-widget .karen-suggestion-list{display:flex;flex-wrap:wrap;gap:7px}
+.karen-widget .karen-suggestion-list button{padding:8px 10px;border:1px solid #47687b;background:#10202b;color:#dcebf2;font-size:11px;cursor:pointer}
+.karen-widget .karen-suggestion-list button:hover{background:#203c4d;border-color:#8ac2d9}
+.karen-widget .karen-suggestion-list button:disabled{opacity:.5;cursor:wait}
+.karen-widget .karen-bottom{flex-shrink:0;padding:12px 16px 16px;background:#0c1720;border-top:1px solid #345367}
+.karen-widget .karen-toggle-questions{border:0;background:transparent;color:#a8c9d8;font-size:11px;padding:0 0 11px;cursor:pointer}
+.karen-widget .karen-form{display:flex;align-items:center;min-height:49px;border:1px solid #668da2;background:#10212d}
+.karen-widget .karen-form:focus-within{border-color:#a2d8ed}
+.karen-widget .karen-prompt{padding:0 11px;color:#b0d7e5;font-size:23px}
+.karen-widget .karen-form input{flex:1;min-width:0;outline:0;border:0;background:transparent;color:#f2f7f9;padding:12px 0;font-size:13px}
+.karen-widget .karen-form input::placeholder{color:#9caebc}
+.karen-widget .karen-form button{align-self:stretch;min-width:52px;display:grid;place-items:center;border:0;border-left:1px solid #7095aa;background:#183b4c;color:#9de2ee;cursor:pointer}
+.karen-widget .karen-form button:hover:not(:disabled){background:#28556a}
+.karen-widget .karen-form button:disabled{opacity:.5;cursor:not-allowed}
+.karen-widget .karen-launcher{display:grid;place-items:center;width:65px;height:65px;padding:3px;border:1px solid #668b9d;background:#0d1b24;cursor:pointer;transition:transform .16s}
+.karen-widget .karen-launcher:hover{transform:translateY(-2px)}
+.karen-widget .karen-launcher img{width:100%;height:100%;object-fit:cover}
+.karen-widget button:focus-visible{outline:2px solid #b8e6f6;outline-offset:2px}
+@media(max-width:520px){.karen-widget{right:12px;bottom:12px}.karen-widget .karen-panel{width:calc(100vw - 24px);height:min(560px,calc(100dvh - 100px));bottom:72px}.karen-widget .karen-panel-welcome{height:auto}.karen-widget .karen-scroll{padding:17px 11px}.karen-widget .karen-header{padding:10px 11px}.karen-widget .karen-header-avatar{width:47px;height:47px}.karen-widget .karen-heading strong{font-size:17px}.karen-widget .karen-bubble{font-size:12px}.karen-widget .karen-suggestions{margin-left:40px}}
+@media(prefers-reduced-motion:reduce){.karen-widget *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

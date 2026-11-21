@@ -14,6 +14,7 @@ from app.modules.contact_inquiries.rate_limit import (
 from app.modules.contact_inquiries.router import router as contact_inquiries_router
 from app.modules.health.router import router as health_router
 from app.modules.notifications.router import router as notifications_router
+from app.modules.projects.router import router as projects_router
 from app.modules.service_requests.router import router as service_requests_router
 
 
@@ -36,9 +37,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     config = settings or Settings()
     application.state.cookie_secure = config.cookie_secure
     application.state.allowed_origins = {
-        origin.strip()
-        for origin in config.allowed_origins.split(",")
-        if origin.strip()
+        origin.strip() for origin in config.allowed_origins.split(",") if origin.strip()
     }
     application.include_router(auth_router, prefix="/api/v1")
     application.include_router(contact_inquiries_router, prefix="/api/v1")
@@ -46,6 +45,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     application.include_router(admin_router, prefix="/api/v1")
     application.include_router(health_router, prefix="/api/v1")
     application.include_router(notifications_router, prefix="/api/v1")
+    application.include_router(projects_router, prefix="/api/v1")
     return application
 
 

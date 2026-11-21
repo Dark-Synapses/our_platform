@@ -43,3 +43,11 @@ async def ensure_application_indexes(db):
         ],
         name="recipient_notifications_unread",
     )
+
+    await db.projects.create_index(
+        [("slug", ASCENDING)], unique=True, name="projects_unique_slug"
+    )
+    await db.projects.create_index(
+        [("status", ASCENDING), ("display_order", ASCENDING)],
+        name="projects_public_order",
+    )

@@ -1,95 +1,68 @@
-import { HeroSignal } from '../components/HeroSignal';
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import './CybersecurityServicePage.css';
+import './CybersecurityTerminal.css';
 
-type IconName = 'assessment' | 'testing' | 'architecture' | 'monitoring';
-
-function SecurityIcon({ name }: { name: IconName }) {
-  const common = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
-  return (
-    <svg viewBox="0 0 48 48" aria-hidden="true" {...common}>
-      {name === 'assessment' && <><path d="M10 8h28v32H10zM16 15h16M16 21h16M16 27h10"/><path d="m27 33 3 3 6-7"/></>}
-      {name === 'testing' && <><circle cx="24" cy="24" r="15"/><circle cx="24" cy="24" r="8"/><circle cx="24" cy="24" r="2"/><path d="M24 3v8M24 37v8M3 24h8M37 24h8"/></>}
-      {name === 'architecture' && <><path d="M24 4 40 11v11c0 10-6 17-16 22C14 39 8 32 8 22V11L24 4Z"/><path d="M19 24v-4a5 5 0 0 1 10 0v4M17 24h14v11H17z"/></>}
-      {name === 'monitoring' && <><circle cx="24" cy="24" r="5"/><path d="M24 6v8M24 34v8M6 24h8M34 24h8M11 11l6 6M31 31l6 6M37 11l-6 6M17 31l-6 6"/><circle cx="24" cy="24" r="17" strokeDasharray="3 5"/></>}
-    </svg>
-  );
-}
-
-const services: { title: string; description: string; icon: IconName; detail: string }[] = [
-  { title: 'Security Assessments', description: 'Identify vulnerabilities and assess security posture.', icon: 'assessment', detail: 'Review risks, configurations, assets, and controls to prioritize practical security improvements.' },
-  { title: 'Penetration Testing', description: 'Simulate real-world attacks to uncover risks.', icon: 'testing', detail: 'Validate potential weaknesses through authorized testing and clear remediation guidance.' },
-  { title: 'Security Architecture', description: 'Design secure, scalable infrastructure.', icon: 'architecture', detail: 'Build defense-in-depth into cloud, application, and network architecture from the start.' },
-  { title: 'Threat Monitoring', description: 'Continuous monitoring and incident response.', icon: 'monitoring', detail: 'Improve visibility, triage suspicious activity, and support timely incident response.' },
+type Capability = { title: string; description: string; scope: string };
+const groups: { label: string; title: string; intro: string; items: Capability[] }[] = [
+  { label: 'OFFENSIVE SECURITY', title: 'Find weaknesses before they become incidents.', intro: 'Authorized, scope-controlled testing that turns technical findings into prioritized remediation.', items: [
+    { title: 'Penetration Testing', description: 'Manual and tool-assisted testing of web applications, APIs, networks and infrastructure, with exploitation validation where authorized.', scope: 'Web · API · Network · Infrastructure' },
+    { title: 'Vulnerability Assessment', description: 'Identify, validate and prioritize vulnerabilities across exposed assets, configurations and dependencies.', scope: 'Discovery · Validation · Risk prioritization' },
+    { title: 'Security Configuration Reviews', description: 'Review hardening, authentication, permissions and exposed services against the operating environment.', scope: 'Hardening · IAM · Misconfiguration' },
+  ] },
+  { label: 'DEFENSIVE SECURITY', title: 'Improve visibility, detection and resilience.', intro: 'Build practical defenses that make threats easier to detect, investigate and contain.', items: [
+    { title: 'Security Monitoring & Detection', description: 'Assess telemetry coverage, refine alert logic and design detection use cases around meaningful attack behaviors.', scope: 'Logging · Detection engineering · Alerting' },
+    { title: 'Threat Modeling & Risk Assessment', description: 'Map critical assets, trust boundaries, attack paths and business impact to guide security investment.', scope: 'Threat scenarios · Attack surface · Risk' },
+    { title: 'Security Posture Improvement', description: 'Review access controls, endpoint and infrastructure protections, and practical security gaps.', scope: 'Controls · Exposure reduction · Validation' },
+  ] },
+  { label: 'SECURITY ENGINEERING', title: 'Build security into the systems you ship.', intro: 'Security reviews and engineering guidance integrated into architecture and delivery workflows.', items: [
+    { title: 'Application & API Security', description: 'Review authentication, authorization, input handling, secrets management and common application abuse paths.', scope: 'OWASP · AuthN/AuthZ · API boundaries' },
+    { title: 'Cloud & Infrastructure Security', description: 'Assess cloud identities, network boundaries, storage exposure and deployment configurations.', scope: 'Cloud IAM · Infrastructure · Access' },
+    { title: 'Secure Architecture & DevSecOps', description: 'Evaluate design decisions and integrate security checks into development and deployment pipelines.', scope: 'Architecture review · CI/CD · Secure SDLC' },
+  ] },
+  { label: 'INCIDENT READINESS', title: 'Prepare to respond with clarity.', intro: 'Improve readiness for investigation, containment and recovery before an incident puts operations under pressure.', items: [
+    { title: 'Incident Response Planning', description: 'Define escalation paths, response roles, containment decisions and communication procedures.', scope: 'Playbooks · Escalation · Containment' },
+    { title: 'Investigation & Evidence Handling', description: 'Plan defensible collection, preservation and analysis workflows for security-relevant digital evidence.', scope: 'Triage · Evidence integrity · Timeline' },
+    { title: 'Recovery & Verification', description: 'Support remediation planning, retesting and documentation of residual risks after security findings or incidents.', scope: 'Remediation · Retesting · Reporting' },
+  ] },
 ];
-
 const phases = [
-  { title: 'Assess', text: 'Understand your risk landscape.' },
-  { title: 'Plan', text: 'Define the right security strategy.' },
-  { title: 'Implement', text: 'Deploy and harden systems.' },
-  { title: 'Monitor', text: 'Continuously detect and respond.' },
+  { title: 'Discover & scope', description: 'Understand systems, critical assets, authorization, constraints and expected outcomes.' },
+  { title: 'Assess & validate', description: 'Perform agreed reviews or tests, verify findings and prioritize by practical impact.' },
+  { title: 'Remediate & strengthen', description: 'Provide actionable recommendations and collaborate on improvements.' },
+  { title: 'Retest & hand over', description: 'Verify changes, document residual risk and deliver clear technical findings.' },
 ];
-
-const projects = [
-  { title: 'Security Infrastructure for Enterprise Platform', image: '/images/cybersecurity-service/impact-security-operations.webp', alt: 'Cybersecurity operations center with monitoring displays' },
-  { title: 'Threat Detection & Monitoring System', image: '/images/cybersecurity-service/impact-data-center.webp', alt: 'Blue illuminated secure data center corridor' },
-  { title: 'Cloud Security Implementation', image: '/images/cybersecurity-service/impact-cloud-security.webp', alt: 'Protected holographic cloud infrastructure' },
-];
-
 export default function CybersecurityServicePage() {
-  const [expanded, setExpanded] = useState<string | null>(null);
-
-  return (
-    <main className="ds-cyber" id="top">
-      <section className="ds-cyber-hero" data-signal-hero="" aria-labelledby="ds-cyber-heading">
-        <HeroSignal />
-        <div className="ds-cyber-hero-art" aria-hidden="true" />
-        <div className="ds-cyber-container ds-cyber-hero-inner">
-          <nav className="ds-cyber-crumb" aria-label="Breadcrumb"><Link to="/services">Services</Link><span>/</span><span>Cybersecurity Services</span></nav>
-          <div className="ds-cyber-hero-copy">
-            <h1 id="ds-cyber-heading">Cybersecurity<br/><span>Services</span></h1>
-            <h2>Proactive security for a more resilient tomorrow.</h2>
-            <p>Comprehensive cybersecurity services to protect your digital assets, detect threats, and strengthen your security posture.</p>
-            <div className="ds-cyber-actions">
-              <Link className="ds-cyber-btn ds-cyber-btn-primary" data-public-cta="primary" to="/contact">Request this service</Link>
-              <a className="ds-cyber-btn ds-cyber-btn-outline" data-public-cta="secondary" href="#cyber-capabilities">Explore capabilities</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="ds-cyber-section ds-cyber-container" id="cyber-capabilities" aria-labelledby="ds-cyber-services-title">
-        <div className="ds-cyber-section-head">
-          <h2 id="ds-cyber-services-title">Comprehensive security<br/><span>across your organization.</span></h2>
-          <p>End-to-end cybersecurity services tailored to your business needs, from risk assessment to continuous monitoring.</p>
-        </div>
-        <div className="ds-cyber-services-grid">
-          {services.map((service) => (
-            <button type="button" className={`ds-cyber-service-card ${expanded === service.title ? 'is-open' : ''}`} key={service.title} aria-expanded={expanded === service.title} onClick={() => setExpanded(expanded === service.title ? null : service.title)}>
-              <span className="ds-cyber-service-icon"><SecurityIcon name={service.icon} /></span>
-              <span className="ds-cyber-service-copy"><strong>{service.title}</strong><span>{service.description}</span>{expanded === service.title && <em>{service.detail}</em>}</span>
-
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <section className="ds-cyber-section ds-cyber-approach" aria-labelledby="ds-cyber-approach-title">
-        <div className="ds-cyber-container">
-          <h2 id="ds-cyber-approach-title">From assessment to<br/><span>continuous protection.</span></h2>
-          <ol className="ds-cyber-timeline">
-            {phases.map((phase, index) => <li key={phase.title}><div className="ds-cyber-phase-number">{String(index + 1).padStart(2, '0')}</div><h3>{phase.title}</h3><p>{phase.text}</p></li>)}
-          </ol>
-        </div>
-      </section>
-
-      <section className="ds-cyber-section ds-cyber-container ds-cyber-impact" aria-labelledby="ds-cyber-impact-title">
-        <div className="ds-cyber-section-head"><h2 id="ds-cyber-impact-title">Stronger security.<br/><span>Greater confidence.</span></h2><Link className="ds-cyber-all-projects" to="/projects">View all projects </Link></div>
-        <div className="ds-cyber-project-grid">{projects.map((project) => <article className="ds-cyber-project" key={project.title}><img src={project.image} alt={project.alt} loading="lazy"/><h3>{project.title}</h3></article>)}</div>
-      </section>
-
-      <section className="ds-cyber-container ds-cyber-cta-wrap" aria-labelledby="ds-cyber-cta-title"><div className="ds-cyber-cta"><div className="ds-cyber-cta-content"><h2 id="ds-cyber-cta-title">Let's strengthen<br/><span>your security.</span></h2><p>Tell us about your security challenges, and we'll help you design the right solution.</p><Link className="ds-cyber-btn ds-cyber-btn-primary" data-public-cta="primary" to="/contact">Get in touch</Link></div></div></section>
-    </main>
-  );
+  const root = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const host = root.current;
+    if (!host) return;
+    const elements = host.querySelectorAll<HTMLElement>('.ds-cyt-reveal');
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      elements.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+    }), { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+    elements.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+  return <main ref={root} className="ds-cyt" id="main-content"><div className="ds-cyt-inner">
+    <nav className="ds-cyt-breadcrumb" aria-label="Breadcrumb"><Link to="/#expertise">EXPERTISE</Link><span>/</span><span>CYBERSECURITY</span></nav>
+    <header className="ds-cyt-hero" aria-labelledby="ds-cyt-title">
+      <div className="ds-cyt-hero-art" role="img" aria-label="Pixel-inspired cybersecurity shield and digital infrastructure" />
+      <div className="ds-cyt-hero-copy"><p className="ds-cyt-kicker">DARK SYNAPSES / SECURITY ENGINEERING</p><h1 id="ds-cyt-title">CYBERSECURITY<span>_</span></h1>
+      <h2>Understand your exposure.<br/><em>Engineer stronger defenses.</em></h2>
+      <p className="ds-cyt-lead">We assess, test and strengthen applications, infrastructure and security operations. From authorized penetration testing to secure architecture and incident readiness, our work focuses on verified findings, clear priorities and practical remediation.</p>
+      <div className="ds-cyt-actions"><Link className="ds-cyt-button ds-cyt-button-primary" to="/contact?service=cybersecurity">Discuss your security needs</Link><a className="ds-cyt-button" href="#cyber-capabilities">Explore capabilities</a></div></div>
+    </header>
+    <div className="ds-cyt-rule"><span>ASSESS / VALIDATE / STRENGTHEN</span><span>SECURITY BUILT ON EVIDENCE</span></div>
+    <section className="ds-cyt-intro ds-cyt-reveal" aria-labelledby="ds-cyt-intro"><div><p className="ds-cyt-kicker">// OUR APPROACH</p><h2 id="ds-cyt-intro">Security is not a checklist.<br/><em>It is an engineering discipline.</em></h2></div><div><p>Every environment has different assets, threat models and operational constraints. We start by understanding what matters, then select assessments and engineering activities that address the actual risk.</p><p>Our deliverables emphasize reproducible findings, business-relevant severity, remediation guidance and verification—not reports filled with unexplained scanner output.</p></div></section>
+    <section className="ds-cyt-capabilities" id="cyber-capabilities" aria-labelledby="ds-cyt-cap-title"><div className="ds-cyt-section-heading ds-cyt-reveal"><p className="ds-cyt-kicker">// CYBERSECURITY CAPABILITIES</p><h2 id="ds-cyt-cap-title">A complete security practice.<br/>Clearly defined services.</h2><p>Explore the areas we can scope for your organization. Engagements are tailored to your systems, permissions and objectives.</p></div>
+      {groups.map(group => <section className="ds-cyt-group ds-cyt-reveal" key={group.label}><div className="ds-cyt-group-heading"><div><p className="ds-cyt-kicker">// {group.label}</p><h3>{group.title}</h3></div><p>{group.intro}</p></div><div className="ds-cyt-list">{group.items.map(item => <article key={item.title}><h4>{item.title}</h4><p>{item.description}</p><span>{item.scope}</span></article>)}</div></section>)}
+    </section>
+    <section className="ds-cyt-deliverables ds-cyt-reveal" aria-labelledby="ds-cyt-deliverables"><div><p className="ds-cyt-kicker">// WHAT YOU RECEIVE</p><h2 id="ds-cyt-deliverables">Findings your team can act on.</h2></div><div className="ds-cyt-output-grid"><article><h3>Clear technical evidence</h3><p>Documented scope, methods, verified observations and reproducible details where appropriate.</p></article><article><h3>Prioritized remediation</h3><p>Recommendations organized around likelihood, impact, effort and operational constraints.</p></article><article><h3>Validation & handover</h3><p>Retesting options, residual-risk notes and a practical handover for engineering and security teams.</p></article></div></section>
+    <section className="ds-cyt-process ds-cyt-reveal" aria-labelledby="ds-cyt-process"><div className="ds-cyt-section-heading"><p className="ds-cyt-kicker">// ENGAGEMENT WORKFLOW</p><h2 id="ds-cyt-process">From scope to verified improvement.</h2><p>Controlled collaboration, explicit authorization and transparent checkpoints throughout.</p></div><div className="ds-cyt-phases">{phases.map((phase, i) => <article key={phase.title}><span>PHASE 0{i + 1}</span><h3>{phase.title}</h3><p>{phase.description}</p></article>)}</div></section>
+    <section className="ds-cyt-cta ds-cyt-reveal" aria-labelledby="ds-cyt-cta"><div><p className="ds-cyt-kicker">// START A SECURITY ENGAGEMENT</p><h2 id="ds-cyt-cta">Let's define your security priorities.</h2><p>Share the systems you need to assess or protect. We'll discuss scope, constraints and a suitable technical approach.</p></div><Link className="ds-cyt-button ds-cyt-button-primary" to="/contact?service=cybersecurity">Request a security consultation</Link></section>
+  </div></main>;
 }
