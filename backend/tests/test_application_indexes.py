@@ -13,6 +13,7 @@ async def test_application_indexes():
     db.service_request_audit.create_index = AsyncMock()
     db.contact_inquiries.create_index = AsyncMock()
     db.notifications.create_index = AsyncMock()
+    db.projects.create_index = AsyncMock()
 
     await ensure_application_indexes(db)
 
