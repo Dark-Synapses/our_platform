@@ -1,38 +1,37 @@
-import { HeroSignal } from '../components/HeroSignal';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import './AIPoweredSecurityPage.css';
-import './AIPoweredSecurityPolish.css';
-const img = '/images/ai-powered/';
-const capabilities = [
-  { icon: '◎', title: 'Intelligent Threat Detection', detail: 'Analyze security events, activity patterns, and system telemetry to prioritize potential threats.' },
-  { icon: '▤', title: 'Automated Security Analysis', detail: 'Automate selected security checks across applications, APIs, configurations, and codebases.' },
-  { icon: '▥', title: 'AI-Assisted Monitoring', detail: 'Summarize events, correlate signals, and help analysts investigate incidents more efficiently.' },
-  { icon: '⌘', title: 'Security Workflow Automation', detail: 'Connect alert enrichment, evidence collection, reporting, and escalation in controlled workflows.' },
-  { icon: '⚙', title: 'Custom Security Intelligence Tools', detail: 'Build specialized AI agents and security tools tailored to organizational requirements.' },
-];
-const steps = ['Understand', 'Model', 'Hypothesize', 'Experiment', 'Verify', 'Report', 'Remediate'];
+import './ServiceV7Identity.css';
+
 export default function AIPoweredSecurityPage() {
-  const [preview, setPreview] = useState(false);
-  return <main className="dsps">
-    <section className="dsps-hero" data-signal-hero="" style={{backgroundImage:`linear-gradient(90deg,#030d1c 0%,rgba(3,13,28,.96) 28%,rgba(3,13,28,.38) 70%),url(${img}security-hero.webp)`}}>
-        <HeroSignal />
-      <div className="dsps-container dsps-hero-inner"><div className="dsps-hero-copy">
-        <p className="dsps-eyebrow">Services &nbsp;/&nbsp; AI-Powered Security Systems</p>
-        <h1>Security Systems Engineered for <span>Intelligent Defense.</span></h1>
-        <p>AI-powered security systems that analyze complex signals, support investigations, and automate controlled security workflows — tailored to your environment.</p>
-        <div className="dsps-actions"><Link className="dsps-btn dsps-primary" data-public-cta="primary" to="/contact">Request this service</Link><a className="dsps-btn dsps-outline" data-public-cta="secondary" href="#capabilities">Explore capabilities</a></div>
-        <div className="dsps-hero-meta"><span>◇ AI-Driven Security</span><span>⬡ Tailored Infrastructure</span><span>↗ Evidence-Driven</span></div>
-      </div></div>
-    </section>
-    <section id="capabilities" className="dsps-section dsps-container"><div className="dsps-heading-row"><div><p className="dsps-eyebrow">WHAT WE BUILD</p><h2>Intelligence across your security operations.</h2></div><p>Purpose-built security intelligence combining AI, behavioral analysis, automation, and human oversight.</p></div>
-      <div className="dsps-cap-grid">{capabilities.map(c=><article className="dsps-cap" key={c.title}><div className="dsps-cap-icon">{c.icon}</div><h3>{c.title}</h3><p>{c.detail}</p></article>)}</div>
-    </section>
-    <section className="dsps-container dsps-research" id="research"><div className="dsps-research-copy"><p className="dsps-eyebrow">FEATURED RESEARCH INITIATIVE <span className="dsps-pill">Under development</span></p><h2>Autonomous AI Security Researcher</h2><p>Beyond automated scanning: an AI-assisted research environment focused on system understanding, adaptive investigation, independent validation, and reproducible evidence.</p><p>Built for authorized research with scoped tool access, experiment logs, and human approval for sensitive actions.</p><div className="dsps-actions"><Link className="dsps-btn dsps-primary" data-public-cta="primary" to="/security-researcher">Explore researcher</Link><button className="dsps-btn dsps-outline" data-public-cta="secondary" onClick={()=>setPreview(true)}>Try UI preview</button></div></div><div className="dsps-research-image" role="img" aria-label="Cybersecurity research workspace" /></section>
-    <section className="dsps-section dsps-container"><p className="dsps-eyebrow">RESEARCH WORKFLOW</p><h2>From hypotheses to verified evidence.</h2><div className="dsps-workflow">{steps.map((step,i)=><div className="dsps-step" key={step}><span className="dsps-step-num">{String(i+1).padStart(2,'0')}</span><strong>{step}</strong>{i<steps.length-1&&<span className="dsps-step-arrow">→</span>}</div>)}</div></section>
-    <section className="dsps-container dsps-projects"><div className="dsps-heading-row"><div><p className="dsps-eyebrow">PROJECTS & RESEARCH</p><h2>Purpose-built security innovation.</h2></div><p>Our research initiatives are under development; available capabilities will be clearly identified as they are released.</p></div><div className="dsps-project-grid"><article><img src={`${img}threat-defense.webp`} alt="Intelligent security threat defense visualization"/><h3>Intelligent Security Systems</h3><p>AI-assisted detection, monitoring, and security workflow orchestration.</p></article><article><img src={`${img}research-ai.webp`} alt="AI security analysis visualization"/><h3>Security Research OS <span className="dsps-pill">Research concept</span></h3><p>A planned Linux-based environment for controlled experiments, research memory, and evidence management.</p></article></div></section>
-    <section className="dsps-container dsps-cta"><div><h2>Deploy intelligent security systems.</h2><p>Tell us about your environment and we'll explore a solution aligned with your security needs.</p></div><Link to="/contact" className="dsps-btn dsps-primary" data-public-cta="primary">Get in touch</Link></section>
-    <button className="dsps-chat-fab" onClick={()=>setPreview(!preview)} aria-label="Open Mandark researcher preview"><img src={`${img}mandark-new.jpg`} alt="Mandark"/><span>Chat with Mandark</span></button>
-    {preview&&<aside className="dsps-preview" aria-label="Mandark preview"><header><img src={`${img}mandark-new.jpg`} alt=""/><div><strong>Mandark</strong><small>AI Security Researcher · UI Preview</small></div><button onClick={()=>setPreview(false)} aria-label="Close preview">×</button></header><p>This preview introduces the research workspace. Tool execution and live AI responses are not connected yet.</p><Link className="dsps-btn dsps-primary" data-public-cta="primary" to="/security-researcher">Open researcher workspace</Link></aside>}
-  </main>;
+  const root = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const host = root.current;
+    if (!host) return;
+    const targets = host.querySelectorAll<HTMLElement>('.ds-v7-reveal');
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      targets.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+    targets.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+  return <main ref={root} className="ds-v7" id="main-content"><div className="ds-v7-wrap">
+    <nav className="ds-v7-crumb" aria-label="Breadcrumb"><Link to="/#expertise">EXPERTISE</Link><span>/</span><span>AI-POWERED SECURITY</span></nav>
+    <header className="ds-v7-hero"><div className="ds-v7-copy"><p className="ds-v7-kicker">DARK SYNAPSES / INTELLIGENCE FOR SECURITY OPERATIONS</p><h1>AI-POWERED SECURITY<span>_</span></h1><h2>Better security decisions. Less operational noise.</h2><p className="ds-v7-intro">We engineer AI-assisted security workflows that connect signals, evidence and approved actions. Analysts stay accountable for decisions while automation reduces repetitive investigation work.</p><div className="ds-v7-actions"><Link className="ds-v7-btn primary" to="/contact?service=ai-powered-security">Discuss your requirements</Link><a className="ds-v7-btn" href="#capabilities">Explore capabilities</a></div></div><div className="ds-v7-art"><img src="/images/services-pixel/ai-powered-security.webp" alt="Pixel-art security operations and AI automation illustration" /></div></header>
+    <div className="ds-v7-rule"><span>ENGINEERING / EVIDENCE / CONTROL</span><span>WHERE INTELLIGENCE MEETS THREATS</span></div>
+    <div id="capabilities"><section className="ds-v7-section ds-v7-reveal"><div className="ds-v7-section-head"><div><p className="ds-v7-kicker">// SECURITY INTELLIGENCE</p><h2>Make telemetry useful, not just abundant.</h2></div><p>We connect operational security data with context, detection logic and reviewable outputs so teams can understand why an event matters.</p></div><div className="ds-v7-items"><article className="ds-v7-item"><h4>Security Analytics & Correlation</h4><p>Bring together alerts, logs and contextual signals to surface related activity and investigation priorities.</p><span>Event correlation · Context · Prioritization</span></article>
+<article className="ds-v7-item"><h4>Anomaly Detection</h4><p>Develop and evaluate models that flag unusual activity while measuring false positives and operational usefulness.</p><span>Baselines · Model evaluation · Analyst review</span></article>
+<article className="ds-v7-item"><h4>Threat Intelligence Enrichment</h4><p>Add relevant indicators and external context to internal events without treating weak signals as confirmed threats.</p><span>Indicators · Enrichment · Confidence</span></article></div></section><section className="ds-v7-section ds-v7-reveal"><div className="ds-v7-section-head"><div><p className="ds-v7-kicker">// AI-ASSISTED OPERATIONS</p><h2>Give analysts more context and control.</h2></div><p>Security automation should be explainable, reversible where possible and bounded by the organization’s response policy.</p></div><div className="ds-v7-items"><article className="ds-v7-item"><h4>Alert Triage Automation</h4><p>Structure alerts, deduplicate recurring cases and assemble evidence for human review.</p><span>Triage · Deduplication · Evidence</span></article>
+<article className="ds-v7-item"><h4>Investigation Assistants</h4><p>Use grounded retrieval and tool-connected workflows to summarize activity and propose next investigative steps.</p><span>Grounded summaries · Traceability · Review</span></article>
+<article className="ds-v7-item"><h4>Response Orchestration</h4><p>Integrate approved playbooks and tools with scoped permissions, action logging and explicit approvals.</p><span>Playbooks · Approvals · Audit trail</span></article></div></section><section className="ds-v7-section ds-v7-reveal"><div className="ds-v7-section-head"><div><p className="ds-v7-kicker">// MANDARK / CONCEPT IN DEVELOPMENT</p><h2>An agentic penetration-testing workspace.</h2></div><p>Mandark is our planned security agent concept: a controlled workspace for authorized testing, evidence gathering and human-reviewed findings. Its interface and autonomous capabilities are still in development.</p></div><div className="ds-v7-items"><article className="ds-v7-item"><h4>Scoped Engagements</h4><p>Define permitted assets, objectives and test constraints before any assessment activity.</p><span>Authorization · Scope · Rules of engagement</span></article>
+<article className="ds-v7-item"><h4>Agent-Assisted Investigation</h4><p>Explore a workflow for proposing tests, organizing observations and linking evidence to findings.</p><span>Planning · Evidence · Analyst oversight</span></article>
+<article className="ds-v7-item"><h4>Reviewable Reporting</h4><p>Design a human approval stage for findings, severity and remediation recommendations.</p><span>Validation · Reporting · Accountability</span></article></div></section></div>
+    <section className="ds-v7-section ds-v7-reveal"><div className="ds-v7-section-head"><div><p className="ds-v7-kicker">// DELIVERY & ACCOUNTABILITY</p><h2>Engineering outcomes, not empty promises.</h2></div><p>Integration architecture, measurable evaluation criteria, auditable workflows and clear boundaries for automation. Mandark is a development concept, not a currently available autonomous testing product.</p></div><div className="ds-v7-process"><div><span>DISCOVER</span><p>Map systems, assets, constraints and success criteria.</p></div><div><span>DESIGN</span><p>Agree on safeguards, architecture and measurable tests.</p></div><div><span>VALIDATE</span><p>Evaluate evidence, errors, risk and operational impact.</p></div><div><span>HAND OVER</span><p>Document decisions, controls and next engineering steps.</p></div></div></section>
+    <section className="ds-v7-cta ds-v7-reveal"><div><p className="ds-v7-kicker">// START AN ENGAGEMENT</p><h2>Build security around the way your systems actually work.</h2><p>Tell us about your environment, constraints and objectives. We'll define a practical scope together.</p></div><Link className="ds-v7-btn primary" to="/contact?service=ai-powered-security">Discuss your requirements</Link></section>
+  </div></main>;
 }

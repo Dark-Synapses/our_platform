@@ -1,52 +1,37 @@
-import { HeroSignal } from '../components/HeroSignal';
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import './AISecurityServicePage.css';
+import './ServiceV7Identity.css';
 
-type IconName = 'risk' | 'adversarial' | 'privacy' | 'model';
-function CapabilityIcon({ name }: { name: IconName }) {
-  return <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    {name === 'risk' && <><circle cx="24" cy="15" r="7"/><path d="M10 41v-5c0-7 6-12 14-12s14 5 14 12v5M24 31v5M24 39h.01"/><path d="m17 13 5 4 9-9"/></>}
-    {name === 'adversarial' && <><path d="M24 4 40 11v12c0 10-7 16-16 21C15 39 8 33 8 23V11L24 4Z"/><circle cx="24" cy="23" r="7"/><path d="M24 12v4M24 30v4M13 23h4M31 23h4"/></>}
-    {name === 'privacy' && <><rect x="8" y="8" width="32" height="32" rx="6"/><path d="M18 23v-4a6 6 0 0 1 12 0v4M16 23h16v12H16z"/><circle cx="24" cy="28" r="1"/></>}
-    {name === 'model' && <><path d="M24 4 40 11v11c0 11-6 17-16 22C14 39 8 33 8 22V11L24 4Z"/><path d="M17 19a5 5 0 0 1 7-5 5 5 0 0 1 7 5 5 5 0 0 1 0 10 5 5 0 0 1-7 5 5 5 0 0 1-7-5 5 5 0 0 1 0-10ZM24 15v18"/></>}
-  </svg>;
-}
-const capabilities: { title: string; description: string; detail: string; icon: IconName }[] = [
-  { title: 'AI Risk Assessments', description: 'Evaluate risks in AI models and data pipelines.', detail: 'Identify exposure across model behavior, data handling, dependencies, and deployment workflows.', icon: 'risk' },
-  { title: 'Adversarial Defense', description: 'Protect against model manipulation and attacks.', detail: 'Assess prompt injection, model misuse, evasion, and adversarial testing scenarios.', icon: 'adversarial' },
-  { title: 'Data Privacy & Governance', description: 'Ensure secure and compliant AI data handling.', detail: 'Strengthen access controls, data boundaries, privacy safeguards, and governance.', icon: 'privacy' },
-  { title: 'Model Security', description: 'Protect model integrity, intellectual property, and usage.', detail: 'Secure inference endpoints, model artifacts, integrations, and monitoring.', icon: 'model' },
-];
-const phases = [
-  { title: 'Analyze', description: 'Identify AI-specific risks and threats.' },
-  { title: 'Design', description: 'Define security measures and policies.' },
-  { title: 'Implement', description: 'Integrate security into the AI pipeline.' },
-  { title: 'Monitor', description: 'Detect, respond, and continuously improve.' },
-];
-const projects = [
-  { title: 'Secure AI Model Deployment', image: '/images/ai-security/secure-model-deployment.webp', alt: 'Secure AI model infrastructure inside a blue-lit data center' },
-  { title: 'AI Data Privacy Framework', image: '/images/ai-security/ai-data-privacy.webp', alt: 'Encrypted data and digital shield protecting AI information' },
-  { title: 'Adversarial Attack Detection', image: '/images/ai-security/adversarial-detection.webp', alt: 'Neural AI system protected against adversarial cyber threats' },
-];
 export default function AISecurityServicePage() {
-  const [expanded, setExpanded] = useState<string | null>(null);
-  return <main className="ds-aisec" id="top">
-    <section className="ds-aisec-hero" data-signal-hero="" aria-labelledby="ds-aisec-title">
-        <HeroSignal />
-      <div className="ds-aisec-hero-art" aria-hidden="true" />
-      <div className="ds-aisec-container ds-aisec-hero-inner">
-        <nav className="ds-aisec-crumb" aria-label="Breadcrumb"><Link to="/services">Services</Link><span>/</span><span>AI Security</span></nav>
-        <div className="ds-aisec-hero-copy"><h1 id="ds-aisec-title">Secure AI.<br/><span>Trusted Intelligence.</span></h1><p>Specialized security for AI systems, from model protection to data privacy and adversarial threat defense.</p>
-          <div className="ds-aisec-actions"><Link className="ds-aisec-btn ds-aisec-primary" data-public-cta="primary" to="/contact?service=ai-security">Request this service</Link><a className="ds-aisec-btn ds-aisec-outline" data-public-cta="secondary" href="#ai-security-capabilities">Explore capabilities</a></div>
-        </div>
-      </div>
-    </section>
-    <section className="ds-aisec-section ds-aisec-container" id="ai-security-capabilities" aria-labelledby="ds-aisec-cap-title"><div className="ds-aisec-heading"><h2 id="ds-aisec-cap-title">Security for every<br/><span>stage of the AI lifecycle.</span></h2><p>We help organizations build, deploy, and maintain secure AI systems with robust defenses against emerging AI-specific threats.</p></div>
-      <div className="ds-aisec-cap-grid">{capabilities.map(c => <button type="button" key={c.title} className={'ds-aisec-cap-card'+(expanded===c.title?' is-open':'')} aria-expanded={expanded===c.title} onClick={()=>setExpanded(expanded===c.title?null:c.title)}><span className="ds-aisec-cap-icon"><CapabilityIcon name={c.icon}/></span><span className="ds-aisec-cap-copy"><strong>{c.title}</strong><span>{c.description}</span>{expanded===c.title && <em>{c.detail}</em>}</span></button>)}</div>
-    </section>
-    <section className="ds-aisec-section ds-aisec-approach" aria-labelledby="ds-aisec-approach-title"><div className="ds-aisec-container ds-aisec-approach-layout"><h2 id="ds-aisec-approach-title">A secure foundation<br/><span>for AI innovation.</span></h2><ol className="ds-aisec-timeline">{phases.map((p,i)=><li key={p.title}><div className="ds-aisec-step">{String(i+1).padStart(2,'0')}</div><div><h3>{p.title}</h3><p>{p.description}</p></div></li>)}</ol></div></section>
-    <section className="ds-aisec-section ds-aisec-container" aria-labelledby="ds-aisec-projects-title"><div className="ds-aisec-heading ds-aisec-project-heading"><h2 id="ds-aisec-projects-title">Built for real-world AI systems.</h2><Link to="/projects">View all projects </Link></div><div className="ds-aisec-project-grid">{projects.map(p=><article className="ds-aisec-project" key={p.title}><img src={p.image} alt={p.alt} loading="lazy"/><h3>{p.title}</h3></article>)}</div></section>
-    <section className="ds-aisec-container ds-aisec-cta-wrap" aria-labelledby="ds-aisec-cta-title"><div className="ds-aisec-cta"><div><h2 id="ds-aisec-cta-title">Build AI with confidence.</h2><p>Let's discuss your AI security requirements and a solution tailored to your goals.</p></div><Link className="ds-aisec-btn ds-aisec-primary" data-public-cta="primary" to="/contact?service=ai-security">Get in touch</Link></div></section>
-  </main>;
+  const root = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const host = root.current;
+    if (!host) return;
+    const targets = host.querySelectorAll<HTMLElement>('.ds-v7-reveal');
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      targets.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+    targets.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+  return <main ref={root} className="ds-v7" id="main-content"><div className="ds-v7-wrap">
+    <nav className="ds-v7-crumb" aria-label="Breadcrumb"><Link to="/#expertise">EXPERTISE</Link><span>/</span><span>AI SECURITY</span></nav>
+    <header className="ds-v7-hero"><div className="ds-v7-copy"><p className="ds-v7-kicker">DARK SYNAPSES / SECURE THE INTELLIGENCE LAYER</p><h1>AI SECURITY<span>_</span></h1><h2>AI systems need more than model accuracy.</h2><p className="ds-v7-intro">We assess and strengthen the applications built around AI: prompts, retrieval, agents, tools, data access and deployment boundaries. Our work connects adversarial testing with practical engineering controls.</p><div className="ds-v7-actions"><Link className="ds-v7-btn primary" to="/contact?service=ai-security">Discuss your requirements</Link><a className="ds-v7-btn" href="#capabilities">Explore capabilities</a></div></div><div className="ds-v7-art"><img src="/images/services-pixel/ai-security.webp" alt="Pixel-art AI security infrastructure illustration" /></div></header>
+    <div className="ds-v7-rule"><span>ENGINEERING / EVIDENCE / CONTROL</span><span>WHERE INTELLIGENCE MEETS THREATS</span></div>
+    <div id="capabilities"><section className="ds-v7-section ds-v7-reveal"><div className="ds-v7-section-head"><div><p className="ds-v7-kicker">// AI APPLICATION SECURITY</p><h2>Protect the interfaces where models meet users and systems.</h2></div><p>AI applications introduce new trust boundaries: a model can interpret untrusted instructions, retrieve sensitive context and invoke tools. We examine how those boundaries behave under realistic misuse.</p></div><div className="ds-v7-items"><article className="ds-v7-item"><h4>LLM Application Assessments</h4><p>Evaluate prompt injection, indirect instruction attacks, insecure output handling and misuse of model-connected features.</p><span>Prompt surfaces · Output handling · Abuse cases</span></article>
+<article className="ds-v7-item"><h4>Agent & Tool Permission Reviews</h4><p>Review tool scopes, credentials, action authorization, approval checkpoints and the consequences of agent errors.</p><span>Least privilege · Tool calls · Human approval</span></article>
+<article className="ds-v7-item"><h4>RAG & Knowledge Access Security</h4><p>Test retrieval authorization, document trust, cross-user leakage and malicious content entering model context.</p><span>Retrieval ACLs · Data boundaries · Source trust</span></article></div></section><section className="ds-v7-section ds-v7-reveal"><div className="ds-v7-section-head"><div><p className="ds-v7-kicker">// ADVERSARIAL EVALUATION</p><h2>Test the failure modes that matter to your business.</h2></div><p>Security testing must reflect the actual workflow, not just generic jailbreak examples. We build threat-driven scenarios and document reproducible evidence.</p></div><div className="ds-v7-items"><article className="ds-v7-item"><h4>AI Red Teaming</h4><p>Design authorized adversarial scenarios across the application, model, orchestration and connected services.</p><span>Threat scenarios · Controlled testing · Evidence</span></article>
+<article className="ds-v7-item"><h4>Data & Privacy Exposure</h4><p>Assess sensitive-data disclosure paths in prompts, logs, embeddings, retrieval and third-party integrations.</p><span>Data flows · Secrets · Retention</span></article>
+<article className="ds-v7-item"><h4>Threat Modeling for AI Systems</h4><p>Map assets, trust boundaries, misuse cases and attack paths before selecting the right defenses.</p><span>Architecture · Attack paths · Risk</span></article></div></section><section className="ds-v7-section ds-v7-reveal"><div className="ds-v7-section-head"><div><p className="ds-v7-kicker">// SECURE AI ENGINEERING</p><h2>Turn findings into enforceable controls.</h2></div><p>We help teams translate assessments into engineering decisions that can be tested, monitored and maintained after release.</p></div><div className="ds-v7-items"><article className="ds-v7-item"><h4>Guardrails & Policy Enforcement</h4><p>Design input and output checks, deterministic permission gates and safe failure behavior around model interactions.</p><span>Policy checks · Enforcement · Fail-safe</span></article>
+<article className="ds-v7-item"><h4>Evaluation & Regression Testing</h4><p>Create repeatable tests for prompt attacks, data exposure and unsafe tool behavior as systems change.</p><span>Test suites · Release gates · Regression</span></article>
+<article className="ds-v7-item"><h4>Observability & Incident Readiness</h4><p>Define useful logging, investigation context and escalation paths for AI-specific security events.</p><span>Telemetry · Traceability · Response</span></article></div></section></div>
+    <section className="ds-v7-section ds-v7-reveal"><div className="ds-v7-section-head"><div><p className="ds-v7-kicker">// DELIVERY & ACCOUNTABILITY</p><h2>Engineering outcomes, not empty promises.</h2></div><p>A clear threat model, reproducible findings, prioritized remediation and a validation plan for the AI system you actually operate.</p></div><div className="ds-v7-process"><div><span>DISCOVER</span><p>Map systems, assets, constraints and success criteria.</p></div><div><span>DESIGN</span><p>Agree on safeguards, architecture and measurable tests.</p></div><div><span>VALIDATE</span><p>Evaluate evidence, errors, risk and operational impact.</p></div><div><span>HAND OVER</span><p>Document decisions, controls and next engineering steps.</p></div></div></section>
+    <section className="ds-v7-cta ds-v7-reveal"><div><p className="ds-v7-kicker">// START AN ENGAGEMENT</p><h2>Build security around the way your systems actually work.</h2><p>Tell us about your environment, constraints and objectives. We'll define a practical scope together.</p></div><Link className="ds-v7-btn primary" to="/contact?service=ai-security">Discuss your requirements</Link></section>
+  </div></main>;
 }

@@ -1,0 +1,29 @@
+/* Cybersecurity-specific refinement. Shared service pages remain unchanged. */
+.ds-cyber-enhanced{background:radial-gradient(ellipse at 77% 12%,#09213a 0%,transparent 45%),#05080c}
+.ds-cyber-enhanced .ds-wrap{max-width:1480px}
+.ds-cyber-enhanced .ds-crumb{margin-bottom:0;position:relative;z-index:3}
+.ds-cyber-enhanced .ds-hero{min-height:min(760px,85vh);grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);gap:0}
+.ds-cyber-enhanced .ds-hero-copy{padding:30px 0 45px;z-index:3}
+.ds-cyber-enhanced .ds-art{margin-left:-12vw;margin-right:-7vw;min-height:600px;overflow:visible}
+.ds-cyber-enhanced .ds-art img{width:130%;max-height:760px;mask-image:linear-gradient(90deg,transparent 0%,#000 23%,#000 90%,transparent 100%);filter:saturate(.95) drop-shadow(0 0 25px #0871a633)}
+.ds-cyber-enhanced .ds-art:after{background:linear-gradient(90deg,#05080c 0%,transparent 40%,transparent 92%,#05080c 100%);opacity:.38}
+.ds-cyber-enhanced .ds-lead{max-width:510px}
+.ds-cyber-enhanced section.ds-section{padding-top:88px;padding-bottom:68px}
+.ds-cyber-enhanced .ds-grid{gap:12px;border:0}
+.ds-cyber-enhanced .ds-cap{border:1px solid #2d4356!important;min-height:210px;padding:26px 27px;background:linear-gradient(130deg,#091723aa,#07111baa);transition:background .22s,transform .22s,border-color .22s}
+.ds-cyber-enhanced .ds-cap:hover{background:#10263a;transform:translateY(-4px);border-color:#64c8ff!important}
+.ds-cyber-enhanced .ds-cap-icon{display:grid;place-items:center;width:38px;height:38px;border:1px solid #3979a1;color:#64d2ff;font:24px/1 ui-monospace,monospace;text-shadow:0 0 12px #16baff55}
+.ds-cyber-enhanced .ds-cap h3{margin:17px 0 10px}
+.ds-cyber-enhanced .ds-cap p{margin-bottom:0}
+.ds-cyber-enhanced .ds-cyber-flow{border:0;gap:18px}
+.ds-cyber-enhanced .ds-step{position:relative;border:1px solid #2d4356!important;min-height:188px;background:#07121d;padding:25px}
+.ds-cyber-enhanced .ds-step:not(:last-child):after{content:'›';position:absolute;right:-15px;top:45%;z-index:2;color:#62c7ff;font-size:27px}
+.ds-cyber-enhanced .ds-step .ds-eyebrow{display:inline-block;border:1px solid #377ba4;padding:5px 8px}
+.ds-cyber-enhanced .ds-step h3{margin-top:20px}
+.ds-cyber-enhanced .ds-cta{padding:38px 45px;background:linear-gradient(105deg,#0b263a,#06111b);border-color:#4087af;box-shadow:inset 0 0 0 1px #0d2535}
+.ds-cyber-enhanced .ds-cta h2{font-size:clamp(25px,2.6vw,38px)}
+.ds-cyber-enhanced .ds-cta p{margin-bottom:0}
+.ds-cyber-enhanced .ds-btn:focus-visible{outline:2px solid #7ad6ff;outline-offset:4px}
+@media(max-width:950px){.ds-cyber-enhanced .ds-hero{grid-template-columns:1fr;min-height:0}.ds-cyber-enhanced .ds-art{min-height:330px;margin:-40px -5vw 0}.ds-cyber-enhanced .ds-art img{width:100%;max-height:440px}.ds-cyber-enhanced .ds-cyber-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.ds-cyber-enhanced .ds-step:after{display:none}}
+@media(max-width:600px){.ds-cyber-enhanced .ds-grid,.ds-cyber-enhanced .ds-cyber-flow{grid-template-columns:1fr}.ds-cyber-enhanced .ds-art{min-height:220px}.ds-cyber-enhanced .ds-cta{padding:28px 22px}.ds-cyber-enhanced section.ds-section{padding-top:62px;padding-bottom:45px}}
+@media(prefers-reduced-motion:reduce){.ds-cyber-enhanced .ds-cap{transition:none}.ds-cyber-enhanced .ds-cap:hover{transform:none}}

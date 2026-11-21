@@ -15,6 +15,7 @@ from app.modules.contact_inquiries.router import router as contact_inquiries_rou
 from app.modules.health.router import router as health_router
 from app.modules.notifications.router import router as notifications_router
 from app.modules.service_requests.router import router as service_requests_router
+from app.modules.projects.router import router as projects_router
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -46,6 +47,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     application.include_router(admin_router, prefix="/api/v1")
     application.include_router(health_router, prefix="/api/v1")
     application.include_router(notifications_router, prefix="/api/v1")
+    application.include_router(projects_router, prefix="/api/v1")
     return application
 
 
