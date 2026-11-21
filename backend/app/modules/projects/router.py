@@ -1,19 +1,34 @@
+import re
 from datetime import datetime, timezone
 from typing import Literal
-import re
+
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
 from pymongo import ASCENDING
-from app.modules.auth.router import get_db, check_origin
+
 from app.modules.admin.router import require_admin
+from app.modules.auth.router import check_origin, get_db
 
 router = APIRouter(tags=["Projects"])
-SERVICES = {"AI Services", "Cybersecurity", "AI Security", "AI-Powered Security", "Digital Forensics"}
+SERVICES = {
+    "AI Services",
+    "Cybersecurity",
+    "AI Security",
+    "AI-Powered Security",
+    "Digital Forensics",
+}
+
 
 class ProjectInput(BaseModel):
     slug: str = Field(min_length=3, max_length=100)
     title: str = Field(min_length=2, max_length=160)
-    category: Literal["AI Services", "Cybersecurity", "AI Security", "AI-Powered Security", "Digital Forensics"] = "AI Services"
+    category: Literal[
+        "AI Services",
+        "Cybersecurity",
+        "AI Security",
+        "AI-Powered Security",
+        "Digital Forensics",
+    ] = "AI Services"
     service_categories: list[str] = Field(default_factory=list, max_length=5)
     discipline: str = Field(default="", max_length=160)
     summary: str = Field(default="", max_length=2000)
@@ -46,10 +61,14 @@ def serialize(d, public=False):
         excluded.add("note")
     return {k: v for k, v in d.items() if k not in excluded}
 
+
 @router.get("/projects")
 async def list_public_projects(db=Depends(get_db)):
-    cursor = db.projects.find({"status": "published"}).sort([("display_order", ASCENDING), ("slug", ASCENDING)])
+    cursor = db.projects.find({"status": "published"}).sort(
+        [("display_order", ASCENDING), ("slug", ASCENDING)]
+    )
     return [serialize(x, public=True) for x in await cursor.to_list(length=200)]
+
 
 @router.get("/projects/{slug}")
 async def get_public_project(slug: str, db=Depends(get_db)):
@@ -58,13 +77,25 @@ async def get_public_project(slug: str, db=Depends(get_db)):
         raise HTTPException(404, "Project not found")
     return serialize(doc, public=True)
 
+
 @router.get("/admin/projects")
 async def list_admin_projects(admin=Depends(require_admin), db=Depends(get_db)):
-    docs = await db.projects.find({}).sort([("display_order", ASCENDING), ("slug", ASCENDING)]).to_list(length=200)
+    docs = (
+        await db.projects.find({})
+        .sort([("display_order", ASCENDING), ("slug", ASCENDING)])
+        .to_list(length=200)
+    )
     return [serialize(x) for x in docs]
 
+
 @router.put("/admin/projects/{slug}")
-async def upsert_project(slug: str, data: ProjectInput, request: Request, admin=Depends(require_admin), db=Depends(get_db)):
+async def upsert_project(
+    slug: str,
+    data: ProjectInput,
+    request: Request,
+    admin=Depends(require_admin),
+    db=Depends(get_db),
+):
     check_origin(request)
     validate_project(data)
     if slug != data.slug:
@@ -73,11 +104,18 @@ async def upsert_project(slug: str, data: ProjectInput, request: Request, admin=
     payload = data.model_dump()
     payload["updated_at"] = now
     payload["updated_by"] = admin["id"]
-    await db.projects.update_one({"slug": slug}, {"$set": payload, "$setOnInsert": {"created_at": now}}, upsert=True)
+    await db.projects.update_one(
+        {"slug": slug},
+        {"$set": payload, "$setOnInsert": {"created_at": now}},
+        upsert=True,
+    )
     return {"ok": True, "slug": slug}
 
+
 @router.delete("/admin/projects/{slug}")
-async def delete_project(slug: str, request: Request, admin=Depends(require_admin), db=Depends(get_db)):
+async def delete_project(
+    slug: str, request: Request, admin=Depends(require_admin), db=Depends(get_db)
+):
     check_origin(request)
     result = await db.projects.delete_one({"slug": slug})
     if not result.deleted_count:
