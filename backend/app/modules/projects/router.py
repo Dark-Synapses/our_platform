@@ -5,6 +5,7 @@ from typing import Literal
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
 from pymongo import ASCENDING
+from pymongo.errors import DuplicateKeyError
 
 from app.modules.admin.router import require_admin
 from app.modules.auth.router import check_origin, get_db
@@ -88,8 +89,39 @@ async def list_admin_projects(admin=Depends(require_admin), db=Depends(get_db)):
     return [serialize(x) for x in docs]
 
 
+@router.post("/admin/projects", status_code=201)
+async def create_project(
+    data: ProjectInput,
+    request: Request,
+    admin=Depends(require_admin),
+    db=Depends(get_db),
+):
+    check_origin(request)
+    validate_project(data)
+    now = datetime.now(timezone.utc)
+    payload = data.model_dump()
+    payload.update(created_at=now, updated_at=now, updated_by=admin["id"])
+    try:
+        await db.projects.insert_one(payload)
+    except DuplicateKeyError as exc:
+        raise HTTPException(409, "Project slug already exists") from exc
+    return {"ok": True, "slug": data.slug}
+
+
+@router.get("/admin/projects/{slug}")
+async def get_admin_project(
+    slug: str,
+    admin=Depends(require_admin),
+    db=Depends(get_db),
+):
+    doc = await db.projects.find_one({"slug": slug})
+    if not doc:
+        raise HTTPException(404, "Project not found")
+    return serialize(doc)
+
+
 @router.put("/admin/projects/{slug}")
-async def upsert_project(
+async def update_project(
     slug: str,
     data: ProjectInput,
     request: Request,
@@ -104,11 +136,12 @@ async def upsert_project(
     payload = data.model_dump()
     payload["updated_at"] = now
     payload["updated_by"] = admin["id"]
-    await db.projects.update_one(
+    result = await db.projects.update_one(
         {"slug": slug},
-        {"$set": payload, "$setOnInsert": {"created_at": now}},
-        upsert=True,
+        {"$set": payload},
     )
+    if not result.matched_count:
+        raise HTTPException(404, "Project not found")
     return {"ok": True, "slug": slug}
 
 
