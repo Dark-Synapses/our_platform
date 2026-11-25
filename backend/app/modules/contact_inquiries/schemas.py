@@ -28,3 +28,8 @@ class ContactInquiryResponse(BaseModel):
     id: str
     status: Literal["submitted"]
     created_at: datetime
+
+
+class ContactInquiryStatusUpdate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    status: Literal["submitted", "in_review", "resolved", "archived"]

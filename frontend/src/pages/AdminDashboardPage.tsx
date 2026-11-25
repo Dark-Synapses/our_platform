@@ -40,6 +40,7 @@ export default function AdminDashboardPage() {
   const [requests, setRequests] = useState<
     AdminServiceRequest[]
   >([]);
+  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [savingId, setSavingId] = useState<string | null>(
@@ -139,7 +140,9 @@ export default function AdminDashboardPage() {
 
   const filtered = requests.filter(
     (item) =>
-      filter === 'all' || item.status === filter,
+      (filter === 'all' || item.status === filter) &&
+      `${item.title} ${item.description} ${item.service_type}`
+        .toLowerCase().includes(search.trim().toLowerCase()),
   );
 
   const count = (status: RequestStatus) =>
@@ -182,6 +185,11 @@ export default function AdminDashboardPage() {
         </div>
       )}
 
+      <nav aria-label="Admin workspace" className="admin-panel">
+        <Link to="/admin/projects" className="admin-request-link">Manage projects</Link>
+        {' · '}
+        <Link to="/admin/contact-inquiries" className="admin-request-link">Contact inquiries</Link>
+      </nav>
       <section className="admin-stats">
         <div className="admin-stat">
           <span>Total Requests</span>
@@ -199,6 +207,10 @@ export default function AdminDashboardPage() {
           <span>Approved</span>
           <strong>{count('approved')}</strong>
         </div>
+        <div className="admin-stat">
+          <span>Rejected</span>
+          <strong>{count('rejected')}</strong>
+        </div>
       </section>
 
       <section className="admin-panel">
@@ -211,6 +223,7 @@ export default function AdminDashboardPage() {
             </p>
           </div>
 
+          <input type="search" aria-label="Search requests" placeholder="Search requests" value={search} onChange={(event) => setSearch(event.target.value)} />
           <select
             aria-label="Filter requests by status"
             value={filter}
@@ -277,7 +290,7 @@ export default function AdminDashboardPage() {
                       <select
                         aria-label={`Update ${item.title} status`}
                         value={item.status}
-                        disabled={savingId === item.id}
+                        disabled={savingId !== null}
                         onChange={(event) =>
                           void changeStatus(
                             item.id,

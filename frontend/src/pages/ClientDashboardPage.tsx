@@ -1,13 +1,39 @@
 import { useAuth } from '../components/auth/AuthProvider';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../lib/auth';
+import { getServiceRequests, type ServiceRequest } from '../lib/serviceRequests';
+import { ApiError } from '../lib/apiError';
 
 export default function ClientDashboardPage() {
   const navigate = useNavigate();
-  const { user, clearSession } = useAuth();
+  const { user, clearSession, captureSession, invalidateSession } = useAuth();
   const [error, setError] = useState('');
+
+  const [requests, setRequests] = useState<ServiceRequest[]>([]);
+  const [requestState, setRequestState] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [attempt, setAttempt] = useState(0);
+  useEffect(() => {
+    if (!user) return;
+    let active = true;
+    const token = captureSession();
+    setRequests([]);
+    setRequestState('loading');
+    getServiceRequests().then((data) => {
+      if (!active || token !== captureSession()) return;
+      setRequests(data);
+      setRequestState('ready');
+    }).catch((error: unknown) => {
+      if (!active || token !== captureSession()) return;
+      if (error instanceof ApiError && error.status === 401) {
+        invalidateSession(token);
+        return;
+      }
+      setRequestState('error');
+    });
+    return () => { active = false; };
+  }, [user, attempt, captureSession, invalidateSession]);
 
   async function handleLogout() {
     try {
@@ -52,9 +78,14 @@ export default function ClientDashboardPage() {
         </article>
 
         <article className="dashboard-card">
-          <span>Projects</span>
-          <h2>Coming soon</h2>
-          <p>Project tracking will appear here.</p>
+          <span>Service requests</span>
+          {requestState === 'loading' && <p role="status">Loading requests...</p>}
+          {requestState === 'error' && <><p>Unable to load requests.</p><button type="button" onClick={() => setAttempt((value) => value + 1)}>Retry requests</button></>}
+          {requestState === 'ready' && <>
+            <h2>{requests.length} requests</h2>
+            <p>{requests.filter((item) => item.status === 'in_review').length} in review · {requests.filter((item) => item.status === 'approved').length} approved</p>
+          </>}
+          <Link to="/service-requests">View my requests</Link>
         </article>
       </div>
     </main>

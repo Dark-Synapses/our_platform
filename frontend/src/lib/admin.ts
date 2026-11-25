@@ -101,3 +101,12 @@ export function getAdminContactInquiries(signal: AbortSignal) {
     cache: 'no-store',
   });
 }
+
+export type InquiryStatus = 'submitted' | 'in_review' | 'resolved' | 'archived';
+
+export function updateInquiryStatus(id: string, status: InquiryStatus) {
+  return api<{ id: string; status: InquiryStatus }>(
+    `/api/v1/admin/contact-inquiries/${encodeURIComponent(id)}/status`,
+    { method: 'PATCH', body: JSON.stringify({ status }) },
+  );
+}

@@ -109,3 +109,25 @@ def test_contact_rate_limit_rejected():
     assert response.status_code == 429
     assert response.headers["retry-after"] == "900"
     db.contact_inquiries.insert_one.assert_not_awaited()
+
+
+def test_admin_updates_inquiry_status():
+    client, db = make_client(admin=True)
+    db.contact_inquiries.update_one = AsyncMock(return_value=MagicMock(matched_count=1))
+    response = client.patch(
+        "/api/v1/admin/contact-inquiries/507f1f77bcf86cd799439011/status",
+        json={"status": "resolved"},
+    )
+    assert response.status_code == 200
+    assert response.json()["status"] == "resolved"
+    update = db.contact_inquiries.update_one.await_args.args[1]
+    assert update["$set"]["status"] == "resolved"
+
+
+def test_guest_cannot_update_inquiry_status():
+    client, _ = make_client()
+    response = client.patch(
+        "/api/v1/admin/contact-inquiries/507f1f77bcf86cd799439011/status",
+        json={"status": "resolved"},
+    )
+    assert response.status_code == 401

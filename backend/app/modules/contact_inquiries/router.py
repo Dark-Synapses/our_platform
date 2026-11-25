@@ -1,3 +1,6 @@
+from datetime import datetime, timezone
+
+from bson import ObjectId
 from fastapi import APIRouter, Depends, HTTPException, Request
 
 from app.modules.admin.router import require_admin
@@ -7,6 +10,7 @@ from app.modules.contact_inquiries.rate_limit import check_rate_limit
 from app.modules.contact_inquiries.schemas import (
     ContactInquiryCreate,
     ContactInquiryResponse,
+    ContactInquiryStatusUpdate,
 )
 from app.modules.notifications.events import notify_admins
 
@@ -80,3 +84,27 @@ async def admin_list_contact_inquiries(
         }
         for item in documents
     ]
+
+
+@router.patch("/admin/contact-inquiries/{inquiry_id}/status")
+async def update_contact_inquiry_status(
+    inquiry_id: str,
+    data: ContactInquiryStatusUpdate,
+    request: Request,
+    admin=Depends(require_admin),
+    db=Depends(get_db),
+):
+    check_origin(request)
+    if not ObjectId.is_valid(inquiry_id):
+        raise HTTPException(404, "Inquiry not found")
+    result = await db.contact_inquiries.update_one(
+        {"_id": ObjectId(inquiry_id)},
+        {"$set": {
+            "status": data.status,
+            "updated_at": datetime.now(timezone.utc),
+            "updated_by": admin["id"],
+        }},
+    )
+    if not result.matched_count:
+        raise HTTPException(404, "Inquiry not found")
+    return {"id": inquiry_id, "status": data.status}
