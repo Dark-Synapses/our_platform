@@ -254,3 +254,5 @@ dark-synapses-frontend@0.1.0
 # Environment secrets
 .env.*
 !.env.example
+
+/backend/karen-wheelhouse/

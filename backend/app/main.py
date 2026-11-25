@@ -13,6 +13,9 @@ from app.modules.contact_inquiries.rate_limit import (
 )
 from app.modules.contact_inquiries.router import router as contact_inquiries_router
 from app.modules.health.router import router as health_router
+from app.modules.karen.llm import KarenLLM
+from app.modules.karen.router import router as karen_router
+from app.modules.karen.runtime import KarenRuntime
 from app.modules.notifications.router import router as notifications_router
 from app.modules.projects.router import router as projects_router
 from app.modules.service_requests.router import router as service_requests_router
@@ -28,10 +31,23 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         await auth_repository.ensure_indexes(app.state.database)
         await ensure_contact_indexes(app.state.database)
         await ensure_application_indexes(app.state.database)
+        app.state.karen = None
+        app.state.karen_llm = None
         try:
+            if config.karen_enabled:
+                app.state.karen = KarenRuntime(config)
+                app.state.karen_llm = KarenLLM(config)
             yield
         finally:
-            await client.close()
+            try:
+                try:
+                    if app.state.karen_llm is not None:
+                        await app.state.karen_llm.close()
+                finally:
+                    if app.state.karen is not None:
+                        await app.state.karen.close()
+            finally:
+                await client.close()
 
     application = FastAPI(title="Dark Synapses API", lifespan=lifespan)
     config = settings or Settings()
@@ -44,6 +60,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     application.include_router(service_requests_router, prefix="/api/v1")
     application.include_router(admin_router, prefix="/api/v1")
     application.include_router(health_router, prefix="/api/v1")
+    application.include_router(karen_router, prefix="/api/v1")
     application.include_router(notifications_router, prefix="/api/v1")
     application.include_router(projects_router, prefix="/api/v1")
     return application

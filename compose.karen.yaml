@@ -1,0 +1,52 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      args:
+        INSTALL_KAREN: "true"
+    environment:
+      DS_KAREN_ENABLED: "true"
+      DS_KAREN_REDIS_URL: redis://redis:6379/0
+      DS_KAREN_QDRANT_URL: http://qdrant:6333
+      DS_KAREN_MODEL_CACHE: /app/model-cache
+      LANGSMITH_TRACING: "false"
+      LANGCHAIN_TRACING_V2: "false"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    volumes:
+      - karen_model_cache:/app/model-cache
+    depends_on:
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+
+  redis:
+    image: redis:7-alpine
+    command:
+      - redis-server
+      - --save
+      - ""
+      - --appendonly
+      - "no"
+      - --maxmemory
+      - 192mb
+      - --maxmemory-policy
+      - noeviction
+    mem_limit: 256m
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  qdrant:
+    image: qdrant/qdrant:v1.15.5
+    mem_limit: 768m
+    volumes:
+      - karen_qdrant_data:/qdrant/storage
+    environment:
+      QDRANT__TELEMETRY_DISABLED: "true"
+
+volumes:
+  karen_model_cache:
+  karen_qdrant_data:
