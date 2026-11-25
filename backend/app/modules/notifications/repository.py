@@ -59,3 +59,11 @@ async def mark_as_read(db, notification_id, recipient_id):
     )
 
     return result.matched_count > 0
+
+
+async def mark_all_as_read(db, recipient_id):
+    result = await db.notifications.update_many(
+        {"recipient_id": str(recipient_id), "is_read": False},
+        {"$set": {"is_read": True}},
+    )
+    return result.modified_count

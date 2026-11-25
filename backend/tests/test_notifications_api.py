@@ -105,3 +105,23 @@ def test_invalid_notification_id():
 
     assert response.status_code == 404
     db.notifications.update_one.assert_not_called()
+
+
+def test_mark_all_notifications_read():
+    client, db = make_client()
+    db.notifications.update_many = AsyncMock(
+        return_value=MagicMock(modified_count=3)
+    )
+    response = client.patch("/api/v1/notifications/read-all")
+    assert response.status_code == 200
+    assert response.json() == {"updated_count": 3}
+    db.notifications.update_many.assert_awaited_once_with(
+        {"recipient_id": "client-1", "is_read": False},
+        {"$set": {"is_read": True}},
+    )
+
+
+def test_mark_all_requires_auth():
+    client, db = make_client(authenticated=False)
+    assert client.patch("/api/v1/notifications/read-all").status_code == 401
+    db.notifications.update_many.assert_not_called()

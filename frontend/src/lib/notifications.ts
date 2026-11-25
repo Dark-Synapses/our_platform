@@ -50,3 +50,7 @@ export function markNotificationRead(id: string) {
     { method: 'PATCH' },
   );
 }
+
+export function markAllNotificationsRead() {
+  return request<{ updated_count: number }>('/read-all', { method: 'PATCH' });
+}

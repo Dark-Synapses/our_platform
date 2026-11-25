@@ -69,3 +69,14 @@ async def mark_notification_read(
         )
 
     return {"status": "read"}
+
+
+@router.patch("/read-all")
+async def mark_all_notifications_read(
+    request: Request,
+    user=Depends(get_notification_user),
+    db=Depends(get_db),
+):
+    check_origin(request)
+    count = await repository.mark_all_as_read(db, user["id"])
+    return {"updated_count": count}

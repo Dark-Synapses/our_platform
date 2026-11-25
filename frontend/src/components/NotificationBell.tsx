@@ -1,5 +1,5 @@
 import '../styles/notifications.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from './auth/AuthProvider';
 import { ApiError } from '../lib/apiError';
@@ -7,6 +7,7 @@ import {
   getNotifications,
   getUnreadCount,
   markNotificationRead,
+  markAllNotificationsRead,
   type Notification,
 } from '../lib/notifications';
 
@@ -19,6 +20,9 @@ export function NotificationBell({ userId }: { userId: string }) {
   const [error, setError] = useState('');
   const [busyId, setBusyId] = useState<string | null>(null);
 
+  const revision = useRef(0);
+  const pending = useRef(false);
+
   useEffect(() => {
     let active = true;
     const token = captureSession();
@@ -27,6 +31,10 @@ export function NotificationBell({ userId }: { userId: string }) {
     setItems([]);
     setUnread(0);
     setError('');
+    setBusyId(null);
+    setLoading(false);
+    pending.current = false;
+    revision.current++;
 
     if (status !== 'authenticated') {
       return () => {
@@ -34,14 +42,19 @@ export function NotificationBell({ userId }: { userId: string }) {
       };
     }
 
-    getUnreadCount()
+    let refreshing = false;
+    function refresh() {
+      if (refreshing || pending.current || document.hidden) return;
+      refreshing = true;
+      const version = revision.current;
+      getUnreadCount()
       .then((result) => {
-        if (active && token === captureSession()) {
+        if (active && token === captureSession() && version === revision.current) {
           setUnread(result.unread_count);
         }
       })
       .catch((error: unknown) => {
-        if (!active || token !== captureSession()) return;
+        if (!active || token !== captureSession() || version !== revision.current) return;
 
         if (error instanceof ApiError && error.status === 401) {
           invalidateSession(token);
@@ -53,15 +66,24 @@ export function NotificationBell({ userId }: { userId: string }) {
             ? 'Access denied.'
             : 'Could not load notifications.',
         );
-      });
+      }).finally(() => { refreshing = false; });
+    }
+    refresh();
+    const timer = window.setInterval(refresh, 30000);
+    document.addEventListener('visibilitychange', refresh);
 
     return () => {
       active = false;
+      window.clearInterval(timer);
+      document.removeEventListener('visibilitychange', refresh);
     };
   }, [userId, status, captureSession, invalidateSession]);
 
   async function loadNotifications() {
     const token = captureSession();
+    if (pending.current) return;
+    pending.current = true;
+    revision.current++;
     setLoading(true);
     setError('');
 
@@ -90,6 +112,7 @@ export function NotificationBell({ userId }: { userId: string }) {
       );
     } finally {
       if (token === captureSession()) {
+        pending.current = false;
         setLoading(false);
       }
     }
@@ -105,20 +128,23 @@ export function NotificationBell({ userId }: { userId: string }) {
   }
 
   async function markRead(id: string) {
-    if (busyId) return;
+    if (pending.current) return;
+    pending.current = true;
+    revision.current++;
 
     const token = captureSession();
     setBusyId(id);
     setError('');
 
     try {
-      await markNotificationRead(id);
+      if (id === 'all') await markAllNotificationsRead();
+      else await markNotificationRead(id);
 
       if (token !== captureSession()) return;
 
       setItems((previous) =>
         previous.map((item) =>
-          item.id === id ? { ...item, is_read: true } : item,
+          (id === 'all' || item.id === id) ? { ...item, is_read: true } : item,
         ),
       );
 
@@ -142,6 +168,7 @@ export function NotificationBell({ userId }: { userId: string }) {
       );
     } finally {
       if (token === captureSession()) {
+        pending.current = false;
         setBusyId(null);
       }
     }
@@ -179,6 +206,10 @@ export function NotificationBell({ userId }: { userId: string }) {
 
           {loading && <p>Loading notifications...</p>}
           {error && <p role="alert">{error}</p>}
+          {error && <button type="button" disabled={loading || busyId !== null}
+            onClick={() => void loadNotifications()}>Retry</button>}
+          {unread > 0 && <button type="button" disabled={loading || busyId !== null}
+            onClick={() => void markRead('all')}>Mark all as read</button>}
 
           {!loading && !error && items.length === 0 && (
             <p>No notifications yet.</p>
@@ -204,6 +235,13 @@ export function NotificationBell({ userId }: { userId: string }) {
                 >
                   View contact inbox
                 </Link>
+              )}
+              {item.reference_id && user?.role === 'admin' && item.type === 'new_service_request' && (
+                <Link to={`/admin/requests/${encodeURIComponent(item.reference_id)}`}
+                  onClick={() => setOpen(false)}>View request</Link>
+              )}
+              {user?.role === 'client' && item.type === 'request_status_changed' && (
+                <Link to="/service-requests" onClick={() => setOpen(false)}>View requests</Link>
               )}
               {!item.is_read && (
                 <button
