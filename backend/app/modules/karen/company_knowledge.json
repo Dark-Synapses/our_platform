@@ -1,0 +1,42 @@
+[
+  {
+    "source_id": "service:ai",
+    "kind": "service",
+    "title": "Artificial Intelligence",
+    "text": "We design and engineer intelligent software around real operational needs—from custom machine learning and real-time computer vision to AI agents, document intelligence, voice interfaces, and production integrations. Capabilities: AI agents, LLMs & RAG; Computer vision & real-time AI; OCR & document intelligence; Voice AI & automation",
+    "source_path": "/services/ai",
+    "service": "AI Services"
+  },
+  {
+    "source_id": "service:cybersecurity",
+    "kind": "service",
+    "title": "Cybersecurity",
+    "text": "We assess applications and infrastructure, identify security weaknesses, and provide actionable findings that help teams reduce exposure. Our offensive work covers web, mobile, API, and network penetration testing; defensive engineering and SOC are areas of planned expansion. Capabilities: Web, mobile & API penetration testing; Network & infrastructure assessment; Vulnerability assessment & hardening; Defensive security — expanding",
+    "source_path": "/services/cybersecurity",
+    "service": "Cybersecurity"
+  },
+  {
+    "source_id": "service:ai-security",
+    "kind": "service",
+    "title": "AI Security",
+    "text": "AI applications introduce new attack surfaces. We evaluate the security of LLM-based systems, agents, retrieval pipelines, model integrations, and their access to sensitive data. Capabilities: AI penetration testing; LLM & agent security; Prompt injection & adversarial testing; RAG & data exposure assessment",
+    "source_path": "/services/ai-security",
+    "service": "AI Security"
+  },
+  {
+    "source_id": "service:ai-powered-security",
+    "kind": "service",
+    "title": "AI-Powered Security",
+    "text": "We explore and engineer AI-assisted security workflows that help analysts interpret signals, surface anomalies, and automate repetitive analysis while keeping human oversight central. Capabilities: Threat detection & analysis; Anomaly detection; Security workflow automation; AI-assisted monitoring",
+    "source_path": "/services/ai-powered-security",
+    "service": "AI-Powered Security"
+  },
+  {
+    "source_id": "service:content-authenticity-digital-forensics",
+    "kind": "service",
+    "title": "Digital Forensics",
+    "text": "An independent discipline for examining digital evidence. We analyze images, video, audio, documents, and relevant system artifacts for signs of manipulation, synthetic media, compromise, or potential data exposure—with findings grounded in available evidence. Capabilities: AI image & video authenticity; Voice cloning & speech manipulation; Document, file & metadata analysis; Compromise & breach investigation",
+    "source_path": "/services/content-authenticity-digital-forensics",
+    "service": "Digital Forensics"
+  }
+]
