@@ -49,3 +49,25 @@ def test_missing_extraction_is_retained_not_promoted():
     assert len(reviewed.unresolved_evidence) == 11
     assert len(candidate.unresolved_evidence) == 12
     assert reviewed.topics == candidate.topics
+
+
+def test_review_is_atomic_and_topic_scoped():
+    from app.modules.karen.context import UnresolvedEvidence
+    from app.modules.karen.evidence import review_evidence
+
+    a, b = ProjectTopic(title="A"), ProjectTopic(title="B")
+    state = KarenSessionState(
+        topics={a.topic_id: a, b.topic_id: b},
+        unresolved_evidence=[
+            UnresolvedEvidence(topic_id=t.topic_id, text="Same")
+            for t in (a, b)
+        ],
+    )
+    with pytest.raises(ValueError, match="Invalid evidence review"):
+        review_evidence(state, [(a.topic_id, "Same"), (b.topic_id, "Wrong")])
+    assert len(state.unresolved_evidence) == 2
+    reviewed = review_evidence(state, [(a.topic_id, "Same")])
+    assert reviewed.unresolved_evidence == [state.unresolved_evidence[1]]
+    assert reviewed.topics == state.topics
+    assert reviewed.revision == state.revision
+    assert len(state.unresolved_evidence) == 2

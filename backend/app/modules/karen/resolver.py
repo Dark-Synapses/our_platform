@@ -25,6 +25,14 @@ class ResolutionError(Exception):
         super().__init__(message)
         self.code = code
 
+    @property
+    def requires_context_review(self) -> bool:
+        return self.code in {
+            "evidence_capacity_exceeded",
+            "context_budget_exceeded",
+            "state_capacity_exceeded",
+        }
+
 
 class QueryResolution(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
@@ -172,7 +180,9 @@ class ContextResolver:
         )
 
         if len(content.encode("utf-8")) > 24000:
-            raise ResolutionError("Context budget exceeded")
+            raise ResolutionError(
+                "Context budget exceeded", code="context_budget_exceeded",
+            )
 
         schema = StatefulResolution if extract_updates else QueryResolution
         prompt = SYSTEM_PROMPT

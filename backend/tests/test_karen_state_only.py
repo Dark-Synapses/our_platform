@@ -284,3 +284,54 @@ async def test_requirement_and_retrieval_can_coexist():
     }
     assert not state.active_topic.requirements
     assert result.resolution.retrieval_query
+
+
+@pytest.mark.asyncio
+async def test_evidence_capacity_review_and_retry():
+    from app.modules.karen.context import UnresolvedEvidence
+    from app.modules.karen.evidence import review_evidence
+
+    state = make_state()
+    topic_id = state.active_topic_id
+    state.unresolved_evidence = [
+        UnresolvedEvidence(topic_id=topic_id, text=f"Unreviewed {i}")
+        for i in range(12)
+    ]
+    original = state.model_dump_json()
+    resolver = ContextResolver(FakeLLM(make_payload(
+        [], retrieval_query="acoustic AI",
+    )))
+    with pytest.raises(ResolutionError) as caught:
+        await resolver.resolve(state, MESSAGE, extract_updates=True)
+    assert caught.value.code == "evidence_capacity_exceeded"
+    assert caught.value.requires_context_review
+    assert state.model_dump_json() == original
+    reviewed = review_evidence(state, [(topic_id, "Unreviewed 0")])
+    result = await resolver.resolve(reviewed, MESSAGE, extract_updates=True)
+    candidate = apply_topic_update(
+        reviewed, result.resolution, result.topic_update, MESSAGE,
+    )
+    assert len(candidate.unresolved_evidence) == 12
+    assert candidate.unresolved_evidence[-1].text == MESSAGE
+    assert candidate.topics == state.topics
+    assert state.model_dump_json() == original
+
+
+@pytest.mark.asyncio
+async def test_context_budget_review_before_provider_call():
+    from app.modules.karen.context import UnresolvedEvidence
+
+    state = make_state()
+    state.unresolved_evidence = [
+        UnresolvedEvidence(topic_id=state.active_topic_id, text="é" * 2000)
+        for _ in range(7)
+    ]
+
+    class NoCall:
+        async def generate(self, *args, **kwargs):
+            pytest.fail("Provider must not be called")
+
+    with pytest.raises(ResolutionError) as caught:
+        await ContextResolver(NoCall()).resolve(state, MESSAGE)
+    assert caught.value.code == "context_budget_exceeded"
+    assert caught.value.requires_context_review

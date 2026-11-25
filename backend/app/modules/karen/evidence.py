@@ -36,3 +36,23 @@ def acknowledge_evidence(state, topic_id: str, text: str):
         if (entry.topic_id, entry.text) != (topic_id, text)
     ]
     return candidate
+
+
+def review_evidence(state, entries: list[tuple[str, str]]):
+    """Remove explicitly reviewed entries atomically, never infer facts.
+
+    Caller must authorize the review and save with the original revision.
+    Unknown entries reject the whole review rather than silently succeeding.
+    """
+    from app.modules.karen.context import KarenSessionState
+
+    candidate = KarenSessionState.model_validate_json(state.model_dump_json())
+    requested = set(entries)
+    existing = {(e.topic_id, e.text) for e in candidate.unresolved_evidence}
+    if not requested or not requested <= existing:
+        raise ValueError("Invalid evidence review")
+    candidate.unresolved_evidence = [
+        e for e in candidate.unresolved_evidence
+        if (e.topic_id, e.text) not in requested
+    ]
+    return candidate
