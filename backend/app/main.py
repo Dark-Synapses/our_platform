@@ -16,6 +16,7 @@ from app.modules.health.router import router as health_router
 from app.modules.karen.llm import KarenLLM
 from app.modules.karen.router import router as karen_router
 from app.modules.karen.runtime import KarenRuntime
+from app.modules.karen.session import SessionStore
 from app.modules.notifications.router import router as notifications_router
 from app.modules.projects.router import router as projects_router
 from app.modules.service_requests.router import router as service_requests_router
@@ -33,10 +34,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         await ensure_application_indexes(app.state.database)
         app.state.karen = None
         app.state.karen_llm = None
+        app.state.karen_sessions = None
         try:
             if config.karen_enabled:
                 app.state.karen = KarenRuntime(config)
                 app.state.karen_llm = KarenLLM(config)
+                app.state.karen_sessions = SessionStore(config)
             yield
         finally:
             try:
@@ -47,7 +50,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     if app.state.karen is not None:
                         await app.state.karen.close()
             finally:
-                await client.close()
+                try:
+                    if app.state.karen_sessions is not None:
+                        await app.state.karen_sessions.close()
+                finally:
+                    await client.close()
 
     application = FastAPI(title="Dark Synapses API", lifespan=lifespan)
     config = settings or Settings()

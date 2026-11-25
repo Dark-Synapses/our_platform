@@ -19,6 +19,7 @@ class LLMResult:
     output_tokens: int
     total_tokens: int
     model: str
+    reasoning_tokens: int | None = None
 
 
 class KarenLLM:
@@ -40,7 +41,9 @@ class KarenLLM:
             api_key=key.get_secret_value(), timeout=30, max_retries=0
         )
 
-    async def generate(self, messages):
+    async def generate(
+        self, messages, *, response_format=None, reasoning_effort=None
+    ):
         if self.closed:
             raise LLMUnavailable("LLM closed")
         if self.pending >= self.config.karen_llm_concurrency:
@@ -51,12 +54,20 @@ class KarenLLM:
         try:
             if self.client is None:
                 self.client = self.factory()
+            options = {}
+            if response_format is not None:
+                options["response_format"] = response_format
+
+            if reasoning_effort is not None:
+                options["reasoning_effort"] = reasoning_effort
+
             async with asyncio.timeout(30):
                 response = await self.client.chat.completions.create(
                     model=self.config.karen_llm_model,
                     messages=messages,
                     temperature=0.2,
                     max_completion_tokens=768,
+                    **options,
                 )
             text = response.choices[0].message.content
             usage = response.usage
@@ -64,9 +75,11 @@ class KarenLLM:
                 raise LLMUnavailable("Incomplete LLM response")
             if response.choices[0].finish_reason != "stop":
                 raise LLMUnavailable("Incomplete LLM completion")
+            details = getattr(usage, "completion_tokens_details", None)
+            reasoning = getattr(details, "reasoning_tokens", None)
             return LLMResult(
                 text, usage.prompt_tokens, usage.completion_tokens,
-                usage.total_tokens, response.model,
+                usage.total_tokens, response.model, reasoning,
             )
         except LLMUnavailable:
             raise

@@ -1,3 +1,5 @@
+from typing import Literal
+
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -34,3 +36,6 @@ class Settings(BaseSettings):
     karen_groq_api_key: SecretStr | None = None
     karen_llm_model: str = "openai/gpt-oss-120b"
     karen_llm_concurrency: int = Field(default=4, ge=1, le=32)
+    karen_resolver_reasoning_effort: Literal["low", "medium", "high"] | None = (
+        "low"
+    )
