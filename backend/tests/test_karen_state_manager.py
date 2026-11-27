@@ -74,3 +74,66 @@ def test_explicit_removal():
                                 "Remove A")
     assert not result.active_topic.constraints
     assert state.active_topic.constraints == {"data": "A"}
+
+
+@pytest.mark.parametrize("evidence", [
+    "Healthy recordings only",
+    '"Healthy recordings only"',
+    "'Healthy recordings only'",
+])
+def test_evidence_format_normalization(evidence):
+    original = KarenSessionState()
+    before = original.model_dump_json()
+    message = "Healthy recordings only"
+
+    proposed = update("Audio", [
+        fact("data", message, evidence),
+    ])
+
+    result = apply_topic_update(
+        original, resolution("new"), proposed, message,
+    )
+
+    assert result.active_topic.constraints["data"] == message
+    assert not result.unresolved_evidence
+    assert original.model_dump_json() == before
+    assert proposed.changes[0].evidence == evidence
+
+
+@pytest.mark.parametrize("evidence", [
+    "Faulty recordings only",
+    '"Faulty recordings only"',
+    "'Faulty recordings only'",
+    '"Healthy recordings only',
+    '""Healthy recordings only""',
+    '""',
+])
+def test_invalid_evidence_still_rejected(evidence):
+    original = KarenSessionState()
+    before = original.model_dump_json()
+
+    with pytest.raises(StateMutationError, match="Missing user evidence"):
+        apply_topic_update(
+            original,
+            resolution("new"),
+            update("Audio", [fact("data", "Healthy", evidence)]),
+            "Healthy recordings only",
+        )
+
+    assert original.model_dump_json() == before
+
+
+def test_normalized_evidence_preserves_uncovered_message():
+    message = "Healthy recordings only. What should we investigate?"
+
+    result = apply_topic_update(
+        KarenSessionState(),
+        resolution("new"),
+        update("Audio", [
+            fact("data", "Healthy", '"Healthy recordings only"'),
+        ]),
+        message,
+    )
+
+    assert len(result.unresolved_evidence) == 1
+    assert result.unresolved_evidence[0].text == message

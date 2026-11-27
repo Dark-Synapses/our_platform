@@ -22,6 +22,18 @@ def select_route(resolution: QueryResolution) -> Route:
     if resolution.intent == "technical_consultation":
         if resolution.topic_relation == "unclear":
             return "clarify"
+        decision = resolution.requires_technical_analysis
+        if decision is False:
+            if resolution.topic_relation in {"continue", "return"}:
+                return "fact_update"
+            return "clarify"
+        if decision is True:
+            return (
+                "technical"
+                if resolution.retrieval_query.strip()
+                else "clarify"
+            )
+        # Compatibility for legacy internal resolution objects.
         if not resolution.retrieval_query.strip():
             if resolution.topic_relation in {"continue", "return"}:
                 return "fact_update"

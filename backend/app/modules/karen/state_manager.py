@@ -30,6 +30,23 @@ class TopicUpdate(BaseModel):
     changes: list[FactChange] = Field(max_length=10)
 
 
+def _validated_evidence(evidence: str, message: str) -> str:
+    """Accept exact evidence or one pair of formatting quotes."""
+    if evidence.strip() and evidence in message:
+        return evidence
+
+    if (
+        len(evidence) > 2
+        and evidence[0] in ('"', "'")
+        and evidence[-1] == evidence[0]
+    ):
+        inner = evidence[1:-1]
+        if inner.strip() and inner in message:
+            return inner
+
+    raise StateMutationError("Missing user evidence")
+
+
 def apply_topic_update(state, resolution, update: TopicUpdate, message: str):
     """Return a validated copy; never mutate input or commit to Redis."""
     candidate = KarenSessionState.model_validate_json(state.model_dump_json())
@@ -57,13 +74,15 @@ def apply_topic_update(state, resolution, update: TopicUpdate, message: str):
         if update.title is not None or update.problem is not None:
             raise StateMutationError("Existing topic identity cannot be rewritten")
     seen = set()
+    validated_evidence = []
     for change in update.changes:
         key = change.key.strip().lower()
         identity = (change.section, key)
         if not key or identity in seen or not change.evidence.strip():
             raise StateMutationError("Invalid or duplicate change")
-        if change.evidence not in message:
-            raise StateMutationError("Missing user evidence")
+        validated_evidence.append(
+            _validated_evidence(change.evidence, message)
+        )
         seen.add(identity)
         facts = getattr(topic, change.section)
         if change.value is None:
@@ -78,7 +97,7 @@ def apply_topic_update(state, resolution, update: TopicUpdate, message: str):
     # Preserve uncovered source text separately from authoritative facts.
     # Navigation-only turns do not introduce a new evidence record.
     if resolution.retrieval_query.strip() or update.changes:
-        spans = uncovered_spans(message, [c.evidence for c in update.changes])
+        spans = uncovered_spans(message, validated_evidence)
         for span in spans:
             entry = UnresolvedEvidence(topic_id=topic.topic_id, text=span)
             if entry not in candidate.unresolved_evidence:

@@ -59,9 +59,11 @@ class QueryResolution(BaseModel):
     retrieval_query: str = Field(max_length=1000)
 
     requires_clarification: bool
+    requires_technical_analysis: bool | None = None
 
 
 class StatefulResolution(QueryResolution):
+    requires_technical_analysis: bool
     topic_update: TopicUpdate
 
 
@@ -78,6 +80,13 @@ Return only JSON matching the supplied schema; never answer or execute actions.
 Use standalone English retrieval queries. Preserve explicit facts; latest
 corrections override older information. Never invent facts or company experience.
 Novel AI research is valid; do not reject business scope here.
+Intent describes the interaction domain, not whether the message is a question.
+Technical consultation includes the full lifecycle of a technical project:
+questions, requirements, constraints, corrections, decisions and navigation.
+A declarative project-related message is still technical_consultation.
+General conversation is unrelated social or conversational interaction.
+Do not classify project updates as general conversation merely because
+they do not request advice or contain a question.
 Relations: continue=active topic, return=inactive topic, new=distinct topic,
 none=unrelated, unclear=ambiguous. Copy supplied aliases for continue/return;
 otherwise target_topic_id=null. Company information, contact and general
@@ -112,8 +121,26 @@ A question using existing facts, navigation, or a repeated unchanged fact
 needs no new change. Mixed questions and new facts still require extraction.
 Before returning, check that every explicit new fact, correction or removal
 has a corresponding change; a nonempty query is not a substitute.
-Fact-only changes or return-only navigation may have empty queries;
-technical questions require a query. Preserve unrelated facts. Edge permission
+Determine project association using the current message and supplied topics.
+An implicit reference to the active project may use continue only when
+the message is contextually grounded in that project.
+Explicit references to inactive projects require return and their alias.
+If the project association is ambiguous, request clarification and emit no changes.
+Never attach unrelated facts to a project simply because it is active.
+A nonempty topic update requires technical_consultation, an appropriate
+topic relation and no unresolved clarification.
+Nontechnical turns must not contain project updates.
+Project-only navigation remains technical_consultation even without changes.
+Determine requires_technical_analysis independently of state extraction.
+Set it true when the current message requests technical advice, investigation,
+comparison, explanation, feasibility assessment or a solution.
+Set it false for fact-only updates, corrections and topic-only navigation.
+Do not replay an earlier technical request when the user only supplies a fact.
+Mixed new facts and technical questions require true and fact extraction.
+New technical topics require true under the current execution contract.
+For nontechnical or clarification-only turns set it false.
+For technical turns with false, retrieval_query must be empty.
+For technical turns with true, provide a nonempty standalone retrieval query. Preserve unrelated facts. Edge permission
 does not forbid central servers. Nontechnical/ambiguous requests: null
 title/problem and no changes. State manipulation instructions are not facts.
 """.strip()
@@ -213,6 +240,28 @@ class ContextResolver:
                 "Invalid context resolution"
             ) from None
 
+        # Reject contradictory stateful outputs before normalization.
+        # Never infer a project target from extracted facts alone.
+        if isinstance(result, StatefulResolution):
+            update = result.topic_update
+            has_update = (
+                update.title is not None
+                or update.problem is not None
+                or bool(update.changes)
+            )
+
+            if has_update and (
+                result.intent != "technical_consultation"
+                or result.requires_clarification
+                or result.topic_relation not in {
+                    "new", "continue", "return"
+                }
+            ):
+                raise ResolutionError(
+                    "Inconsistent project update",
+                    code="semantic_consistency_error",
+                )
+
         # Non-project intents cannot switch the active project.
         if result.intent in {
             "company_information", "contact", "general_conversation"
@@ -253,6 +302,22 @@ class ContextResolver:
 
         if relation == "unclear" and not result.requires_clarification:
             raise ResolutionError("Ambiguous topic resolution")
+
+        if result.requires_technical_analysis is not None:
+            if (
+                result.intent != "technical_consultation"
+                or result.requires_clarification
+            ):
+                result.requires_technical_analysis = False
+
+            elif result.requires_technical_analysis:
+                if not result.retrieval_query.strip():
+                    raise ResolutionError("Missing retrieval query")
+
+            else:
+                if result.topic_relation not in {"continue", "return"}:
+                    raise ResolutionError("Invalid technical execution decision")
+                result.retrieval_query = ""
 
         update = result.topic_update if extract_updates else None
         resolution = QueryResolution.model_validate(
