@@ -55,7 +55,12 @@ def test_qualification_isolated_context():
 
 def test_invalid_provider_response():
     with pytest.raises(QualificationError):
-        asyncio.run(qualify(FakeLLM({}), KarenSessionState(), "AI"))
+        topic = ProjectTopic(title="AI")
+        state = KarenSessionState(
+            topics={topic.topic_id: topic},
+            active_topic_id=topic.topic_id,
+        )
+        asyncio.run(qualify(FakeLLM({}), state, "AI"))
 
 
 def test_invalid_message_no_provider_call():
@@ -63,3 +68,63 @@ def test_invalid_message_no_provider_call():
     with pytest.raises(QualificationError):
         asyncio.run(qualify(llm, KarenSessionState(), " "))
     assert not llm.calls
+
+
+@pytest.mark.parametrize("scope", [
+    "IN_SCOPE",
+    "PARTIALLY_IN_SCOPE",
+])
+def test_insufficient_requirements_requires_questions(scope):
+    with pytest.raises(ValidationError):
+        Qualification.model_validate(VALID | {
+            "scope": scope,
+            "assessment": "INSUFFICIENT_REQUIREMENTS",
+            "questions": [],
+        })
+
+
+@pytest.mark.parametrize("scope", [
+    "IN_SCOPE",
+    "PARTIALLY_IN_SCOPE",
+    "NEEDS_CLARIFICATION",
+])
+def test_valid_clarification_contract(scope):
+    result = Qualification.model_validate(VALID | {
+        "scope": scope,
+        "assessment": "INSUFFICIENT_REQUIREMENTS",
+        "questions": ["What training data is available?"],
+    })
+    assert len(result.questions) == 1
+
+
+def test_out_of_scope_rejects_questions():
+    with pytest.raises(ValidationError):
+        Qualification.model_validate(VALID | {
+            "scope": "OUT_OF_SCOPE",
+            "assessment": "NOT_APPLICABLE",
+            "questions": ["What framework do you prefer?"],
+        })
+
+
+def test_valid_out_of_scope():
+    result = Qualification.model_validate(VALID | {
+        "scope": "OUT_OF_SCOPE",
+        "assessment": "NOT_APPLICABLE",
+        "questions": [],
+    })
+    assert result.scope == "OUT_OF_SCOPE"
+
+
+def test_missing_active_topic_no_provider_call():
+    llm = FakeLLM(VALID)
+    state = KarenSessionState()
+    before = state.model_dump_json()
+
+    with pytest.raises(
+        QualificationError,
+        match="Missing active technical topic",
+    ):
+        asyncio.run(qualify(llm, state, "AI"))
+
+    assert not llm.calls
+    assert state.model_dump_json() == before
